@@ -1,0 +1,15 @@
+\let\textcircled=\pgftextcircled
+\chapter{Context Survey}
+\label{chap:2}
+%----------------------------------------------------------------------------------------
+%   INTRO
+%----------------------------------------------------------------------------------------
+\initial{T}here are some problems in the world which are difficult to be solved in mathematical representation. The Constraint Programming provides a very powerful tool to solve these combinatorial problems related to scheduling, distribution of traffic and logic puzzles in a very high level. The user provides the properties of the problem and the constraint solver find the solution by itself. Therefore, this approach of solving problems becomes more and more popular in the industry and academia. Due to this reason there are so many researches related to the creation of algorithms that can solve the constraint satisfaction types of problems more efficiently and there are so many different packages and libraries that can be used to solve these types of problems \cite{savile_row_paper}. 
+
+Due to the fact that most of the puzzle games not necessarily have only one way of solving it. There is always a possibility to develop a new approach to solve this game more efficiently. This will help to develop new algorithms that could be applied to any other real-life problems \cite{nonogram_with_multiple_solutions}. 
+
+Such that the most popular example of combinatorial problem is Sudoku puzzle game. Which could be very easily solved by the constraint solver using \texttt{AllDiff()} function. Search algorithm will definitely take longer to implement and solve the game. Sudoku becomes very well researched puzzle game in constraint programming\cite{Sudoku_as_CP}.
+
+With the same reason this project is related to the writing of constraint solver of another puzzle NP-complete problem, called Nonogram. There are some previous researches related to the Nonogram solving algorithms such as reinforcement learning, constraint programming\cite{nonogram_reinforcement,nonogram_good} as well as search algorithms using different heuristics\cite{Apt2003a}. There is a detailed paper of comparing the efficiency of different solvers based on depth-first search algorithm and the second is constraint programming. In that paper it was discovered that the solve of the Nonogram based on the depth-first search algorithm performs faster than constraint programming. 
+
+In this project there is no comparison of the several other algorithms except the ones which are based on the Constraint Programming. For instance in this project for the compilation of the Essence' constraint model we use Savile Row which runs the Minion solver. The more details of definition of Constraint Satisfaction Problem will be discussed in the Design and Implementation chapter. 

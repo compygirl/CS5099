@@ -1,0 +1,47 @@
+\let\textcircled=\pgftextcircled
+\chapter{Evaluation}
+\label{chap:evaluation}
+
+% Evaluating the work with respect to the original objectives. The section should also critically evaluate the work with respect to related work done by others. It should compare and contrast the project with similar work in the public domain, for example as written about in published papers, or as distributed in software available to the team.
+
+\initial{M}ost of the attention in this chapter will be given to evaluating sentiment analysis and topic modelling parts of the project, as well as testing results.
+Overall, the project has reached all its main goals. The sentiment analysis and topic models have been successfully implemented, tested, validated and packed into an application which could be run from a command line. Depending on the further requirements, the output of the program could be presented in a number of ways such as email or push notifications, as well as a simple command line output. 
+
+\section{Comparison to the original objectives}
+Some objectives have been changed --- as a result, they have been replaced with other objectives or scratched out. 
+
+\label{sec:originalObjectives}
+\textbf{Primary objectives}:
+\begin{itemize}
+    \item \textbf{Extract the existing data from Twitter}: This has been achieved fully. The program can access tweets by a keyword using the Twitter API. 
+    \item \textbf{Study the existing text classification techniques, compare them and identify those that could be used for the current project}: This has been achieved as well and has been discussed in Chapter \ref{chap:context-survey} (the Context Survey). 
+    \item \textbf{Train a model that recognises negative tweets about Grangemouth}: A sentiment model has been created, tested and evaluated and showed high results. This model can be used in general and works for any tweets, not just the ones about Grangemouth. The sentiment analysis program was made to be scalable and maintainable, it was created as a platform that can be instantiated and trained in a large number of ways, depending on the command-line arguments given. For the topic modelling, the project had to divert away from the original topic (Grangemouth). As a consequence, two classifiers were implemented. One of them is rule-based but was implemented randomly, and, hence, could not be evaluated objectively. The new statistical topic model focuses on the UK General Election. The model has been created, tested and validated using k-fold validation. 
+\end{itemize}
+
+The \textbf{secondary objectives}:
+\begin{itemize}
+    \item \textbf{Create a mechanism to send the selected tweets to the Falkirk Council as notifications}: this objective has not been implemented because the project had to change the topic, so the output could not be delivered to the client straightaway. Instead, the program returns the output, and, as a part of future work, a simple application can be written to send the output to the client in a way they want.
+    \item \textbf{Train another model}: This has been implemented in a number of ways. For sentiment analysis, several models can be trained easily using the same code base by providing different arguments. Any of these classifiers can be combined with the topic model to produce different outputs. 
+    \item \textbf{Analyse and compare the models and their effectiveness}: This has been done and the results were discussed in Chapter \ref{chap:des_imp}.
+    \item \textbf{Create a live tool that will receive a stream of tweets and classify them `on the go'}: This has been implemented fully and can be loaded from the \texttt{src/twitter\_tool.py} file. The procedure trains the sentiment analysis and topic models, after which it starts requesting tweets from Twitter and evaluating them as they get returned by the API.
+    \item \textbf{Look into existing studies of detecting irony and sarcasm in the text}: This has been researched and discussed in Chapter \ref{chap:context-survey} (Context Survey). However, it was out of the scope of this project to attempt the implementation. An idiom filter was implemented for the rule-based version of the topic classifier, and any further work would probably also be based on maintaining a dictionary of known idioms and using it as a filter. However, that could potentially require changing the structure of the feature vector away from the Bag-of-Words approach since, to detect an idiom in a sentence, the order of words will matter more.  
+\end{itemize}
+
+%=======
+\section{Testing}
+\label{sec:testing}
+
+The main parts of the project have been tested both manually and using unit tests. 
+Since the implementation involves classification using classifiers implemented by \texttt{NLTK} (Natural Language Toolkit) and other APIs and libraries, it is not possible to test certain parts of the implementation using unit tests. Such parts of the program are, for example, streaming tweets using Twitter API, searching tweets using the same library, processing the tweet using \texttt{preprocessor} library and text classification using \texttt{NLTK}'s classifiers. These parts have been tested manually under a number of different conditions and different user inputs, and, in some cases, the methods \texttt{test()} remain in the code and can be called from the main methods of the corresponding modules.
+
+The unit tests can be found in the \texttt{src/tests} folder and run individually using the command \\ \texttt{python <filename.py>}. \\ These check a lot of input types for methods that perform preprocessing on data that is being used for classifier training, testing and validation. All the unit tests pass. 
+
+
+\section{Relation to Existing Work}
+\label{sec:relation}
+
+I'd like to think of this project as being a mid-point between research and industry. Most of the work related to Natural Language Processing has been done in research, and, despite the fact that it is also widely used in the industry, the application and the power of existing NLP techniques has not been fully explored by the industry. Therefore, its usage has been quite shallow. Nowadays these techniques are mostly used in marketing, media and politics. However, NLP can be an extremely powerful tool, and there is still a long way to go in order to fully use its potential.
+
+All of this project has been based on the vast amount of research done in this area and builds up on the latest papers, too, including a lot of materials from the past two years. The techniques used at the root of the classification, such as the SVM and Naive Bayes classification, have been known for a while, but a lot of nuances involved in the feature vector extraction are new. For example, using emojis in sentiment analysis has never been discussed in any papers. The latest research, however, defined the sentiment of every known emoji, and it was possible to use the Web-scraped results in the sentiment model, which has never been done before. 
+
+Certain industry tools exist that perform Natural Language Processing. A lot of them, used in marketing and media, are internal tools of different corporations, so one of the very few publicly available tools is the Google product suite. When it comes to training statistical models, Google has the clear immense advantage of having access to tremendous amounts of data. However, as it can be seen from different papers and existing tools, almost all of them use the same techniques such as stemming, finding synonyms and patterns and using the Bag-of-Words approach to training their models. This means that this project has been done on a similar level, despite taking certain shortcuts due to the time and resource limitations. In terms of the precision and recall of the models, they are also on the same level as the models in the existing research papers. 

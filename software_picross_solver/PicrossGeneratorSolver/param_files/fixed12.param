@@ -1,0 +1,16 @@
+language ESSENCE' 1.0
+letting mainRow be 4
+letting mainCol be 4
+letting topRows be 2
+letting leftCols be 2
+letting leftMatrix be [
+[1, 0],
+[4, 0],
+[2, 0],
+[0, 0],
+]
+letting topMatrix be [
+[2, 1, 2, 2],
+[0, 0, 0, 0],
+
+]

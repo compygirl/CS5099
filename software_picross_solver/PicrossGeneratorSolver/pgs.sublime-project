@@ -1,0 +1,21 @@
+{
+	"SublimeLinter":
+	{
+		"@python": 2.7,
+		"linters":
+		{
+			"pep8":
+			{
+				"@disable": false,
+				"ignore": "E127,E128,W191",
+				"max-line-length": 120
+			}
+		}
+	},
+	"folders":
+	[
+		{
+			"path": "."
+		}
+	]
+}

@@ -1,0 +1,21 @@
+language ESSENCE' 1.0
+letting mainRow be 7
+letting mainCol be 7
+letting topRows be 4
+letting leftCols be 4
+letting leftMatrix be [
+[2, 1, 1, 0],
+[3, 0, 0, 0],
+[3, 0, 0, 0],
+[7, 0, 0, 0],
+[1, 1, 0, 0],
+[1, 1, 0, 0],
+[2, 2, 0, 0],
+]
+letting topMatrix be [
+[1, 1, 2, 5, 2, 1, 1],
+[2, 2, 0, 0, 1, 1, 1],
+[1, 1, 0, 0, 1, 2, 0],
+[0, 0, 0, 0, 0, 0, 0],
+
+]

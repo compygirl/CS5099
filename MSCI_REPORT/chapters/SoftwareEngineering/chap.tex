@@ -1,0 +1,37 @@
+\let\textcircled=\pgftextcircled
+\chapter{Software Engineering}
+\label{chap:software-engineering}
+
+\initial{T}he software engineering aspect of this project depended mostly on the amount of communication with the client. For this project, the role of the client belonged to the Falkirk Council. 
+
+Generally, the project followed an iterative approach, and the whole workflow could be separated into several iterations. The rest of this chapter will describe the iterations involved in the software engineering side of the project. 
+
+%=======
+\section{Iteration 1}
+\label{sec:it1}
+
+The communication with the client was not very systematic due to a variety of reasons, such as the project being experimental and, thus, not having a very high priority. As a result, the project was mostly an individual research project. However, communication with the Falkirk council gave some positive results. Initially, the communication with the Falkirk Council was done through email, where the main idea and the main requirements were discussed.
+
+The main requirements were to build a model which would access social media data and notify the Council about the possible problems around the Grangemouth refinery area. The client also mentioned dangers of flooding and chemical leaks. As a result, a lot of initial research was spent on reading about the ethical concerns with using social media data in crisis situations as well as about the techniques used to locate an environmental disaster. Also, at that point, it was clear that a sentiment analysis model had to be created. 
+This gave enough information to start the project. 
+
+In the first phase, it was revealed that the privacy settings provided by Facebook API do not allow accessing any posts, not even the public ones. This meant that the project had to evolve around using the Twitter data, which is available publicly through the Twitter API. The survey of the existing techniques used for sentiment analysis of Twitter showed that mostly large data sets are used for training such models, and some of the datasets created by different research groups such as Stanford NLP Group are available for general use. 
+
+During the first iteration of the project, the sentiment analysis model was created. It might have been helpful to create a joint model that would perform both the sentiment analysis and the topic modelling at the same time, however, that model would require a large amount of training data which was not available at that point, and the availability of the sentiment analysis training set made it convenient to work on the models separately.
+
+By the end of the first iteration, the sentimental analysis model had been created, tested and evaluated.
+
+
+%=======
+\section{Iteration 2}
+\label{sec:it2}
+
+In the second iteration, the topic model had to be created. 
+The meeting with a company representative showed that the project would have to change the requirements slightly. Instead of detecting upcoming disasters such as flooding and chemical leaks, it became clear that the main goal of the application would be to detect small occurrences of complaints in order to be able to work on the problems proactively. This changed the cases we were looking for and, hence, the whole approach to topic modelling. 
+
+Falkirk Council provided a list of keywords which they wanted to trace. The list of keywords can be found attached in the appendix \ref{app:keywords}.
+However, the very first API request showed that it was impossible to get any training data at all. Grangemouth area is fairly small in terms of population, which affects the number of posts on Twitter about it. Even though some posts could be found through the website, it would still not be enough to train a successful model. 
+
+Due to these reasons, it was decided that the project had to change direction. So, for the topic modelling phase of the project, another topic was chosen. This time, it was decided to focus on elections, which would give a wider dataset. In the second iteration, the topic model was created, tested and validated.
+
+Both models were then combined to produce a filter for live tweets and to determine whether a tweet is a negative tweet that also talks about the 2017 UK General Election. 

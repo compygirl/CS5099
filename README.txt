@@ -50,15 +50,15 @@ REQUIRED SOFTWARE:
 6. After it was completed go back to step 4 and repeat.
 7. Play with different options in the main menu of the program: 
 “Please choose the type of generating instances for Nanogram (insert number 1-7):
-1. image based with - compare of 2 solutions
-2. image based with - compare all solutions
-3. random based with - compare 2 solutions
-4. random based with - compare all solutions
-5. fixed solution board - compare 2 solutions
-6. fixed solution board - compare all solutions
-7. create and display instances to print on paper and play with it
-8. for participants
-9. Test Minion”
+    1. image based with - compare of 2 solutions
+    2. image based with - compare all solutions
+    3. random based with - compare 2 solutions
+    4. random based with - compare all solutions
+    5. fixed solution board - compare 2 solutions
+    6. fixed solution board - compare all solutions
+    7. create and display instances to print on paper and play with it
+    8. for participants
+    9. Test Minion”
 
 ====================================================
 SOURCE CODE in “PicrossGeneratorSolver” directory:
@@ -92,9 +92,9 @@ ADDITIONAL FOLDER & OUTPUTS:
 2.param_files - where all .param files are generated and overwritten, when 1 solution found
 3.participant_instances - all needed files and information after User_study: instances to be tested, results of timing in .csv files and implementation in R statistical programming languages for analysis of collected data in this study.
 4. stat_data - folder which contains data of running instances and all their parameters and information of running by Savile Row. This folder should contain 3 .csv files:
-(1)infoFile.csv - keeps the information of every file and its every single updates update after each execution without overwriting it.
-(2)constInfoFile.csv - keeps the information of the instances which are set by the user. At one execution it has all instances of the same size and the same number of coloured cells.
-(3)participants.csv - keeps the information of the instances, which were generated for the user study. in order to compare and analyse later.
+ (1)infoFile.csv - keeps the information of every file and its every single updates update after each execution without overwriting it.
+ (2)constInfoFile.csv - keeps the information of the instances which are set by the user. At one execution it has all instances of the same size and the same number of coloured cells.
+ (3)participants.csv - keeps the information of the instances, which were generated for the user study. in order to compare and analyse later.
 —————————————————————————————————————————————————————————————————————————————————————————
 
 

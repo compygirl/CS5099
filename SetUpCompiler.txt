@@ -1,0 +1,8 @@
+Settings for savilerow command:
+1. go to the terminal and enter the following command:
+	open ~/.zshrc
+2. in the opened file should be changed two paths to the path of the current location for the 'savilerow-1.6.4-mac':
+	path+=('/Users/aigera/Documents/GitHub/CS5099/savilerow-1.6.4-mac')
+	alias cd_ex='cd "/Users/aigera/Documents/GitHub/CS5099/savilerow-1.6.4-mac/examples/sudoku"'
+3. Important to save the file and quite the Terminal completely.
+

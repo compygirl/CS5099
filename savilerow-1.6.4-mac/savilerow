@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# get savilerow installation directory
+DIR="$( cd "$( dirname "$0" )" && pwd )"
+
+java -ea -XX:ParallelGCThreads=1 -Xmx16G -jar "$DIR/savilerow.jar" -minion-bin "$DIR/bin/minion" "$@" 
+

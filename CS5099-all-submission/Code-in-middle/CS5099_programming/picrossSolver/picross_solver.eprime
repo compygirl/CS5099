@@ -1,0 +1,94 @@
+language ESSENCE' 1.0
+
+$ matrix solutionBoard[r][c]
+given mainRow: int  $num of rows
+given mainCol: int  $num of cols
+$given a: int  $leftMatrix[r][a]
+given topRows: int  $topMatrix[b][mainCol]
+given leftCols: int  $topMatrix[b][mainCol]
+
+
+given topMatrix: matrix indexed by [int(1..topRows), int(1..mainCol)] of int(0..mainRow)
+given leftMatrix: matrix indexed by [int(1..mainRow), int(1..leftCols)] of int(0..mainCol)
+
+find topIndexMatrix: matrix indexed by [int(1..topRows), int(1..mainCol)] of int(0..mainRow)
+find leftIndexMatrix: matrix indexed by [int(1..mainRow), int(1..leftCols)] of int(0..mainCol)
+
+find solutionBoard: matrix indexed by [int(1..mainRow), int(1..mainCol)] of int(0..1)
+
+such that
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$ Block for basic constraints of solutionBoard
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+$ sum in each column of topMatrix is the same as sum in the same column of the solutionBoard
+forAll col:int(1..mainCol).
+	((sum j: int(1..topRows).topMatrix[j,col])=(sum i: int(1..mainRow).solutionBoard[i,col])),
+
+$ sum in each row of leftMatrix is the same as sum in the same row of the solutionBoard
+forAll row:int(1..mainRow).
+	((sum j: int(1..leftCols).leftMatrix[row,j])=(sum i: int(1..mainCol).solutionBoard[row,i])),
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$ Block for filling topIndexMatrix and leftIndexMatrix:
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+$ since the topMatrix/leftMatrix and topIndexMatrix/leftIndexMatrix are alike
+$ then they are similar when cells are zeros:
+forAll row: int (1..topRows).
+		forAll col:int(1..mainCol).
+			topMatrix[row, col]=0 -> topIndexMatrix[row, col]=0,
+
+forAll row: int (1..mainRow).
+		forAll col:int(1..leftCols).
+			leftMatrix[row, col]=0 -> leftIndexMatrix[row, col]=0,
+
+
+$ if column in topMatrix is empty then the column in the topIndexMatrix is also empty
+$ OR if row in leftMatrix is empty then the row in the leftIndexMatrix is also empty
+$forAll col:int(1..mainCol).
+$	((sum j: int(1..topRows).topMatrix[j,col])=0)->((sum i: int(1..topRows).topIndexMatrix[i,col])=0),
+$
+$forAll row:int(1..mainRow).
+$	((sum j: int(1..leftCols).leftMatrix[row,j])=0)->((sum i: int(1..leftCols).leftIndexMatrix[row,i])=0),
+
+
+$ if the topIndexMatrix has several indeces in one column it must be in ascending order
+$ it also enforces zeros between the blocks
+forAll row: int (1..topRows).
+		forAll col:int(1..mainCol).
+			(topIndexMatrix[row, col]!=0 /\ topIndexMatrix[row+1,col]!=0) ->
+				((topIndexMatrix[row, col]<topIndexMatrix[row+1, col]) /\
+				((topIndexMatrix[row+1, col]-topIndexMatrix[row, col]-topMatrix[row, col])>=1)),
+
+$ if the leftIndexMatrix has several indeces in one row it must be in ascending order
+$ it also enforces zeros between the blocks
+forAll row: int (1..mainRow).
+		forAll col:int(1..leftCols).
+			(leftIndexMatrix[row, col]!=0 /\ leftIndexMatrix[row,col+1]!=0) ->
+			((leftIndexMatrix[row, col]<leftIndexMatrix[row, col+1]) /\
+			((leftIndexMatrix[row, col+1]-leftIndexMatrix[row, col]-leftMatrix[row, col])>=1)) ,
+
+$ checking that the blocks colored in continuos blocks and in right order
+$ if topMatrix has elements it should start colouring from the index from
+$the topIndexMatrix till the value of the topMatrix is completed.
+forAll row:int(1..topRows).
+	forAll col:int(1..mainCol).
+    (topMatrix[row, col]>0) -> forAll run:int(0..topMatrix[row,col]).
+      (run > 0 -> (solutionBoard[topIndexMatrix[row, col]+run-1,col]=1)),
+
+forAll row:int(1..mainRow).
+	forAll col:int(1..leftCols).
+    (leftMatrix[row, col]>0) -> forAll run:int(0..leftMatrix[row,col]).
+      (run > 0 -> (solutionBoard[row,leftIndexMatrix[row, col]+run-1]=1))
+
+
+$forAll row:int(1..topRows).
+$	forAll col:int(1..mainCol).
+$    (topMatrix[row, col]>0) -> (forAll run:int(1..topMatrix[row,col]).
+$    (solutionBoard[topIndexMatrix[row, col]+run-1,col]=1)),
+$
+$forAll row:int(1..mainRow).
+$	forAll col:int(1..leftCols).
+$    (leftMatrix[row, col]>0) -> (forAll run:int(1..leftMatrix[row,col]).
+$    (solutionBoard[row,leftIndexMatrix[row, col]+run-1]=1))

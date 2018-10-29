@@ -1,0 +1,21 @@
+\let\textcircled=\pgftextcircled
+\chapter{Requirements}
+\label{chap:requirements}
+
+\initial{T}he initial requirements for the project were provided by the Falkirk Council. The organisation wanted to have another `sensor' and be able to keep track of the public opinion about the environmental issues in the Grangemouth area and be able to respond to the complaints before the problems become large. 
+
+The organisation wanted to have a fully automated service which would work with all the most popular social media platforms and did not involve any man-hours. It was planned that the classifier would be running on a separate server and would send notifications about any posts of interest to the Falkirk Council.
+
+The organisation provided a list of keywords they were interested in keeping track of. It can be found attached in appendix \ref{app:keywords}.
+
+Due to the fact that the organisation was represented by a person who was not familiar with the possibilities of Natural Language Processing and Machine Learning and did not have the resources to become more familiar with this field, detailed requirements were produced without the guidance of the organisation. 
+
+Overall, the requirements of the project separated the work on the project into separate stages:
+
+\begin{enumerate}
+    \item Get access to the necessary social media APIs and stream data about Grangemouth.
+    \item Train a sentiment analysis model which would extract any negative posts from the stream.
+    \item Train a topic modelling model which would extract any posts talking about the environment.
+    \item Get posts that satisfy both requirements (are negative and talk about the environment) and send them as push notifications to the Falkirk Council.
+\end{enumerate} 
+

@@ -1,0 +1,9 @@
+language ESSENCE' 1.0
+
+$given Vals: matrix indexed by [int(0..10)] of int(0..9)
+given X: matrix indexed by [int(1..5), int(1..5)] of int(0..9)
+
+find C: matrix indexed by [int(0..10)] of int(0..9)
+
+such that
+gcc(X[..], [1,2], C)

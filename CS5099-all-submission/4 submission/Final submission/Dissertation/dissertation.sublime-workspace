@@ -1,0 +1,829 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"item",
+				"\\item                                             \tlatex-document"
+			],
+			[
+				"enum",
+				"\\begin{enumerate}                                 \tlatex-document"
+			],
+			[
+				"ref",
+				"\\ref{key}                                         \tlatex-document"
+			],
+			[
+				"cha",
+				"chapters"
+			],
+			[
+				"clear",
+				"\\clearpage                                        \tlatex-document"
+			],
+			[
+				"begin",
+				"\\begin{center}                                    \tlatex-document"
+			],
+			[
+				"tab",
+				"table\tTable"
+			],
+			[
+				"usepacka",
+				"\\usepackage{package}                              \tlatex-document"
+			],
+			[
+				"cite",
+				"\\cite{keylist}                                    \tlatex-document"
+			],
+			[
+				"bi",
+				"\\bibliography{file}                               \tlatex-document"
+			],
+			[
+				"conte",
+				"\\tableofcontents                                  \tlatex-document"
+			],
+			[
+				"list",
+				"list_clues"
+			],
+			[
+				"dis",
+				"display_instance"
+			],
+			[
+				"to",
+				"total_amount_cells"
+			],
+			[
+				"solut",
+				"solution_board"
+			],
+			[
+				"left",
+				"left_matrix"
+			],
+			[
+				"top",
+				"top_matrix"
+			],
+			[
+				"lef",
+				"left_matrix"
+			],
+			[
+				"table",
+				"table_vals"
+			],
+			[
+				"info",
+				"info_dict"
+			],
+			[
+				"tota",
+				"total_amount_of_instances"
+			],
+			[
+				"cou",
+				"coloured_cells"
+			],
+			[
+				"soli",
+				"solution_board"
+			],
+			[
+				"num",
+				"num_sols"
+			],
+			[
+				"temp",
+				"temp_dict"
+			],
+			[
+				"write",
+				"writerow"
+			],
+			[
+				"sol",
+				"solution_processor"
+			],
+			[
+				"count",
+				"counter_diff"
+			],
+			[
+				"image",
+				"image_directory"
+			],
+			[
+				"print",
+				"print_matrix"
+			],
+			[
+				"compare",
+				"compare_all_boards"
+			],
+			[
+				"orig",
+				"orig_solution_board"
+			],
+			[
+				"difference",
+				"difference_m"
+			],
+			[
+				"get",
+				"get_all_sol_boards"
+			],
+			[
+				"upda",
+				"updated_sol_board"
+			],
+			[
+				"solu",
+				"solution_board"
+			],
+			[
+				"param",
+				"param_filename"
+			],
+			[
+				"img",
+				"img_list"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "Packages/LaTeXTools/LaTeX.sublime-build",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					""
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Traditional"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"PdfLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"XeLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"LuaLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder - PdfLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder - XeLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder - LuaLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Script Builder"
+				]
+			],
+			[
+				"Packages/LaTeXTools/LaTeX.sublime-build",
+				"XeLaTeX"
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 217.0,
+		"last_filter": "clear ca",
+		"selected_items":
+		[
+			[
+				"clear ca",
+				"LaTeXTools: Clear current bibliography cache"
+			],
+			[
+				"latex",
+				"LaTeXTools: Clear cache"
+			],
+			[
+				"move",
+				"File: Move"
+			],
+			[
+				"proejct mange",
+				"Project Manager"
+			],
+			[
+				"rein",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"project manage",
+				"Project Manager"
+			],
+			[
+				"instla",
+				"Package Control: Install Package"
+			],
+			[
+				"project ",
+				"Project: Add Folder"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"upp",
+				"Convert Case: Upper Case"
+			],
+			[
+				"upper",
+				"Convert Case: Upper Case"
+			],
+			[
+				"lowe",
+				"Convert Case: Lower Case"
+			],
+			[
+				"reinde",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"list pac",
+				"Package Control: List Packages"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"install ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 446.0
+	},
+	"console":
+	{
+		"height": 130.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d39e33b79698005270310898eea76'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/aigera/Documents/GitHub/CS5099/Dissertation",
+		"/Users/aigera/Documents/GitHub/CS5099/Dissertation/chapters",
+		"/Users/aigera/Documents/GitHub/CS5099/Dissertation/chapters/appendices",
+		"/Users/aigera/Documents/GitHub/CS5099/Dissertation/chapters/Conclusion",
+		"/Users/aigera/Documents/GitHub/CS5099/Dissertation/chapters/ContextSurvey",
+		"/Users/aigera/Documents/GitHub/CS5099/Dissertation/chapters/DesignImplementation",
+		"/Users/aigera/Documents/GitHub/CS5099/Dissertation/chapters/Ethics",
+		"/Users/aigera/Documents/GitHub/CS5099/Dissertation/chapters/Evaluation",
+		"/Users/aigera/Documents/GitHub/CS5099/Dissertation/chapters/Introduction",
+		"/Users/aigera/Documents/GitHub/CS5099/Dissertation/chapters/Requirements",
+		"/Users/aigera/Documents/GitHub/CS5099/Dissertation/chapters/SoftwareEngineering",
+		"/Users/aigera/Documents/GitHub/CS5099/Dissertation/chapters/userstudy",
+		"/Users/aigera/Documents/GitHub/CS5099/Dissertation/img"
+	],
+	"file_history":
+	[
+		"/Users/aigera/Documents/GitHub/CS5099/Dissertation/chapters/appendices/manual.tex",
+		"/Users/aigera/Documents/GitHub/CS5099/Dissertation/bibliography.bib",
+		"/Users/aigera/Documents/GitHub/CS5099/Dissertation/chapters/Evaluation/8chap.tex",
+		"/Users/aigera/Documents/GitHub/CS5099/Dissertation/chapters/DesignImplementation/6chap.tex",
+		"/Users/aigera/Documents/GitHub/CS5099/Dissertation/chapters/userstudy/7chap.tex",
+		"/Users/aigera/Documents/GitHub/CS5099/Dissertation/chapters/Ethics/5chap.tex",
+		"/Users/aigera/Documents/GitHub/CS5099/Dissertation/main.tex",
+		"/Users/aigera/Documents/GitHub/CS5099/Dissertation/chapters/ContextSurvey/2chap.tex",
+		"/Users/aigera/Documents/GitHub/CS5099/Dissertation/chapters/SoftwareEngineering/4chap.tex",
+		"/Users/aigera/Documents/GitHub/CS5099/Dissertation/chapters/Requirements/3chap.tex",
+		"/Users/aigera/Documents/GitHub/CS5099/Dissertation/chapters/Conclusion/9chap.tex",
+		"/Users/aigera/Documents/GitHub/CS5099/Dissertation/chapters/Introduction/1chap.tex",
+		"/Users/aigera/Documents/GitHub/CS5099/Dissertation/chapters/userstudy/chap.tex",
+		"/Users/aigera/Documents/GitHub/CS5099/Dissertation/frontmatter/abstract.tex",
+		"/Users/aigera/Documents/incase.tex",
+		"/Users/aigera/Documents/GitHub/CS5099/Dissertation/frontmatter/declaration.tex",
+		"/Users/aigera/Documents/GitHub/CS5099/Dissertation/frontmatter/title.tex",
+		"/Users/aigera/Documents/GitHub/CS5099/Dissertation/main.pdf",
+		"/Users/aigera/Library/Application Support/Sublime Text 3/Cache/LaTeXTools/1408ae78b034e30055fba8f8c65dfe31/main.bbl",
+		"/Users/aigera/Library/Application Support/Sublime Text 3/Packages/User/Projects/Dissertation.sublime-project",
+		"/Users/aigera/Documents/GitHub/CS5099/Dissertation/dissertation.sublime-project",
+		"/usr/local/texlive/2017/texmf-dist/tex/latex/fmtcount/fmtcount.sty",
+		"/Users/aigera/Library/Application Support/Sublime Text 3/Packages/User/LaTeXTools.sublime-settings",
+		"/Users/aigera/Documents/GitHub/CS5099/PicrossGeneratorSolver/instance_generator.py",
+		"/Users/aigera/Documents/GitHub/CS5099/PicrossGeneratorSolver/param_files/participants8.param.infor",
+		"/Users/aigera/Documents/GitHub/CS5099/PicrossGeneratorSolver/param_files/participants9.param.info",
+		"/Users/aigera/Documents/GitHub/CS5099/PicrossGeneratorSolver/single_solution.py",
+		"/Users/aigera/Documents/GitHub/CS5099/PicrossGeneratorSolver/board_generator.py",
+		"/Users/aigera/Documents/GitHub/CS5099/PicrossGeneratorSolver/game_analyser.py",
+		"/Users/aigera/Documents/GitHub/CS5099/PicrossGeneratorSolver/PLAN OF WRITING",
+		"/Users/aigera/Documents/GitHub/CS5099/PicrossGeneratorSolver/solution_processor.py",
+		"/Users/aigera/Documents/GitHub/CS5099/PicrossGeneratorSolver/matrix_processor.py",
+		"/Users/aigera/Documents/GitHub/CS5099/PicrossGeneratorSolver/image_processor.py",
+		"/Users/aigera/Documents/GitHub/CS5099/PicrossGeneratorSolver/tester.py",
+		"/Users/aigera/Documents/GitHub/CS5099/PicrossGeneratorSolver/display_game.py",
+		"/Users/aigera/Documents/GitHub/CS5099/PicrossGeneratorSolver/param_files/fixed0.param",
+		"/Users/aigera/Documents/GitHub/CS5099/PicrossGeneratorSolver/stat_data/constInfoFile.csv",
+		"/Users/aigera/Documents/GitHub/CS5099/PicrossGeneratorSolver/file_manager.py",
+		"/Users/aigera/Documents/GitHub/CS5099/PicrossGeneratorSolver/param_files/fixed12.param.solution.000001",
+		"/Users/aigera/Documents/GitHub/CS5099/PicrossGeneratorSolver/param_files/fixed14.param.info",
+		"/Users/aigera/Documents/GitHub/CS5099/PicrossGeneratorSolver/constants.py",
+		"/Users/aigera/Documents/GitHub/CS5099/PicrossGeneratorSolver/stat_data/infoFile5.csv",
+		"/Users/aigera/Documents/GitHub/CS5099/PicrossGeneratorSolver/myfile.csv",
+		"/Users/aigera/Documents/GitHub/CS5099/PicrossGeneratorSolver/pgs.sublime-project",
+		"/Users/aigera/Documents/GitHub/CS5099/PicrossGeneratorSolver/param_files/Secondjpg.param",
+		"/Users/aigera/Documents/GitHub/CS5099/PicrossGeneratorSolver/param_files/Secondjpg.param.solution.000002",
+		"/Users/aigera/Documents/GitHub/CS5099/PicrossGeneratorSolver/param_files/random1.param",
+		"/Users/aigera/Documents/GitHub/CS5099/PicrossGeneratorSolver/picross_solver.eprime",
+		"/Users/aigera/Documents/GitHub/CS5099/PicrossGeneratorSolver/param_files/Secondjpg.param.solution.000001",
+		"/Users/aigera/Documents/GitHub/CS5099/PicrossGeneratorSolver/untitled.py",
+		"/Users/aigera/Documents/GitHub/CS5099/PicrossGeneratorSolver/untitled1.py",
+		"/Users/aigera/Documents/GitHub/CS5099/PicrossGeneratorSolver/param_files/random2.param",
+		"/Users/aigera/Documents/GitHub/CS5099/PicrossGeneratorSolver/param_files/updated_Secondjpg.param",
+		"/Users/aigera/Documents/GitHub/CS5099/PicrossGeneratorSolver/untitled2.py",
+		"/Users/aigera/Documents/GitHub/CS5099/PicrossGeneratorSolver/param_files/random5.param",
+		"/Users/aigera/Documents/GitHub/CS5099/PicrossGeneratorSolver/permanent_examples/random0.param.solution.000001",
+		"/Users/aigera/Documents/GitHub/CS5099/PicrossGeneratorSolver/param_files/updated_Secondjpg.param.solution.000001",
+		"/Users/aigera/Documents/GitHub/CS5099/PicrossGeneratorSolver/random_generator.py",
+		"/Users/aigera/Desktop/CS5099/Ruby_solution_to_image/solution_to_image.rb",
+		"/Users/aigera/Documents/GitHub/CS5099/PicrossGeneratorSolver/.sublime-project",
+		"/Users/aigera/Documents/GitHub/CS5099/.gitignore",
+		"/Users/aigera/Desktop/CS5099/Demo1_instance_generator/tester.py",
+		"/Users/aigera/Desktop/CS5099/PicrossGeneratorSolver/longExample.txt",
+		"/Users/aigera/Desktop/CS5099/PicrossGeneratorSolver/randomInstances/random0.param.info",
+		"/Users/aigera/Desktop/CS5099/Demo1_instance_generator/image_processor.py",
+		"/Users/aigera/Desktop/CS5099/Demo1_instance_generator/single_solution.py",
+		"/Users/aigera/Desktop/CS5099/PicrossGeneratorSolver/permanent_examples/random0.param",
+		"/Users/aigera/Desktop/CS5099/PicrossGeneratorSolver/test.py",
+		"/Users/aigera/Desktop/CS5099/Demo1_instance_generator/game_analyser.py",
+		"/Users/aigera/Desktop/CS5099/Demo1_instance_generator/file_manager.py",
+		"/Users/aigera/Desktop/CS5099/Demo1_instance_generator/constants.py",
+		"/Users/aigera/Desktop/CS5099/Demo1_instance_generator/matrix_processor.py",
+		"/Users/aigera/Desktop/CS5099/Demo1_instance_generator/instance_generator.py",
+		"/Users/aigera/Desktop/CS5099/Demo1_instance_generator/demo1.sublime-project",
+		"/Users/aigera/Desktop/CS5099/Demo1_instance_generator/random_generator.py"
+	],
+	"find":
+	{
+		"height": 48.0
+	},
+	"find_in_files":
+	{
+		"height": 132.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"itemize",
+			"content",
+			"appendix",
+			"itemize",
+			"center",
+			"section",
+			"center",
+			"lstlisting",
+			"column",
+			"center",
+			"float",
+			"tabularx",
+			"multicol",
+			"makecell",
+			"seq",
+			"&",
+			"hypothesis",
+			"size",
+			"color",
+			"itemize",
+			"&",
+			"{red}{red}",
+			"table",
+			"tabular",
+			"usepackage{tik",
+			"clues",
+			"\\strike{}",
+			"diag",
+			"tikz",
+			"makecell",
+			"array",
+			"usepackage",
+			"nonogram",
+			"thus",
+			"mdeling",
+			"modelin",
+			"human",
+			"nanogram",
+			"Nanogram",
+			"nanogram",
+			"margin",
+			"space",
+			"hypcap=true",
+			"hypecap=true",
+			"includegraphics",
+			"scrextend",
+			"lipsum",
+			"Level",
+			"\\hrule",
+			"caption",
+			"entire_list_seconds",
+			"\\\\",
+			"table",
+			"experienced_data",
+			"total_seconds",
+			"mean",
+			")",
+			"mean",
+			"entire_list_seconds",
+			"entire_list_seconds9",
+			"entire_list_seconds",
+			"&39&39&39\\\\",
+			"&111&111&111&111\\\\",
+			"Level",
+			"floatrow",
+			"table",
+			"caption",
+			"textit",
+			"textbf",
+			"text",
+			"textbf",
+			"hape",
+			"itshape",
+			"shape",
+			"declare",
+			"shape",
+			"declare",
+			"nonogram",
+			"caption",
+			"table",
+			"example",
+			"shape",
+			"latin",
+			"bfseries",
+			"sc",
+			"\\newcommand\\feline@chm[1][4cm]{%\n% \t\\sbox\\feline@chapter{\\feline@chapter@marker[#1]}% \n% \t\\makebox[0pt][c]{% aka \\rlap\n% \t\t\\makebox[1cm][r]{\\usebox\\feline@chapter}%\n% \t}}",
+			"sc",
+			"nonogram",
+			"begin",
+			"ref",
+			"usepacka",
+			"exam",
+			"includegraphics",
+			"include",
+			"\\%",
+			"%",
+			"demonstrates",
+			"%",
+			"table",
+			"graphicx",
+			"Level",
+			"table",
+			"chapter",
+			"dandur",
+			"utational sustainability require clients to be connected to a facility under path-length ",
+			"usepackage",
+			"\\usepackage",
+			"integration ",
+			"picture",
+			"micro",
+			"math",
+			"asmmath",
+			"mathtools",
+			"amsmath",
+			"math",
+			"  ",
+			"micro",
+			"set",
+			"graphic",
+			"bibliography",
+			"booktab",
+			"url",
+			"main",
+			"thebibliography",
+			"date",
+			"jefferson",
+			"backmat",
+			"date"
+		],
+		"highlight": false,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 22.0
+	},
+	"input":
+	{
+		"height": 58.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.latextools":
+	{
+		"height": 193.0
+	},
+	"pinned_build_system": "",
+	"project": "dissertation.sublime-project",
+	"replace":
+	{
+		"height": 40.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"manu",
+				"chapters/appendices/manual.tex"
+			],
+			[
+				"man",
+				"chapters/appendices/manual.tex"
+			],
+			[
+				"bib",
+				"bibliography.bib"
+			],
+			[
+				"6",
+				"chapters/DesignImplementation/6chap.tex"
+			],
+			[
+				"5",
+				"chapters/Ethics/5chap.tex"
+			],
+			[
+				"8",
+				"chapters/Evaluation/8chap.tex"
+			],
+			[
+				"main",
+				"main.tex"
+			],
+			[
+				"ma",
+				"main.tex"
+			],
+			[
+				"7",
+				"chapters/userstudy/7chap.tex"
+			],
+			[
+				"1",
+				"chapters/Introduction/1chap.tex"
+			],
+			[
+				"9",
+				"chapters/Conclusion/9chap.tex"
+			],
+			[
+				"4",
+				"chapters/SoftwareEngineering/4chap.tex"
+			],
+			[
+				"3",
+				"chapters/Requirements/3chap.tex"
+			],
+			[
+				"2",
+				"chapters/ContextSurvey/2chap.tex"
+			],
+			[
+				"mai",
+				"main.tex"
+			],
+			[
+				"chap",
+				"chapters/userstudy/chap.tex"
+			],
+			[
+				"cha",
+				"chapters/userstudy/chap.tex"
+			],
+			[
+				"chap1",
+				"chapters/introduction/chap1.tex"
+			],
+			[
+				"instance",
+				"instance_generator.py"
+			],
+			[
+				"const",
+				"constants.py"
+			],
+			[
+				"game",
+				"game_analyser.py"
+			],
+			[
+				"test",
+				"tester.py"
+			],
+			[
+				"matrix",
+				"matrix_processor.py"
+			],
+			[
+				"sing",
+				"single_solution.py"
+			],
+			[
+				"image",
+				"image_processor.py"
+			],
+			[
+				"",
+				"board_generator.py"
+			],
+			[
+				"ons",
+				"constants.py"
+			],
+			[
+				"con",
+				"constants.py"
+			],
+			[
+				"solution",
+				"solution_processor.py"
+			],
+			[
+				"matri",
+				"matrix_processor.py"
+			],
+			[
+				"cp",
+				"constants.py"
+			],
+			[
+				"tes",
+				"tester.py"
+			],
+			[
+				"file",
+				"file_manager.py"
+			],
+			[
+				"text",
+				"permanent_examples/random0.param.solution.000001"
+			],
+			[
+				"single",
+				"single_solution.py"
+			],
+			[
+				"cons",
+				"constants.py"
+			],
+			[
+				"random",
+				"random_generator.py"
+			],
+			[
+				"instan",
+				"instance_generator.py"
+			],
+			[
+				"projec",
+				".sublime-project"
+			],
+			[
+				"gane",
+				"Demo1_instance_generator/game_analyser.py"
+			],
+			[
+				"im",
+				"image_processor.py"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"~/Documents/GitHub/CS5099/PicrossGeneratorSolver/pgs.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 208.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

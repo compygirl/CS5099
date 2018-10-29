@@ -1,0 +1,27 @@
+MINION 3
+# CSETopLevel_number = 0
+# CSETopLevel_eliminated_expressions = 0
+# CSETopLevel_total_size = 0
+# CSE_active_number = 0
+# CSE_active_eliminated_expressions = 0
+# CSE_active_total_size = 0
+**VARIABLES**
+DISCRETE solutionBoard_00000_00000 #
+{0..1}
+DISCRETE solutionBoard_00001_00000 #
+{0..1}
+DISCRETE solutionBoard_00002_00000 #
+{0..1}
+**TUPLELIST**
+topMatrix 1 3
+2 0 0 
+**VARIABLES**
+ALIAS topMatrix[1,3]=[[2, 0, 0]]
+**SEARCH**
+PRINT[[solutionBoard_00000_00000],[solutionBoard_00001_00000],[solutionBoard_00002_00000]]
+VARORDER STATIC [solutionBoard_00000_00000, 0, 0, solutionBoard_00001_00000, 0, 0, solutionBoard_00002_00000, 0, 0]
+VARORDER AUX [solutionBoard_00000_00000,solutionBoard_00001_00000,solutionBoard_00002_00000]
+**CONSTRAINTS**
+sumleq([solutionBoard_00000_00000,solutionBoard_00001_00000,solutionBoard_00002_00000],2)
+sumgeq([solutionBoard_00000_00000,solutionBoard_00001_00000,solutionBoard_00002_00000],2)
+**EOF**

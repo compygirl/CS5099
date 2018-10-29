@@ -1,0 +1,3 @@
+language ESSENCE' 1.0
+letting solutionBoard be [[0, 0;int(1..2)], 
+[1, 0;int(1..2)];int(1..2)]

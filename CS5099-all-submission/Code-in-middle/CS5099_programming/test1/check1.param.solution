@@ -1,0 +1,7 @@
+language ESSENCE' 1.0
+$ Minion SolverNodes: 5
+$ Minion SolverTotalTime: 0.000355
+$ Minion SolverTimeOut: 0
+$ Savile Row TotalTime: 0.183
+letting solutionBoard be [[0, 0;int(1..2)], 
+[0, 0;int(1..2)];int(1..2)]

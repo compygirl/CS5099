@@ -1,0 +1,87 @@
+MINION 3
+# CSETopLevel_number = 0
+# CSETopLevel_eliminated_expressions = 0
+# CSETopLevel_total_size = 0
+# CSE_active_number = 0
+# CSE_active_eliminated_expressions = 0
+# CSE_active_total_size = 0
+**VARIABLES**
+DISCRETE f_00000_00000 #
+{1..3}
+DISCRETE f_00000_00002 #
+{1..3}
+DISCRETE f_00000_00003 #
+{1..3}
+DISCRETE f2_00000_00000 #
+{0..4}
+DISCRETE f2_00000_00001 #
+{0..4}
+DISCRETE f2_00001_00000 #
+{0..4}
+DISCRETE f2_00001_00001 #
+{0..4}
+DISCRETE f2_00002_00000 #
+{0..4}
+DISCRETE f2_00002_00001 #
+{0..4}
+DISCRETE f2_00003_00000 #
+{0..4}
+DISCRETE f2_00003_00001 #
+{0..4}
+DISCRETE solutionBoard_00000_00000 #
+{0..1}
+DISCRETE solutionBoard_00000_00002 #
+{0..1}
+DISCRETE solutionBoard_00000_00003 #
+{0..1}
+DISCRETE solutionBoard_00002_00000 #
+{0..1}
+DISCRETE solutionBoard_00002_00002 #
+{0..1}
+DISCRETE solutionBoard_00002_00003 #
+{0..1}
+DISCRETE aux24 #(-1 + f_00000_00000)
+{0..2}
+DISCRETE aux26 #(-1 + f_00000_00002)
+{0..2}
+DISCRETE aux29 #(-1 + f_00000_00003)
+{0..2}
+**TUPLELIST**
+topMatrix 2 4
+1 0 1 1 
+0 0 0 0 
+**VARIABLES**
+ALIAS topMatrix[2,4]=[[1, 0, 1, 1], [0, 0, 0, 0]]
+**TUPLELIST**
+rightMatrix 4 2
+1 0 
+0 0 
+2 0 
+0 0 
+**VARIABLES**
+ALIAS rightMatrix[4,2]=[[1, 0], [0, 0], [2, 0], [0, 0]]
+**SEARCH**
+PRINT[[f_00000_00000],[f_00000_00002],[f_00000_00003],[f2_00000_00000],[f2_00000_00001],[f2_00001_00000],[f2_00001_00001],[f2_00002_00000],[f2_00002_00001],[f2_00003_00000],[f2_00003_00001],[solutionBoard_00000_00000],[solutionBoard_00000_00002],[solutionBoard_00000_00003],[solutionBoard_00002_00000],[solutionBoard_00002_00002],[solutionBoard_00002_00003]]
+VARORDER STATIC [f_00000_00000, 0, f_00000_00002, f_00000_00003, 0, 0, 0, 0, f2_00000_00000, f2_00000_00001, f2_00001_00000, f2_00001_00001, f2_00002_00000, f2_00002_00001, f2_00003_00000, f2_00003_00001, solutionBoard_00000_00000, 0, solutionBoard_00000_00002, solutionBoard_00000_00003, 0, 0, 0, 0, solutionBoard_00002_00000, 0, solutionBoard_00002_00002, solutionBoard_00002_00003, 0, 0, 0, 0]
+VARORDER AUX [f_00000_00000,f_00000_00002,f_00000_00003,f2_00000_00000,f2_00000_00001,f2_00001_00000,f2_00001_00001,f2_00002_00000,f2_00002_00001,f2_00003_00000,f2_00003_00001,solutionBoard_00000_00000,solutionBoard_00000_00002,solutionBoard_00000_00003,solutionBoard_00002_00000,solutionBoard_00002_00002,solutionBoard_00002_00003,aux24,aux26,aux29]
+**CONSTRAINTS**
+watchelement_undefzero([solutionBoard_00000_00000, 0, solutionBoard_00002_00000], aux24, 1)
+watchelement_undefzero([solutionBoard_00000_00002, 0, solutionBoard_00002_00002], aux26, 1)
+watchelement_undefzero([solutionBoard_00000_00003, 0, solutionBoard_00002_00003], aux29, 1)
+sumleq([-1,f_00000_00000],aux24)
+sumgeq([-1,f_00000_00000],aux24)
+sumleq([-1,f_00000_00002],aux26)
+sumgeq([-1,f_00000_00002],aux26)
+sumleq([solutionBoard_00000_00003,solutionBoard_00002_00003],1)
+sumgeq([solutionBoard_00000_00003,solutionBoard_00002_00003],1)
+sumleq([-1,f_00000_00003],aux29)
+sumgeq([-1,f_00000_00003],aux29)
+sumleq([solutionBoard_00000_00000,solutionBoard_00002_00000],1)
+sumgeq([solutionBoard_00000_00000,solutionBoard_00002_00000],1)
+sumleq([solutionBoard_00000_00002,solutionBoard_00002_00002],1)
+sumgeq([solutionBoard_00000_00002,solutionBoard_00002_00002],1)
+sumleq([solutionBoard_00000_00000,solutionBoard_00000_00002,solutionBoard_00000_00003],1)
+sumgeq([solutionBoard_00000_00000,solutionBoard_00000_00002,solutionBoard_00000_00003],1)
+sumleq([solutionBoard_00002_00000,solutionBoard_00002_00002,solutionBoard_00002_00003],2)
+sumgeq([solutionBoard_00002_00000,solutionBoard_00002_00002,solutionBoard_00002_00003],2)
+**EOF**

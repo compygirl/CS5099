@@ -1,0 +1,6 @@
+language ESSENCE' 1.0
+letting leftIndexMatrix be [[1;int(1)], 
+[1;int(1)];int(1..2)]
+letting solutionBoard be [[1;int(1)], 
+[1;int(1)];int(1..2)]
+letting topIndexMatrix be [[1;int(1)];int(1)]

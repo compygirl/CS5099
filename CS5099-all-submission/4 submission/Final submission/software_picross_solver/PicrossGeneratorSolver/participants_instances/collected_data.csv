@@ -1,0 +1,17 @@
+Participant_ID,Gender,Degree,Experienced,7x7_70_LC,7x7_70_LC_completeness,7x7_70_MC,7x7_70_MC_completeness,7x7_50_LC,7x7_50_LC_completeness,7x7_50_MC,7x7_50_MC_completeness,10x10_70_LC,10x10_70_LC,10x10_70_LC_completeness
+1,M,CS,Yes,00:02:39,Success,00:01:26,Success,00:03:05,Success,00:03:24,Success,00:05:10,05:10,Success
+2,F,CS,Yes,00:03:31,Success,00:02:28,Success,00:03:37,Success,00:06:00,NC,00:06:00,07:27,NC
+3,M,CS,No,00:03:59,Success,00:02:57,Success,00:04:59,Success,00:04:09,Success,00:04:23,04:23,Success
+4,F,IS and M,No,00:04:57,Success,00:03:37,Success,00:05:07,Success,00:06:00,NC,00:06:00,06:00,NC
+5,M,CS,No,00:02:45,Success,00:02:19,Success,00:07:00,Failed,00:07:00,Failed,00:04:15,04:15,Success
+6,M,CS,No,00:02:49,Success,00:01:45,Success,00:07:00,Failed,00:07:00,Failed,00:07:00,07:00,Failed
+7,F,IS and M,Yes,00:02:55,Success,00:02:09,Success,00:07:00,Failed,00:07:00,Failed,00:06:00,06:00,NC
+8,M,CS,No,00:06:00,NC,00:03:23,Success,00:07:00,Failed,00:06:00,NC,00:06:00,06:00,NC
+9,F,CS,No,00:06:00,NC,00:06:00,NC,00:07:00,Failed,00:07:00,Failed,00:06:00,06:00,NC
+10,M,IS and M,No,00:07:00,Failed,00:06:00,NC,00:06:00,NC,00:06:00,NC,00:06:00,06:00,NC
+11,M,CS,Yes,00:02:40,Success,00:01:55,Success,00:03:56,Success,00:07:00,Success,00:06:00,06:23,NC
+12,M,CS,No,00:06:00,NC,00:03:25,Success,00:06:00,NC,00:06:00,NC,00:06:00,09:43,NC
+13,F,CS,Yes,00:01:25,Success,00:01:13,Success,00:01:15,Success,00:01:50,Success,00:02:41,02:41,Success
+14,F,CS,No,00:02:15,Success,00:01:49,Success,00:04:34,Success,00:07:00,Failed,00:04:36,04:36,Success
+15,M,CS,Yes,00:01:32,Success,00:01:28,Success,00:07:00,Failed,00:07:00,Failed,00:07:00,07:00,Failed
+16,M,CS,No,00:07:00,Failed,00:03:23,Success,00:06:00,NC,00:06:00,NC,00:07:00,07:00:00,Failed

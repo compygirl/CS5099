@@ -1,0 +1,72 @@
+
+\chapter{User Manual}
+\label{app:manual}
+
+\initial{T}his project could be compiled and run in a number of different ways, both as a whole and part by part. In order to compile and run the project, certain dependencies and libraries have to be installed, such as \texttt{NLTK}, \texttt{preprocessor}, and \texttt{scikit-learn}. The project uses Python 2.7. All the necessary libraries are compiled in the \texttt{resources/requirements.txt} file of the project and are also attached in appendix \ref{app:pyreqs} of this report. 
+
+A lot of modules of the project could be run separately and can be run from the command line. To explore the functionality of each module, one could modify the \texttt{main()} method for each of them. By default, most of them currently perform a simple test of a module by giving it a simple task.
+
+\par For example, to run and test the TextBlob classifier, run
+
+\begin{center}
+\texttt{python textblob\_classifier.py}
+\end{center}
+
+This will print the accuracy of the classifier, using the training data from the provided data set.
+
+\par To run the rule-based classifier, run
+
+\begin{center}
+\texttt{python rb\_environmental\_classifier.py}
+\end{center}
+
+This will create a classifier and print classification outputs for a number of given sentences from the \texttt{main()} method.
+
+\par
+Running
+\begin{center}
+\texttt{python elections.py}
+\end{center}
+
+will create a Topic Model and perform ten-fold validation on it. The method will print averages for both accuracy and recall values obtained during the validation.
+
+\par To test the Sentiment Model, \texttt{ngram\_classifier.py} has to be run. The command also accepts five arguments: 
+\begin{enumerate}
+    \item \textbf{Classifier name}: 
+    \begin{itemize}
+    \item ``Naive Bayes''
+    \item ``MaxEntClassifier''
+    \item ``SVM''
+    \item ``DecisionTree''
+  \end{itemize}
+    \item \textbf{The number of tokens in an n-gram}: 1 produces the best model, 2 performs reasonably well, any other positive integer will create a model which is not likely to perform well. Any other number will not be validated.
+    \item \textbf{The size of training data}: the dataset contains more than a million and a half of tweets. It has been found out empirically that a model does not need more than 300 000 tweets to train on in the case of SVM. In a case of another classifier, this number will be even less. 
+    \item \textbf{The size of testing data}: any non-negative integer that, summed with the previous parameter, will not give a sum larger than the size of the entire data set.
+    \item \textbf{Name of the feature extractor}:
+    \begin{itemize}
+    \item \textbf{``ngram\_extractor''}: Simply extracts n-grams from the tweets and performs basic pre-processing.
+    \item \textbf{``preprocessing\_extractor''}: Parses the tweet using the \texttt{preprocessor} library, then extracts n-grams. The most advanced feature extractor. 
+    \item \textbf{``noun\_phrase\_extractor''}: Extracts noun phrases using external libraries. This is the slowest extractor, and the results are not satisfying.
+  \end{itemize}
+\end{enumerate}.
+
+So, a command
+\begin{center}
+\texttt{python ngram\_classifier.py SVM 1 10000 200 preprocessing\_extractor}
+\end{center}
+
+will create and test an SVM for sentiment analysis from unigrams extracted using\\ \texttt{preprocessing\_extractor} from a training set of a size 10 000 and will test the model on 200 tweets.
+
+The \texttt{twitter\_tool} module contains methods that show the implementation of the entire model. To run it, run
+\begin{center}
+\texttt{python twitter\_tool.py}
+\end{center}
+from the \texttt{/src} folder.
+
+This will create two models with the best parameters obtained empirically and discussed in the report and start a stream of tweets containing the keyword ``election''. 
+
+Please note that, in order to train the models, the datasets have to be placed into the \texttt{/resources} folder. The datasets can be downloaded from: \\
+\url{https://mn39.host.cs.st-andrews.ac.uk/grangemouth/training.1600000.processed.noemoticon.csv}
+\\and\\
+\url{https://mn39.host.cs.st-andrews.ac.uk/grangemouth/Sentiment-Analysis-Dataset.csv}.
+

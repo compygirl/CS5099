@@ -1,0 +1,168 @@
+\let\textcircled=\pgftextcircled
+\chapter{Context Survey}
+\label{chap:context-survey}
+
+\initial{T}he problem of computers and humans understanding each other has existed ever since the very first, non-digital, computers. Even though computers are typically much better at some tasks than humans, understanding human speech still remains an unsolved task for Computer Science. 
+
+The history of Machine Translation could be traced to philosophical sources from as early as 17th century, for example, the ideas of Descartes and Leibniz about the so-called `universal' languages. Descartes proposed cataloguing all the possible concepts and `elements of human imagination' \cite{descartes}. Leibniz came up with an idea of the `Characteristica universalis', a formal language which would be capable of expressing not only scientific statements but also metaphysical concepts \cite{leibniz}. 
+
+Later in the course of history, artificial languages such as Esperanto and Interlingua appeared. Esperanto was constructed earlier, in the 1880s. Its author, Ludwik Zamenhof mentioned that his main goals for creating the language were to make it easy to learn for people of as many nationalities as possible and to ``find some means of overcoming the natural indifference of mankind'' \cite{zamenhof1911international}. Interlingua is another auxiliary language, however, it was created later, in the 1940s. Its goals differ significantly from the goals of the inventors of Esperanto. With Interlingua, the main idea behind the language was to create a naturalistic language (as opposed to Esperanto which was systematic) that would deny the naive idea that a language is simply a tool and would promote an understanding that a language represents a culture \cite{gode1951interlingua}.
+
+An interesting pattern could be noticed at this point in history: simultaneously with developing the first digital computers and, hence, the first programming languages, humanity was working on the so-called auxiliary languages, the main purpose of which was to help people from different parts of the world understand each other better. The first computers, thus, could be seen as another `nation' that had to be understood by everyone else and that had to be taught to understand humans, too. At that time, with the creation of the first digital computers and Alan Turing's publication of his famous article ``Computing Machinery and Intelligence'' \cite{turing1950computing}, the two problems could be united into one --- a meta-problem of understanding different ways of communication.
+
+It is often considered that the history of the Natural Language Processing starts with George Artsrouni's patent (received in 1933) for his ``electronic brain'' which was supposed to be able to translate the input text into one of the three languages pre-programmed for the machine \cite{hutchins2004two}. The machine was based on a simple automatic bilingual dictionary and used paper tape. 
+
+In a way, Artsrouni's patent defined the direction of the machine translation-related research for the next decades and resulted in the famous Georgetown-IBM experiment, the results of which were published in 1954 \cite{dostert1955georgetown}. The experiment demonstrated the translation of approximately 60 sentences from Russian to English mainly using the lexicographical approach \cite{hutchins2004georgetown}. The system had six grammar rules and a vocabulary of around 250 lexical items. The experiment was deemed a huge success by media, and it was promised that the machine translation problem would be solved ``within three to five years'' \cite{plumb1954russian}. However, the problem of machine translation still remains unsolved. Later analysis showed the disadvantages and limitations of using lexicographical approach \cite{garvin1968georgetown}. The approach did not try to go into the semantics of the sentence or distinguish between different parts of speech, or count for the fact that sentences in different languages are normally constructed in different ways. Most of the sentences presented during the experiment were constructed in the same way in English and Russian. However, this is not always true, and the system would not have been able to translate sentences which could not be translated word by word into English. 
+
+Gradually, machine translation was announced unsuccessful in the famous ALPAC report \cite{national1966language}, due to the limitations and the irregularities of the natural languages. The classic joke about the translation of ``The spirit is willing but the flesh is weak'' into ``The vodka is good but the meat is rotten'' appeared \cite{hutchins1995whisky}. It is probably important to note that most of these jokes are merely myths, however, they demonstrate the limitations of mechanical translation without an attempt to recognise the context and, ultimately, the meaning of the text.
+
+Despite the loss of interest in machine translation after the lack of progress and success in the area, the development of research in Natural Language Processing continued. During the 1980s, a new wave of research started, which looked into using machine learning for computational linguistics. Machine learning was not possible before that due to the limitations of processing power, however, ever since the 1980s, a big part of the research in Natural Language Processing is based on statistical supervised approach \cite{mcqueen1995applying, bergsma2010creating}. The constant increase in computational power due to the Moore's Law allows processing large amounts of data and use it to construct complex language models which could be applied in a vast number of areas, such as marketing \cite{goldberg1999automated}, medicine \cite{demner2009can}, and automated translation \cite{brants2007large}.
+
+The biggest advantage of this approach is the fact that a large amount of data can be processed quickly. However, in order to use supervised learning algorithms, all the training data has to be labelled manually. This often proves to be a tedious, if not an impossible, task. Only large companies and research groups can afford to perform manual labelling on a scale which then allows training complex models. For example, the SNLI corpus created by the Stanford Natural Language Processing Group has 570 000 manually labelled sentences \cite{ferrero2017compilig}. In some cases, this task can be outsourced to the general public, and platforms such as Amazon's Mechanical Turk are becoming increasingly popular \cite{callison2010creating}. However, often deep linguistic knowledge is necessary to perform the labelling correctly. At the same time, some research suggests that, when certain quality and bias control are introduced properly, crowdsourcing can have an immensely positive impact on Natural Language Processing research \cite{sabou2012crowdsourcing, snow2008cheap}.
+
+The latest research in Natural Language Processing has turned to the semi-supervised and unsupervised methods of learning \cite{liang2005semi, turian2010word}. This avoids having to label the training data, however, is much more difficult than supervised learning, and, therefore, the current results are generally less accurate than those given by the supervised models \cite{lapata2005web}.
+
+The current project focuses mostly on text classification in terms of sentiment and topic. 
+
+\section{Sentiment Analysis}
+\label{sec:sentiment_analysis}
+
+Sentiment analysis is an area of Natural Language Processing that has a goal of determining the attitude or an emotion expressed in a text. The common existing sentiment analysis systems try to detect how positive or negative the text is \cite{yi2003sentiment}. The ultimate goal would be to determine the sentiment of the given text on a much wider spectrum (such as sadness, anger, envy etc.), however, since this field is still quite young, even the problem of determining whether the text is positive or negative proves to be a complicated problem already. The simplest models look at just two classes: positive and negative (as Booleans). More complicated systems introduce the third class - neutral. Another approach expresses the sentiment as a score with clearly defined lower and higher limits, where the lowest score means the most negative text and the highest score stands for the most positive text.
+
+The approaches used to construct sentiment analysis models can roughly be divided into three groups: knowledge-based techniques, statistical approaches, and hybrid approaches. 
+
+The knowledge-based approaches use different ways to store the existing data (called the knowledge base, hence the name of the approach) about the subject, and check for the presence of the words describing that data \cite{chaumartin2007upar7}. The data can be expressed in a variety of ways, for example, with a simple dictionary or with a general-purpose semantic knowledge base, or on a concept level \cite{cambria2013knowledge}. 
+
+The statistical approaches employ machine learning techniques to construct the models. The researcher needs to extract the correct features and give them to a classifier to learn \cite{cambria2013statistical}. This approach allows working with large amounts of data. Different techniques are used in this approach, such as the ``bag-of-words'' approach, as well as the well-known classifiers such as the Support Vector Machines and Naive-Bayes classifiers \cite{mullen2004sentiment, tan2009adapting}.
+
+The hybrid approaches aim to combine the knowledge-based and statistical approaches \cite{ghiassi2013twitter}. 
+
+Overall, the state-of-the-art statistical models claim to reach accuracy around 80\%, whereas the hybrid ones reach 84\% \cite{thakkar2015approaches}. This number might not seem very high to some, however, in fact, accuracy around 80\% means that the model is as good at classifying text as a human. This is due to the fact that people do not always agree when manually labelling text as positive or negative. In fact, research shows that the inter-rater reliability among people labelling polarity of text varies and can be as low as 79\% \cite{bloom2007extracting}. Hence, since a training set is assumed to represent the opinion of one person, if another person manually labelled the same set, they would probably achieve an accuracy of around 80\%. Therefore, any computer system that achieves this level of accuracy is usually assumed to be as good as a human.
+
+\section{Topic modelling}
+\label{sec:topic_modelling}
+
+Topic modelling is another area of Natural Language Processing that looks into discovering the topics that occur in a certain document or a collection of documents. This task is far more complex than the task of determining the polarity of a text, and the existing research is all based on statistical models. It is one more tool that allows extracting information from unstructured data and, hence, use the vast amount of data being generated by humans daily. Interestingly enough, topic modelling is not only used on text but also on images, networks and even DNAs \cite{liu2007unsupervised, chang2009relational, lau2013collocations}. 
+
+The main assumption of the topic modelling is that a piece of text that, supposedly, talks about a certain topic will mention words associated with that topic frequently enough. The usual machine learning techniques are used to train different models to recognise certain topics. 
+
+The most common model used for topic modelling is the Latent Dirichlet allocation. The group of scientists that first proposed the model defined LDA as ``is a three-level hierarchical Bayesian model, in which each item of a collection is modelled as a finite mixture over an underlying set of topics'' \cite{blei2003latent}. Overall, the researchers claim that each document can be assigned a set of topics characterised by a distribution over words and the name Dirichlet appears in the name of the model because it is assumed that the topics are distributed with a Dirichlet prior probability. 
+
+\section{Text classification}
+\label{sec:text_classification}
+
+Classification is one of the most common tasks in machine learning. The main goal of the classification is to separate a collection of items into separate groups defined by the different features. This involves making a decision about every element of the collection of items.
+
+There are different techniques used for classifying text documents and in each case the technique should be used depending on the goal of the research, the amount of data and its structure. However, the most well-known techniques allowing to classify text documents are the following:
+\begin{itemize}
+    \item Naive Bayes classification
+    \item Support Vector Machine
+    \item K-means classification
+    \item Hierarchical classification.
+\end{itemize}
+
+\subsection{Naive Bayes Classification}
+Naive Bayes is a statistical method for classification which uses the Bayes' theorem. Bayes' theorem describes a probability of an event given a prior event and has the following form:
+\begin{align}
+    P(A \mid B) = \frac{P(B \mid A) \, P(A)}{P(B)}
+\end{align}
+
+    The theorem could also be written in plain English as:
+    $$ posterior = \frac{prior \times likelihood}{evidence} $$
+    The Naive Bayes Model assigns a probability to each class of the $C_k$, given a feature vector $ x= (x_1, ..., x_n)$ :
+    $$p(C_k \mid x_1, ..., x_n)$$
+    This rule could be expanded using the chain rule as the following:
+    \begin{align}
+        \mathclap{p (C_k, x_1, ..., x_n)}  & \notag \\
+    &= p(x_1, ..., x_n, C_k)  & \notag \\
+    &= p(x_1 \mid x_2, ..., x_n, C_k)p(x_2, ..., x_n, C_k)  & \notag \\
+    &= p(x_1 \mid x_2, ..., x_n, C_k)p(x_2 \mid x_3, ..., x_n, C_k)p(x_3, ..., x_n, C_k)  & \notag \\
+    &= ...  & \notag \\
+    &= p(x_1 \mid x_2, ..., x_n, C_k)p(x_2 \mid x_3, ..., x_n, C_k)...p(x_{n-1} \mid x_n, C_k)p(x_n \mid
+    C_k)p(C_k)  & \notag \\
+    \end{align}
+    The Naive Bayes classifier assumes that the events \textbf{A} and \textbf{B} do not depend on each other.
+    The `naive' feature comes from the fact that it is assumed that each feature is independent of the other features. This means that on every stage of the chain rule, as in for every feature, we are only interested in the current feature and can get rid of the rest of them, i.e.:
+    $$ p(x_i \mid x_{i+1}, ..., x_n, C_k) = p(x_i \mid C_k) $$
+    Overall, the model can then be expressed as the following product:
+    \begin{align}
+        p(C_k \mid x_1, ..., x_n) \propto p(C_k) \prod_{i=1}^{n} p(x_i \mid C_k)
+    \end{align}
+   
+     This assumption allows for complex models to be maintainable and scalable, but, at the same time, this is considered a rather daring assumption since, in real life, it is almost impossible to have a model where the events would be completely independent of each other. However, the classifier is considered by the researchers to perform well in text classification tasks such as sentiment analysis and spam filtering.
+     To create a classification model, the formula above needs to be combined with a decision rule, which, in this case, is pretty simple as the model simply chooses the largest probability:
+     \begin{align}
+         \hat{y} =  \argmax_{k \in \{1,...,K\}} p(C_k) \prod_{i=1}^{n} p(x_i \mid C_k)
+     \end{align}
+     
+\subsection{Support Vector Machine}
+    A baseline SVM algorithm is a supervised learning algorithm that splits the data into two classes. It works by constructing a hyperplane which divides the space in which items are located in two parts \cite{vapnik1963pattern}. The goal of the algorithm is to maximise the distance from both classes to the hyperplane. The distance to the class is the distance to the closest element of that class from the hyperplane.
+    
+    The researchers talk about a hyperplane because it allows separating the groups which could not be separated by a line in two dimensions. Hence, the idea of assuming the hyper-dimensional space was accepted because it allowed separating these groups in higher dimension by a hyperplane.
+    
+    A training set consists of pairs of objects, in each pair, there is a vector which describes an element of the collection, and a label which says which group this element belongs to. Each vector is a multidimensional real vector. The formula of the resulting model can then be written as:
+    $$ \vec{w}^{}\cdotp\vec{x}^{}-b=0 $$
+    where the hyperplane is defined by the vector $\vec{x}^{}$ and the vector $\vec{w}^{}$ defines the vector to the hyperplane.
+    
+    In later studies, a nonlinear classification was introduced by replacing dot products in the formula above with a nonlinear kernel function \cite{boser1992training}.
+    
+    Multiclass Support Vector Machine has been created in 1999, and its work is based on the principle that a multiclass labelling problem can be split into several binary classification problems \cite{platt1999large}. However, later studies suggest that such complicated algorithm, which involves solving a number of binary classifications problems instead of one, could be avoided, and one optimisation problem could be solved instead \cite{crammer2001algorithmic}. 
+    
+    The authors of the ``Latent Dirichlet Allocation'' paper show how the allocation model could be used to train a Support Vector Machine for document classification \cite{blei2003latent}. In this case, the LDA model is used to reduce the feature set. Often, to train a Support Vector Machine for text documents, the texts are simply split into words and almost all of the words (except the so-called stop words) are then used in a feature vector. However, when working with large diverse corpora, using all the words creates a very large model, which is sometimes not feasible. The use of the LDA for topic modelling allows reducing the feature space drastically (by 99.6\% in the paper). The LDA reduced any document to a fixed set of real values, which are the posterior Dirichlet parameters. The results of the experiment showed that the LDA model could be used for fast calculations and classification. 
+
+
+\section{Twitter Data Analysis}
+\label{sec:twitter_analysis}
+
+Twitter is one of the most popular social media platforms, with 310 million monthly active users and 1.3 billion accounts ever created \cite{twittertcstats, twitterbistats}. 
+
+A tweet, as defined by the organisation, is an ``atomic building block of all things [on] Twitter'', and could also be called a ``status update'' \cite{twitterapi}. A set of actions which can be performed on an existing tweet are the following: 
+\begin{itemize}
+    \item tweet embedding
+    \item reply to a tweet
+    \item like a tweet
+    \item unlike a tweet
+    \item delete a tweet.
+\end{itemize} 
+
+A tweet object, extracted directly from Twitter using Twitter API, has 33 fields, among which are the following: 
+
+\begin{itemize}
+    \item text (String)
+    \item source (String)
+    \item retweeted (Boolean)
+    \item retweet\_count (int)
+    \item lang (String)
+    \item id (Int64)
+    \item favorited (Boolean)
+    \item entities (Entities)
+    \item coordinates (Coordinates).
+\end{itemize}
+
+The Entities object contains information about the URLs mentioned in the text, as well as hashtags and user mentions. All of these things, however, could be parsed out of the text manually. 
+
+The Coordinates object contains information about the geographical coordinates of the user who posted the tweet, as the tweet was being published. However, the coordinates field of a tweet is `nullable', which means that the user can opt out of providing that information. In fact, data shows that only a very small portion of users provide this information \cite{leetaru2013mapping}. The paper says that during the study which was conducted in 2013, only 2.02\% of all tweets included the location data. The researchers have, however, since found ways to locate tweets even if the location data is not included as metadata. A lot of different techniques and heuristics are being used to achieve that goal \cite{leetaru2013mapping, han2014text}.
+
+The existence of the Twitter API which allows requesting data for analysis makes Twitter attractive for research in different areas, especially Natural Language Processing \cite{twitterapi}. 
+
+At the same time, analysing Twitter text has its own specifics which are defined by the philosophy of the platform. The main rule of Twitter is that posts are no longer than 140 characters, and it defines the style of the posts in a major way. In a way, it even defines the styles in different ways for people speaking different languages, since the linguistic research shows that the amount of information which can fit into 140 characters varies a lot between the different languages. For example, when writing in Chinese, one can express almost twice as much as an English speaker \cite{neubig2013much}. 
+
+The microblog format of the platform means that people have to express their thoughts and opinions in a very concise manner. This makes the users try to insert as much meaning --- in terms of both information and emotion --- into one sentence. This means that often the tweets will have a certain aphoristic meaning to them, will try to have a whipping effect. Sharp language, slang, performativity, poetry, scepticism, weird abbreviations, special user inventions like mentions and re-tweets, emojis --- all of these are the most common tools for expression on Twitter. 
+
+Depending on the goal of the research, it might be necessary to deal with some or all of these specifics. The deepest sentiment analysis will take all of them into account. Most of the modern tools focus on emojis to extract the sentiment of a tweet because they themselves often hold a certain amount of sentiment, which is relatively easy to extract \cite{novak2015sentiment}. However, dealing with some of the other tools such as slang, abbreviations and mentions is still necessary during the preprocessing of a tweet.
+
+If one was to summarise all the techniques used to reprocess Twitter data, the general procedure would look similar to the following one:
+
+\begin{enumerate}
+    \item Extract the valuable parts of a tweet. These can be the text, the coordinates, information about the poster and whether the tweet has been favourited (if yes, how many times). 
+    \item The tweet is then stripped of all the things that do not constitute natural language. These are the mentions, the URLs, the hashtags and the emojis. These entities do, in fact, hold important information and can then be processed. For example, a study has shown that tweets containing URLs tend to be positive \cite{go2009twitter}. Other tools have polarity extraction mechanisms for emojis \cite{novak2015sentiment}. 
+    \item After the tweet has been `cleaned out', a text analysis can begin. First, the researchers have to deal with abbreviations and slang. It can be useful to extract noun phrases, for which part-of-speech tagging may be necessary. This is quite a complicated procedure, and some researchers choose to work with unigrams or bigrams instead \cite{mohammad2013nrc}, however, it has been proven that noun phrases provide more information and work better than unigrams or bigrams \cite{whitman2002inferring}. Studies also show that unigrams outperform bigrams when doing sentiment analysis \cite{gamon2004sentiment}.
+    \item Finally, all the extracted data has to be put into a feature vector which can then be used in whatever machine learning technique is chosen for the study.
+\end{enumerate}
+
+Even though this process represents preprocessing as performed in the most recent research, anyone performing Natural Language Processing on Twitter data should keep track of the latest changes in the Twitter policies and social trends in media. For example, Twitter started officially supporting hashtags in 2007, a year after the company was established \cite{twittermilestones}. The geolocation service was first introduced in 2009 \cite{twitterlocation}. Twitter continues to evolve, and it means that new features might be introduced later, and these features might affect the way the users express their emotions and thoughts.
+
+
+
+ 
+ 

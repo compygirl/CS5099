@@ -1,0 +1,816 @@
+MINION 3
+# CSETopLevel_number = 0
+# CSETopLevel_eliminated_expressions = 0
+# CSETopLevel_total_size = 0
+# CSE_active_number = 0
+# CSE_active_eliminated_expressions = 0
+# CSE_active_total_size = 0
+**VARIABLES**
+DISCRETE topIndexMatrix_00000_00000 #
+{1..4}
+DISCRETE topIndexMatrix_00000_00001 #
+{1..4}
+DISCRETE topIndexMatrix_00000_00002 #
+{1..3}
+DISCRETE topIndexMatrix_00000_00003 #
+{1..5}
+DISCRETE topIndexMatrix_00000_00004 #
+{1..4}
+DISCRETE topIndexMatrix_00000_00005 #
+{1..3}
+DISCRETE topIndexMatrix_00000_00006 #
+{1..2}
+DISCRETE topIndexMatrix_00000_00007 #
+{1..3}
+DISCRETE topIndexMatrix_00000_00010 #
+{1..4}
+DISCRETE topIndexMatrix_00000_00011 #
+{1..4}
+DISCRETE topIndexMatrix_00000_00012 #
+{1..2}
+DISCRETE topIndexMatrix_00000_00013 #
+{1..4}
+DISCRETE topIndexMatrix_00000_00017 #
+{1..4}
+DISCRETE topIndexMatrix_00001_00000 #
+{3..6}
+DISCRETE topIndexMatrix_00001_00001 #
+{3..6}
+DISCRETE topIndexMatrix_00001_00002 #
+{4..6}
+DISCRETE topIndexMatrix_00001_00004 #
+{3..6}
+DISCRETE topIndexMatrix_00001_00005 #
+{3..5}
+DISCRETE topIndexMatrix_00001_00006 #
+{5..6}
+DISCRETE topIndexMatrix_00001_00008 #
+{3..4}
+DISCRETE topIndexMatrix_00001_00009 #
+{3..4}
+DISCRETE topIndexMatrix_00001_00010 #
+{3..6}
+DISCRETE topIndexMatrix_00001_00012 #
+{5..6}
+DISCRETE topIndexMatrix_00001_00013 #
+{3..6}
+DISCRETE topIndexMatrix_00002_00008 #
+{5..6}
+DISCRETE topIndexMatrix_00002_00009 #
+{5..6}
+DISCRETE leftIndexMatrix_00000_00000 #
+{1..4}
+DISCRETE leftIndexMatrix_00000_00001 #
+{4..7}
+DISCRETE leftIndexMatrix_00000_00002 #
+{6..9}
+DISCRETE leftIndexMatrix_00000_00003 #
+{13..15}
+DISCRETE leftIndexMatrix_00001_00000 #
+{1..4}
+DISCRETE leftIndexMatrix_00001_00001 #
+{5..8}
+DISCRETE leftIndexMatrix_00001_00002 #
+{9..12}
+DISCRETE leftIndexMatrix_00001_00003 #
+{13..15}
+DISCRETE leftIndexMatrix_00002_00000 #
+{1..2}
+DISCRETE leftIndexMatrix_00002_00001 #
+{3..4}
+DISCRETE leftIndexMatrix_00002_00002 #
+{5..7}
+DISCRETE leftIndexMatrix_00002_00003 #
+{7..9}
+DISCRETE leftIndexMatrix_00002_00004 #
+{9..11}
+DISCRETE leftIndexMatrix_00002_00005 #
+{12..13}
+DISCRETE leftIndexMatrix_00002_00006 #
+{15..16}
+DISCRETE leftIndexMatrix_00003_00000 #
+{1..10}
+DISCRETE leftIndexMatrix_00003_00001 #
+{3..12}
+DISCRETE leftIndexMatrix_00003_00002 #
+{12..15}
+DISCRETE leftIndexMatrix_00004_00000 #
+{1..9}
+DISCRETE leftIndexMatrix_00004_00001 #
+{3..11}
+DISCRETE leftIndexMatrix_00004_00002 #
+{6..13}
+DISCRETE leftIndexMatrix_00004_00003 #
+{8..15}
+DISCRETE leftIndexMatrix_00004_00004 #
+{11..17}
+DISCRETE leftIndexMatrix_00005_00000 #
+{1..4}
+DISCRETE leftIndexMatrix_00005_00001 #
+{3..6}
+DISCRETE leftIndexMatrix_00005_00002 #
+{7..10}
+DISCRETE leftIndexMatrix_00005_00003 #
+{10..13}
+DISCRETE solutionBoard_00000_00000 #
+{0..1}
+DISCRETE solutionBoard_00000_00001 #
+{0..1}
+DISCRETE solutionBoard_00000_00002 #
+{0..1}
+DISCRETE solutionBoard_00000_00003 #
+{0..1}
+DISCRETE solutionBoard_00000_00004 #
+{0..1}
+DISCRETE solutionBoard_00000_00005 #
+{0..1}
+DISCRETE solutionBoard_00000_00006 #
+{0..1}
+DISCRETE solutionBoard_00000_00007 #
+{0..1}
+DISCRETE solutionBoard_00000_00010 #
+{0..1}
+DISCRETE solutionBoard_00000_00011 #
+{0..1}
+DISCRETE solutionBoard_00000_00012 #
+{0..1}
+DISCRETE solutionBoard_00000_00013 #
+{0..1}
+DISCRETE solutionBoard_00000_00017 #
+{0..1}
+DISCRETE solutionBoard_00001_00000 #
+{0..1}
+DISCRETE solutionBoard_00001_00001 #
+{0..1}
+DISCRETE solutionBoard_00001_00002 #
+{0..1}
+DISCRETE solutionBoard_00001_00003 #
+{0..1}
+DISCRETE solutionBoard_00001_00004 #
+{0..1}
+DISCRETE solutionBoard_00001_00005 #
+{0..1}
+DISCRETE solutionBoard_00001_00007 #
+{0..1}
+DISCRETE solutionBoard_00001_00008 #
+{0..1}
+DISCRETE solutionBoard_00001_00009 #
+{0..1}
+DISCRETE solutionBoard_00001_00010 #
+{0..1}
+DISCRETE solutionBoard_00001_00011 #
+{0..1}
+DISCRETE solutionBoard_00001_00013 #
+{0..1}
+DISCRETE solutionBoard_00001_00017 #
+{0..1}
+DISCRETE solutionBoard_00002_00000 #
+{0..1}
+DISCRETE solutionBoard_00002_00001 #
+{0..1}
+DISCRETE solutionBoard_00002_00002 #
+{0..1}
+DISCRETE solutionBoard_00002_00003 #
+{0..1}
+DISCRETE solutionBoard_00002_00004 #
+{0..1}
+DISCRETE solutionBoard_00002_00005 #
+{0..1}
+DISCRETE solutionBoard_00002_00007 #
+{0..1}
+DISCRETE solutionBoard_00002_00008 #
+{0..1}
+DISCRETE solutionBoard_00002_00009 #
+{0..1}
+DISCRETE solutionBoard_00002_00010 #
+{0..1}
+DISCRETE solutionBoard_00002_00011 #
+{0..1}
+DISCRETE solutionBoard_00002_00013 #
+{0..1}
+DISCRETE solutionBoard_00002_00017 #
+{0..1}
+DISCRETE solutionBoard_00003_00000 #
+{0..1}
+DISCRETE solutionBoard_00003_00001 #
+{0..1}
+DISCRETE solutionBoard_00003_00002 #
+{0..1}
+DISCRETE solutionBoard_00003_00003 #
+{0..1}
+DISCRETE solutionBoard_00003_00004 #
+{0..1}
+DISCRETE solutionBoard_00003_00005 #
+{0..1}
+DISCRETE solutionBoard_00003_00006 #
+{0..1}
+DISCRETE solutionBoard_00003_00007 #
+{0..1}
+DISCRETE solutionBoard_00003_00008 #
+{0..1}
+DISCRETE solutionBoard_00003_00009 #
+{0..1}
+DISCRETE solutionBoard_00003_00010 #
+{0..1}
+DISCRETE solutionBoard_00003_00011 #
+{0..1}
+DISCRETE solutionBoard_00003_00012 #
+{0..1}
+DISCRETE solutionBoard_00003_00013 #
+{0..1}
+DISCRETE solutionBoard_00003_00017 #
+{0..1}
+DISCRETE solutionBoard_00004_00000 #
+{0..1}
+DISCRETE solutionBoard_00004_00001 #
+{0..1}
+DISCRETE solutionBoard_00004_00002 #
+{0..1}
+DISCRETE solutionBoard_00004_00003 #
+{0..1}
+DISCRETE solutionBoard_00004_00004 #
+{0..1}
+DISCRETE solutionBoard_00004_00005 #
+{0..1}
+DISCRETE solutionBoard_00004_00006 #
+{0..1}
+DISCRETE solutionBoard_00004_00007 #
+{0..1}
+DISCRETE solutionBoard_00004_00008 #
+{0..1}
+DISCRETE solutionBoard_00004_00009 #
+{0..1}
+DISCRETE solutionBoard_00004_00010 #
+{0..1}
+DISCRETE solutionBoard_00004_00011 #
+{0..1}
+DISCRETE solutionBoard_00004_00012 #
+{0..1}
+DISCRETE solutionBoard_00004_00013 #
+{0..1}
+DISCRETE solutionBoard_00005_00000 #
+{0..1}
+DISCRETE solutionBoard_00005_00001 #
+{0..1}
+DISCRETE solutionBoard_00005_00002 #
+{0..1}
+DISCRETE solutionBoard_00005_00003 #
+{0..1}
+DISCRETE solutionBoard_00005_00004 #
+{0..1}
+DISCRETE solutionBoard_00005_00005 #
+{0..1}
+DISCRETE solutionBoard_00005_00006 #
+{0..1}
+DISCRETE solutionBoard_00005_00007 #
+{0..1}
+DISCRETE solutionBoard_00005_00008 #
+{0..1}
+DISCRETE solutionBoard_00005_00009 #
+{0..1}
+DISCRETE solutionBoard_00005_00010 #
+{0..1}
+DISCRETE solutionBoard_00005_00011 #
+{0..1}
+DISCRETE solutionBoard_00005_00012 #
+{0..1}
+DISCRETE solutionBoard_00005_00013 #
+{0..1}
+DISCRETE aux34 #(topIndexMatrix_00000_00000-1)
+{0..3}
+DISCRETE aux36 #(topIndexMatrix_00000_00002 + 1)
+{2..4}
+BOOL aux37 #(leftIndexMatrix_00002_00001-3)
+DISCRETE aux40 #(topIndexMatrix_00000_00011-1)
+{0..3}
+BOOL aux43 #(-5 + topIndexMatrix_00002_00009)
+BOOL aux46 #(-5 + topIndexMatrix_00001_00012)
+BOOL aux48 #(leftIndexMatrix_00002_00005-12)
+DISCRETE aux50 #(-3 + leftIndexMatrix_00005_00001)
+{0..3}
+DISCRETE aux52 #(3 + leftIndexMatrix_00000_00002)
+{9..12}
+DISCRETE aux53 #(-5 + leftIndexMatrix_00001_00001)
+{0..3}
+DISCRETE aux56 #(-3 + topIndexMatrix_00001_00004)
+{0..3}
+DISCRETE aux60 #(topIndexMatrix_00000_00003 + 1)
+{2..6}
+DISCRETE aux62 #(-9 + leftIndexMatrix_00001_00002)
+{0..3}
+DISCRETE aux70 #(leftIndexMatrix_00002_00002-5)
+{0..2}
+DISCRETE aux72 #(-3 + leftIndexMatrix_00004_00001)
+{0..8}
+DISCRETE aux74 #(-6 + leftIndexMatrix_00000_00002)
+{0..3}
+DISCRETE aux76 #(4 + leftIndexMatrix_00000_00002)
+{10..13}
+DISCRETE aux78 #(-1 + leftIndexMatrix_00005_00000)
+{0..3}
+DISCRETE aux80 #(topIndexMatrix_00000_00003-1)
+{0..4}
+DISCRETE aux82 #(1 + leftIndexMatrix_00001_00001)
+{6..9}
+BOOL aux87 #(leftIndexMatrix_00002_00006-15)
+DISCRETE aux91 #(1 + leftIndexMatrix_00001_00000)
+{2..5}
+DISCRETE aux92 #(topIndexMatrix_00000_00007-1)
+{0..2}
+DISCRETE aux94 #(-6 + leftIndexMatrix_00004_00002)
+{0..7}
+DISCRETE aux98 #(1 + leftIndexMatrix_00001_00003)
+{14..16}
+DISCRETE aux99 #(-3 + topIndexMatrix_00001_00000)
+{0..3}
+DISCRETE aux101 #(-3 + topIndexMatrix_00001_00010)
+{0..3}
+DISCRETE aux103 #(leftIndexMatrix_00002_00003-7)
+{0..2}
+DISCRETE aux106 #(-4 + topIndexMatrix_00001_00002)
+{0..2}
+DISCRETE aux111 #(leftIndexMatrix_00002_00004-9)
+{0..2}
+DISCRETE aux113 #(topIndexMatrix_00000_00013-1)
+{0..3}
+DISCRETE aux116 #(1 + leftIndexMatrix_00001_00002)
+{10..13}
+DISCRETE aux117 #(-10 + leftIndexMatrix_00005_00003)
+{0..3}
+DISCRETE aux120 #(-1 + leftIndexMatrix_00000_00000)
+{0..3}
+DISCRETE aux122 #(topIndexMatrix_00000_00006 + 1)
+{2..3}
+DISCRETE aux125 #(leftIndexMatrix_00003_00002 + 2)
+{14..17}
+DISCRETE aux129 #(leftIndexMatrix_00002_00006 + 1)
+{16..17}
+DISCRETE aux130 #(-13 + leftIndexMatrix_00001_00003)
+{0..2}
+BOOL aux133 #(-5 + topIndexMatrix_00002_00008)
+DISCRETE aux135 #(topIndexMatrix_00000_00017-1)
+{0..3}
+BOOL aux137 #(-3 + topIndexMatrix_00001_00008)
+DISCRETE aux139 #(topIndexMatrix_00000_00006 + 2)
+{3..4}
+DISCRETE aux140 #(leftIndexMatrix_00003_00002 + 3)
+{15..18}
+DISCRETE aux141 #(leftIndexMatrix_00003_00001 + 1)
+{4..13}
+DISCRETE aux143 #(topIndexMatrix_00000_00004-1)
+{0..3}
+DISCRETE aux145 #(topIndexMatrix_00000_00011 + 2)
+{3..6}
+BOOL aux146 #(topIndexMatrix_00000_00012-1)
+DISCRETE aux148 #(-3 + topIndexMatrix_00001_00001)
+{0..3}
+DISCRETE aux150 #(-3 + topIndexMatrix_00001_00013)
+{0..3}
+DISCRETE aux152 #(topIndexMatrix_00000_00007 + 1)
+{2..4}
+DISCRETE aux154 #(leftIndexMatrix_00003_00001-3)
+{0..9}
+DISCRETE aux156 #(topIndexMatrix_00000_00001-1)
+{0..3}
+DISCRETE aux158 #(1 + leftIndexMatrix_00000_00003)
+{14..16}
+DISCRETE aux159 #(2 + leftIndexMatrix_00001_00001)
+{7..10}
+DISCRETE aux160 #(leftIndexMatrix_00003_00000-1)
+{0..9}
+DISCRETE aux162 #(2 + leftIndexMatrix_00005_00001)
+{5..8}
+BOOL aux163 #(topIndexMatrix_00000_00006-1)
+DISCRETE aux167 #(-1 + leftIndexMatrix_00004_00000)
+{0..8}
+DISCRETE aux169 #(-1 + leftIndexMatrix_00001_00000)
+{0..3}
+DISCRETE aux172 #(topIndexMatrix_00000_00005-1)
+{0..2}
+DISCRETE aux175 #(-11 + leftIndexMatrix_00004_00004)
+{0..6}
+DISCRETE aux177 #(topIndexMatrix_00000_00012 + 2)
+{3..4}
+DISCRETE aux179 #(topIndexMatrix_00000_00010-1)
+{0..3}
+DISCRETE aux181 #(2 + leftIndexMatrix_00000_00003)
+{15..17}
+DISCRETE aux182 #(1 + leftIndexMatrix_00005_00001)
+{4..7}
+DISCRETE aux187 #(topIndexMatrix_00000_00011 + 1)
+{2..5}
+DISCRETE aux190 #(-13 + leftIndexMatrix_00000_00003)
+{0..2}
+DISCRETE aux193 #(1 + leftIndexMatrix_00000_00002)
+{7..10}
+DISCRETE aux196 #(1 + topIndexMatrix_00001_00005)
+{4..6}
+DISCRETE aux197 #(leftIndexMatrix_00002_00006 + 2)
+{17..18}
+BOOL aux199 #(leftIndexMatrix_00002_00000-1)
+DISCRETE aux201 #(-4 + leftIndexMatrix_00000_00001)
+{0..3}
+DISCRETE aux206 #(3 + leftIndexMatrix_00000_00003)
+{16..18}
+DISCRETE aux207 #(1 + leftIndexMatrix_00005_00003)
+{11..14}
+BOOL aux208 #(-5 + topIndexMatrix_00001_00006)
+DISCRETE aux210 #(leftIndexMatrix_00002_00005 + 1)
+{13..14}
+DISCRETE aux211 #(-7 + leftIndexMatrix_00005_00002)
+{0..3}
+DISCRETE aux213 #(topIndexMatrix_00000_00012 + 1)
+{2..3}
+DISCRETE aux214 #(topIndexMatrix_00000_00002-1)
+{0..2}
+BOOL aux216 #(-3 + topIndexMatrix_00001_00009)
+DISCRETE aux218 #(-8 + leftIndexMatrix_00004_00003)
+{0..7}
+DISCRETE aux220 #(leftIndexMatrix_00003_00002-12)
+{0..3}
+DISCRETE aux223 #(1 + leftIndexMatrix_00000_00000)
+{2..5}
+DISCRETE aux224 #(2 + leftIndexMatrix_00000_00002)
+{8..11}
+DISCRETE aux225 #(-3 + topIndexMatrix_00001_00005)
+{0..2}
+DISCRETE aux227 #(1 + leftIndexMatrix_00005_00002)
+{8..11}
+DISCRETE aux228 #(leftIndexMatrix_00003_00002 + 1)
+{13..16}
+**TUPLELIST**
+topMatrix 3 18
+1 1 2 2 1 1 3 2 1 1 1 3 3 1 5 4 1 1 
+1 1 1 0 1 2 1 0 1 1 1 0 1 1 0 1 4 1 
+0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 
+**VARIABLES**
+ALIAS topMatrix[3,18]=[[1, 1, 2, 2, 1, 1, 3, 2, 1, 1, 1, 3, 3, 1, 5, 4, 1, 1], [1, 1, 1, 0, 1, 2, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 4, 1], [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]]
+**TUPLELIST**
+leftMatrix 6 9
+2 1 5 4 0 0 0 0 0 
+2 3 2 2 0 0 0 0 0 
+1 1 1 1 1 2 3 0 0 
+1 2 4 0 0 0 0 0 0 
+1 1 1 1 1 0 0 0 0 
+1 3 2 2 3 0 0 0 0 
+**VARIABLES**
+ALIAS leftMatrix[6,9]=[[2, 1, 5, 4, 0, 0, 0, 0, 0], [2, 3, 2, 2, 0, 0, 0, 0, 0], [1, 1, 1, 1, 1, 2, 3, 0, 0], [1, 2, 4, 0, 0, 0, 0, 0, 0], [1, 1, 1, 1, 1, 0, 0, 0, 0], [1, 3, 2, 2, 3, 0, 0, 0, 0]]
+**SEARCH**
+PRINT[[topIndexMatrix_00000_00000],[topIndexMatrix_00000_00001],[topIndexMatrix_00000_00002],[topIndexMatrix_00000_00003],[topIndexMatrix_00000_00004],[topIndexMatrix_00000_00005],[topIndexMatrix_00000_00006],[topIndexMatrix_00000_00007],[topIndexMatrix_00000_00010],[topIndexMatrix_00000_00011],[topIndexMatrix_00000_00012],[topIndexMatrix_00000_00013],[topIndexMatrix_00000_00017],[topIndexMatrix_00001_00000],[topIndexMatrix_00001_00001],[topIndexMatrix_00001_00002],[topIndexMatrix_00001_00004],[topIndexMatrix_00001_00005],[topIndexMatrix_00001_00006],[topIndexMatrix_00001_00008],[topIndexMatrix_00001_00009],[topIndexMatrix_00001_00010],[topIndexMatrix_00001_00012],[topIndexMatrix_00001_00013],[topIndexMatrix_00002_00008],[topIndexMatrix_00002_00009],[leftIndexMatrix_00000_00000],[leftIndexMatrix_00000_00001],[leftIndexMatrix_00000_00002],[leftIndexMatrix_00000_00003],[leftIndexMatrix_00001_00000],[leftIndexMatrix_00001_00001],[leftIndexMatrix_00001_00002],[leftIndexMatrix_00001_00003],[leftIndexMatrix_00002_00000],[leftIndexMatrix_00002_00001],[leftIndexMatrix_00002_00002],[leftIndexMatrix_00002_00003],[leftIndexMatrix_00002_00004],[leftIndexMatrix_00002_00005],[leftIndexMatrix_00002_00006],[leftIndexMatrix_00003_00000],[leftIndexMatrix_00003_00001],[leftIndexMatrix_00003_00002],[leftIndexMatrix_00004_00000],[leftIndexMatrix_00004_00001],[leftIndexMatrix_00004_00002],[leftIndexMatrix_00004_00003],[leftIndexMatrix_00004_00004],[leftIndexMatrix_00005_00000],[leftIndexMatrix_00005_00001],[leftIndexMatrix_00005_00002],[leftIndexMatrix_00005_00003],[solutionBoard_00000_00000],[solutionBoard_00000_00001],[solutionBoard_00000_00002],[solutionBoard_00000_00003],[solutionBoard_00000_00004],[solutionBoard_00000_00005],[solutionBoard_00000_00006],[solutionBoard_00000_00007],[solutionBoard_00000_00010],[solutionBoard_00000_00011],[solutionBoard_00000_00012],[solutionBoard_00000_00013],[solutionBoard_00000_00017],[solutionBoard_00001_00000],[solutionBoard_00001_00001],[solutionBoard_00001_00002],[solutionBoard_00001_00003],[solutionBoard_00001_00004],[solutionBoard_00001_00005],[solutionBoard_00001_00007],[solutionBoard_00001_00008],[solutionBoard_00001_00009],[solutionBoard_00001_00010],[solutionBoard_00001_00011],[solutionBoard_00001_00013],[solutionBoard_00001_00017],[solutionBoard_00002_00000],[solutionBoard_00002_00001],[solutionBoard_00002_00002],[solutionBoard_00002_00003],[solutionBoard_00002_00004],[solutionBoard_00002_00005],[solutionBoard_00002_00007],[solutionBoard_00002_00008],[solutionBoard_00002_00009],[solutionBoard_00002_00010],[solutionBoard_00002_00011],[solutionBoard_00002_00013],[solutionBoard_00002_00017],[solutionBoard_00003_00000],[solutionBoard_00003_00001],[solutionBoard_00003_00002],[solutionBoard_00003_00003],[solutionBoard_00003_00004],[solutionBoard_00003_00005],[solutionBoard_00003_00006],[solutionBoard_00003_00007],[solutionBoard_00003_00008],[solutionBoard_00003_00009],[solutionBoard_00003_00010],[solutionBoard_00003_00011],[solutionBoard_00003_00012],[solutionBoard_00003_00013],[solutionBoard_00003_00017],[solutionBoard_00004_00000],[solutionBoard_00004_00001],[solutionBoard_00004_00002],[solutionBoard_00004_00003],[solutionBoard_00004_00004],[solutionBoard_00004_00005],[solutionBoard_00004_00006],[solutionBoard_00004_00007],[solutionBoard_00004_00008],[solutionBoard_00004_00009],[solutionBoard_00004_00010],[solutionBoard_00004_00011],[solutionBoard_00004_00012],[solutionBoard_00004_00013],[solutionBoard_00005_00000],[solutionBoard_00005_00001],[solutionBoard_00005_00002],[solutionBoard_00005_00003],[solutionBoard_00005_00004],[solutionBoard_00005_00005],[solutionBoard_00005_00006],[solutionBoard_00005_00007],[solutionBoard_00005_00008],[solutionBoard_00005_00009],[solutionBoard_00005_00010],[solutionBoard_00005_00011],[solutionBoard_00005_00012],[solutionBoard_00005_00013]]
+VARORDER STATIC [topIndexMatrix_00000_00000, topIndexMatrix_00000_00001, topIndexMatrix_00000_00002, topIndexMatrix_00000_00003, topIndexMatrix_00000_00004, topIndexMatrix_00000_00005, topIndexMatrix_00000_00006, topIndexMatrix_00000_00007, 1, 1, topIndexMatrix_00000_00010, topIndexMatrix_00000_00011, topIndexMatrix_00000_00012, topIndexMatrix_00000_00013, 1, 1, 1, topIndexMatrix_00000_00017, topIndexMatrix_00001_00000, topIndexMatrix_00001_00001, topIndexMatrix_00001_00002, 0, topIndexMatrix_00001_00004, topIndexMatrix_00001_00005, topIndexMatrix_00001_00006, 0, topIndexMatrix_00001_00008, topIndexMatrix_00001_00009, topIndexMatrix_00001_00010, 0, topIndexMatrix_00001_00012, topIndexMatrix_00001_00013, 0, 6, 3, 6, 0, 0, 0, 0, 0, 0, 0, 0, topIndexMatrix_00002_00008, topIndexMatrix_00002_00009, 0, 0, 0, 0, 0, 0, 0, 0, leftIndexMatrix_00000_00000, leftIndexMatrix_00000_00001, leftIndexMatrix_00000_00002, leftIndexMatrix_00000_00003, 0, 0, 0, 0, 0, leftIndexMatrix_00001_00000, leftIndexMatrix_00001_00001, leftIndexMatrix_00001_00002, leftIndexMatrix_00001_00003, 0, 0, 0, 0, 0, leftIndexMatrix_00002_00000, leftIndexMatrix_00002_00001, leftIndexMatrix_00002_00002, leftIndexMatrix_00002_00003, leftIndexMatrix_00002_00004, leftIndexMatrix_00002_00005, leftIndexMatrix_00002_00006, 0, 0, leftIndexMatrix_00003_00000, leftIndexMatrix_00003_00001, leftIndexMatrix_00003_00002, 0, 0, 0, 0, 0, 0, leftIndexMatrix_00004_00000, leftIndexMatrix_00004_00001, leftIndexMatrix_00004_00002, leftIndexMatrix_00004_00003, leftIndexMatrix_00004_00004, 0, 0, 0, 0, leftIndexMatrix_00005_00000, leftIndexMatrix_00005_00001, leftIndexMatrix_00005_00002, leftIndexMatrix_00005_00003, 16, 0, 0, 0, 0, solutionBoard_00000_00000, solutionBoard_00000_00001, solutionBoard_00000_00002, solutionBoard_00000_00003, solutionBoard_00000_00004, solutionBoard_00000_00005, solutionBoard_00000_00006, solutionBoard_00000_00007, 1, 1, solutionBoard_00000_00010, solutionBoard_00000_00011, solutionBoard_00000_00012, solutionBoard_00000_00013, 1, 1, 1, solutionBoard_00000_00017, solutionBoard_00001_00000, solutionBoard_00001_00001, solutionBoard_00001_00002, solutionBoard_00001_00003, solutionBoard_00001_00004, solutionBoard_00001_00005, 1, solutionBoard_00001_00007, solutionBoard_00001_00008, solutionBoard_00001_00009, solutionBoard_00001_00010, solutionBoard_00001_00011, 1, solutionBoard_00001_00013, 1, 1, 0, solutionBoard_00001_00017, solutionBoard_00002_00000, solutionBoard_00002_00001, solutionBoard_00002_00002, solutionBoard_00002_00003, solutionBoard_00002_00004, solutionBoard_00002_00005, 1, solutionBoard_00002_00007, solutionBoard_00002_00008, solutionBoard_00002_00009, solutionBoard_00002_00010, solutionBoard_00002_00011, 1, solutionBoard_00002_00013, 1, 1, 1, solutionBoard_00002_00017, solutionBoard_00003_00000, solutionBoard_00003_00001, solutionBoard_00003_00002, solutionBoard_00003_00003, solutionBoard_00003_00004, solutionBoard_00003_00005, solutionBoard_00003_00006, solutionBoard_00003_00007, solutionBoard_00003_00008, solutionBoard_00003_00009, solutionBoard_00003_00010, solutionBoard_00003_00011, solutionBoard_00003_00012, solutionBoard_00003_00013, 1, 1, 1, solutionBoard_00003_00017, solutionBoard_00004_00000, solutionBoard_00004_00001, solutionBoard_00004_00002, solutionBoard_00004_00003, solutionBoard_00004_00004, solutionBoard_00004_00005, solutionBoard_00004_00006, solutionBoard_00004_00007, solutionBoard_00004_00008, solutionBoard_00004_00009, solutionBoard_00004_00010, solutionBoard_00004_00011, solutionBoard_00004_00012, solutionBoard_00004_00013, 1, 0, 1, 0, solutionBoard_00005_00000, solutionBoard_00005_00001, solutionBoard_00005_00002, solutionBoard_00005_00003, solutionBoard_00005_00004, solutionBoard_00005_00005, solutionBoard_00005_00006, solutionBoard_00005_00007, solutionBoard_00005_00008, solutionBoard_00005_00009, solutionBoard_00005_00010, solutionBoard_00005_00011, solutionBoard_00005_00012, solutionBoard_00005_00013, 0, 1, 1, 1]
+VARORDER AUX [topIndexMatrix_00000_00000,topIndexMatrix_00000_00001,topIndexMatrix_00000_00002,topIndexMatrix_00000_00003,topIndexMatrix_00000_00004,topIndexMatrix_00000_00005,topIndexMatrix_00000_00006,topIndexMatrix_00000_00007,topIndexMatrix_00000_00010,topIndexMatrix_00000_00011,topIndexMatrix_00000_00012,topIndexMatrix_00000_00013,topIndexMatrix_00000_00017,topIndexMatrix_00001_00000,topIndexMatrix_00001_00001,topIndexMatrix_00001_00002,topIndexMatrix_00001_00004,topIndexMatrix_00001_00005,topIndexMatrix_00001_00006,topIndexMatrix_00001_00008,topIndexMatrix_00001_00009,topIndexMatrix_00001_00010,topIndexMatrix_00001_00012,topIndexMatrix_00001_00013,topIndexMatrix_00002_00008,topIndexMatrix_00002_00009,leftIndexMatrix_00000_00000,leftIndexMatrix_00000_00001,leftIndexMatrix_00000_00002,leftIndexMatrix_00000_00003,leftIndexMatrix_00001_00000,leftIndexMatrix_00001_00001,leftIndexMatrix_00001_00002,leftIndexMatrix_00001_00003,leftIndexMatrix_00002_00000,leftIndexMatrix_00002_00001,leftIndexMatrix_00002_00002,leftIndexMatrix_00002_00003,leftIndexMatrix_00002_00004,leftIndexMatrix_00002_00005,leftIndexMatrix_00002_00006,leftIndexMatrix_00003_00000,leftIndexMatrix_00003_00001,leftIndexMatrix_00003_00002,leftIndexMatrix_00004_00000,leftIndexMatrix_00004_00001,leftIndexMatrix_00004_00002,leftIndexMatrix_00004_00003,leftIndexMatrix_00004_00004,leftIndexMatrix_00005_00000,leftIndexMatrix_00005_00001,leftIndexMatrix_00005_00002,leftIndexMatrix_00005_00003,solutionBoard_00000_00000,solutionBoard_00000_00001,solutionBoard_00000_00002,solutionBoard_00000_00003,solutionBoard_00000_00004,solutionBoard_00000_00005,solutionBoard_00000_00006,solutionBoard_00000_00007,solutionBoard_00000_00010,solutionBoard_00000_00011,solutionBoard_00000_00012,solutionBoard_00000_00013,solutionBoard_00000_00017,solutionBoard_00001_00000,solutionBoard_00001_00001,solutionBoard_00001_00002,solutionBoard_00001_00003,solutionBoard_00001_00004,solutionBoard_00001_00005,solutionBoard_00001_00007,solutionBoard_00001_00008,solutionBoard_00001_00009,solutionBoard_00001_00010,solutionBoard_00001_00011,solutionBoard_00001_00013,solutionBoard_00001_00017,solutionBoard_00002_00000,solutionBoard_00002_00001,solutionBoard_00002_00002,solutionBoard_00002_00003,solutionBoard_00002_00004,solutionBoard_00002_00005,solutionBoard_00002_00007,solutionBoard_00002_00008,solutionBoard_00002_00009,solutionBoard_00002_00010,solutionBoard_00002_00011,solutionBoard_00002_00013,solutionBoard_00002_00017,solutionBoard_00003_00000,solutionBoard_00003_00001,solutionBoard_00003_00002,solutionBoard_00003_00003,solutionBoard_00003_00004,solutionBoard_00003_00005,solutionBoard_00003_00006,solutionBoard_00003_00007,solutionBoard_00003_00008,solutionBoard_00003_00009,solutionBoard_00003_00010,solutionBoard_00003_00011,solutionBoard_00003_00012,solutionBoard_00003_00013,solutionBoard_00003_00017,solutionBoard_00004_00000,solutionBoard_00004_00001,solutionBoard_00004_00002,solutionBoard_00004_00003,solutionBoard_00004_00004,solutionBoard_00004_00005,solutionBoard_00004_00006,solutionBoard_00004_00007,solutionBoard_00004_00008,solutionBoard_00004_00009,solutionBoard_00004_00010,solutionBoard_00004_00011,solutionBoard_00004_00012,solutionBoard_00004_00013,solutionBoard_00005_00000,solutionBoard_00005_00001,solutionBoard_00005_00002,solutionBoard_00005_00003,solutionBoard_00005_00004,solutionBoard_00005_00005,solutionBoard_00005_00006,solutionBoard_00005_00007,solutionBoard_00005_00008,solutionBoard_00005_00009,solutionBoard_00005_00010,solutionBoard_00005_00011,solutionBoard_00005_00012,solutionBoard_00005_00013,aux34,aux36,aux37,aux40,aux43,aux46,aux48,aux50,aux52,aux53,aux56,aux60,aux62,aux70,aux72,aux74,aux76,aux78,aux80,aux82,aux87,aux91,aux92,aux94,aux98,aux99,aux101,aux103,aux106,aux111,aux113,aux116,aux117,aux120,aux122,aux125,aux129,aux130,aux133,aux135,aux137,aux139,aux140,aux141,aux143,aux145,aux146,aux148,aux150,aux152,aux154,aux156,aux158,aux159,aux160,aux162,aux163,aux167,aux169,aux172,aux175,aux177,aux179,aux181,aux182,aux187,aux190,aux193,aux196,aux197,aux199,aux201,aux206,aux207,aux208,aux210,aux211,aux213,aux214,aux216,aux218,aux220,aux223,aux224,aux225,aux227,aux228]
+**CONSTRAINTS**
+watchelement_undefzero([solutionBoard_00000_00000, solutionBoard_00001_00000, solutionBoard_00002_00000, solutionBoard_00003_00000], aux34, 1)
+watchelement_undefzero([solutionBoard_00002_00002, solutionBoard_00002_00003], aux37, 1)
+watchelement_undefzero([1, 1, solutionBoard_00003_00012], topIndexMatrix_00000_00012, 1)
+watchelement_undefzero([solutionBoard_00000_00011, solutionBoard_00001_00011, solutionBoard_00002_00011, solutionBoard_00003_00011], aux40, 1)
+watchelement_undefzero([solutionBoard_00004_00009, solutionBoard_00005_00009], aux43, 1)
+watchelement_undefzero([solutionBoard_00004_00012, solutionBoard_00005_00012], aux46, 1)
+watchelement_undefzero([solutionBoard_00002_00011, 1], aux48, 1)
+watchelement_undefzero([solutionBoard_00005_00002, solutionBoard_00005_00003, solutionBoard_00005_00004, solutionBoard_00005_00005], aux50, 1)
+watchelement_undefzero([solutionBoard_00001_00004, solutionBoard_00001_00005, 1, solutionBoard_00001_00007], aux53, 1)
+watchelement_undefzero([solutionBoard_00005_00000, solutionBoard_00005_00001, solutionBoard_00005_00002, solutionBoard_00005_00003, solutionBoard_00005_00004, solutionBoard_00005_00005, solutionBoard_00005_00006, solutionBoard_00005_00007, solutionBoard_00005_00008, solutionBoard_00005_00009, solutionBoard_00005_00010], leftIndexMatrix_00005_00002, 1)
+watchelement_undefzero([solutionBoard_00002_00004, solutionBoard_00003_00004, solutionBoard_00004_00004, solutionBoard_00005_00004], aux56, 1)
+watchelement_undefzero([solutionBoard_00001_00000, solutionBoard_00001_00001, solutionBoard_00001_00002, solutionBoard_00001_00003, solutionBoard_00001_00004, solutionBoard_00001_00005, 1, solutionBoard_00001_00007, solutionBoard_00001_00008], leftIndexMatrix_00001_00001, 1)
+watchelement_undefzero([solutionBoard_00003_00000, solutionBoard_00003_00001, solutionBoard_00003_00002, solutionBoard_00003_00003, solutionBoard_00003_00004, solutionBoard_00003_00005, solutionBoard_00003_00006, solutionBoard_00003_00007, solutionBoard_00003_00008, solutionBoard_00003_00009, solutionBoard_00003_00010, solutionBoard_00003_00011, solutionBoard_00003_00012], leftIndexMatrix_00003_00001, 1)
+watchelement_undefzero([solutionBoard_00001_00008, solutionBoard_00001_00009, solutionBoard_00001_00010, solutionBoard_00001_00011], aux62, 1)
+watchelement_undefzero([solutionBoard_00000_00001, solutionBoard_00000_00002, solutionBoard_00000_00003, solutionBoard_00000_00004, solutionBoard_00000_00005, solutionBoard_00000_00006, solutionBoard_00000_00007, 1, 1, solutionBoard_00000_00010, solutionBoard_00000_00011, solutionBoard_00000_00012, solutionBoard_00000_00013, 1, 1, 1], leftIndexMatrix_00000_00003, 1)
+watchelement_undefzero([solutionBoard_00003_00002, solutionBoard_00003_00003, solutionBoard_00003_00004, solutionBoard_00003_00005, solutionBoard_00003_00006, solutionBoard_00003_00007, solutionBoard_00003_00008, solutionBoard_00003_00009, solutionBoard_00003_00010, solutionBoard_00003_00011, solutionBoard_00003_00012, solutionBoard_00003_00013, 1, 1, 1, solutionBoard_00003_00017], leftIndexMatrix_00003_00002, 1)
+watchelement_undefzero([solutionBoard_00002_00001, solutionBoard_00002_00002, solutionBoard_00002_00003, solutionBoard_00002_00004, solutionBoard_00002_00005, 1, solutionBoard_00002_00007, solutionBoard_00002_00008, solutionBoard_00002_00009, solutionBoard_00002_00010, solutionBoard_00002_00011, 1, solutionBoard_00002_00013, 1, 1, 1, solutionBoard_00002_00017], leftIndexMatrix_00002_00006, 1)
+watchelement_undefzero([solutionBoard_00000_00002, solutionBoard_00000_00003, solutionBoard_00000_00004, solutionBoard_00000_00005, solutionBoard_00000_00006, solutionBoard_00000_00007, 1, 1, solutionBoard_00000_00010, solutionBoard_00000_00011, solutionBoard_00000_00012, solutionBoard_00000_00013, 1, 1, 1, solutionBoard_00000_00017], leftIndexMatrix_00000_00003, 1)
+watchelement_undefzero([solutionBoard_00000_00000, solutionBoard_00000_00001, solutionBoard_00000_00002, solutionBoard_00000_00003, solutionBoard_00000_00004, solutionBoard_00000_00005, solutionBoard_00000_00006, solutionBoard_00000_00007, 1, 1], leftIndexMatrix_00000_00002, 1)
+watchelement_undefzero([solutionBoard_00002_00004, solutionBoard_00002_00005, 1], aux70, 1)
+watchelement_undefzero([solutionBoard_00004_00002, solutionBoard_00004_00003, solutionBoard_00004_00004, solutionBoard_00004_00005, solutionBoard_00004_00006, solutionBoard_00004_00007, solutionBoard_00004_00008, solutionBoard_00004_00009, solutionBoard_00004_00010], aux72, 1)
+watchelement_undefzero([solutionBoard_00000_00005, solutionBoard_00000_00006, solutionBoard_00000_00007, 1], aux74, 1)
+watchelement_undefzero([solutionBoard_00001_00000, solutionBoard_00001_00001, solutionBoard_00001_00002, solutionBoard_00001_00003, solutionBoard_00001_00004], leftIndexMatrix_00001_00000, 1)
+watchelement_undefzero([solutionBoard_00005_00000, solutionBoard_00005_00001, solutionBoard_00005_00002, solutionBoard_00005_00003], aux78, 1)
+watchelement_undefzero([solutionBoard_00000_00003, solutionBoard_00001_00003, solutionBoard_00002_00003, solutionBoard_00003_00003, solutionBoard_00004_00003], aux80, 1)
+watchelement_undefzero([1, 1], aux87, 1)
+watchelement_undefzero([solutionBoard_00001_00000, solutionBoard_00001_00001, solutionBoard_00001_00002, solutionBoard_00001_00003, solutionBoard_00001_00004, solutionBoard_00001_00005, 1, solutionBoard_00001_00007, solutionBoard_00001_00008, solutionBoard_00001_00009, solutionBoard_00001_00010, solutionBoard_00001_00011, 1, solutionBoard_00001_00013, 1, 1], leftIndexMatrix_00001_00003, 1)
+watchelement_undefzero([solutionBoard_00000_00007, solutionBoard_00001_00007, solutionBoard_00002_00007], aux92, 1)
+watchelement_undefzero([solutionBoard_00004_00005, solutionBoard_00004_00006, solutionBoard_00004_00007, solutionBoard_00004_00008, solutionBoard_00004_00009, solutionBoard_00004_00010, solutionBoard_00004_00011, solutionBoard_00004_00012], aux94, 1)
+watchelement_undefzero([solutionBoard_00000_00005, solutionBoard_00001_00005, solutionBoard_00002_00005, solutionBoard_00003_00005, solutionBoard_00004_00005, solutionBoard_00005_00005], topIndexMatrix_00001_00005, 1)
+watchelement_undefzero([solutionBoard_00002_00000, solutionBoard_00003_00000, solutionBoard_00004_00000, solutionBoard_00005_00000], aux99, 1)
+watchelement_undefzero([solutionBoard_00002_00010, solutionBoard_00003_00010, solutionBoard_00004_00010, solutionBoard_00005_00010], aux101, 1)
+watchelement_undefzero([1, solutionBoard_00002_00007, solutionBoard_00002_00008], aux103, 1)
+watchelement_undefzero([solutionBoard_00000_00006, 1, 1], topIndexMatrix_00000_00006, 1)
+watchelement_undefzero([solutionBoard_00003_00002, solutionBoard_00004_00002, solutionBoard_00005_00002], aux106, 1)
+watchelement_undefzero([solutionBoard_00002_00008, solutionBoard_00002_00009, solutionBoard_00002_00010], aux111, 1)
+watchelement_undefzero([solutionBoard_00000_00013, solutionBoard_00001_00013, solutionBoard_00002_00013, solutionBoard_00003_00013], aux113, 1)
+watchelement_undefzero([solutionBoard_00005_00009, solutionBoard_00005_00010, solutionBoard_00005_00011, solutionBoard_00005_00012], aux117, 1)
+watchelement_undefzero([solutionBoard_00000_00002, solutionBoard_00000_00003, solutionBoard_00000_00004, solutionBoard_00000_00005, solutionBoard_00000_00006, solutionBoard_00000_00007, 1, 1, solutionBoard_00000_00010, solutionBoard_00000_00011], leftIndexMatrix_00000_00002, 1)
+watchelement_undefzero([solutionBoard_00000_00000, solutionBoard_00000_00001, solutionBoard_00000_00002, solutionBoard_00000_00003], aux120, 1)
+watchelement_undefzero([solutionBoard_00002_00000, solutionBoard_00002_00001, solutionBoard_00002_00002, solutionBoard_00002_00003, solutionBoard_00002_00004, solutionBoard_00002_00005, 1, solutionBoard_00002_00007, solutionBoard_00002_00008, solutionBoard_00002_00009, solutionBoard_00002_00010, solutionBoard_00002_00011, 1, solutionBoard_00002_00013], leftIndexMatrix_00002_00005, 1)
+watchelement_undefzero([solutionBoard_00000_00000, solutionBoard_00000_00001, solutionBoard_00000_00002, solutionBoard_00000_00003, solutionBoard_00000_00004, solutionBoard_00000_00005, solutionBoard_00000_00006, solutionBoard_00000_00007, 1, 1, solutionBoard_00000_00010, solutionBoard_00000_00011, solutionBoard_00000_00012, solutionBoard_00000_00013, 1, 1], leftIndexMatrix_00000_00003, 1)
+watchelement_undefzero([solutionBoard_00005_00001, solutionBoard_00005_00002, solutionBoard_00005_00003, solutionBoard_00005_00004, solutionBoard_00005_00005, solutionBoard_00005_00006, solutionBoard_00005_00007], leftIndexMatrix_00005_00001, 1)
+watchelement_undefzero([1, solutionBoard_00001_00013, 1], aux130, 1)
+watchelement_undefzero([solutionBoard_00000_00002, solutionBoard_00001_00002, solutionBoard_00002_00002, solutionBoard_00003_00002], topIndexMatrix_00000_00002, 1)
+watchelement_undefzero([solutionBoard_00004_00008, solutionBoard_00005_00008], aux133, 1)
+watchelement_undefzero([solutionBoard_00000_00017, solutionBoard_00001_00017, solutionBoard_00002_00017, solutionBoard_00003_00017], aux135, 1)
+watchelement_undefzero([solutionBoard_00002_00008, solutionBoard_00003_00008], aux137, 1)
+watchelement_undefzero([solutionBoard_00000_00004, solutionBoard_00001_00004, solutionBoard_00002_00004, solutionBoard_00003_00004], aux143, 1)
+watchelement_undefzero([solutionBoard_00000_00012, 1], aux146, 1)
+watchelement_undefzero([solutionBoard_00002_00001, solutionBoard_00003_00001, solutionBoard_00004_00001, solutionBoard_00005_00001], aux148, 1)
+watchelement_undefzero([solutionBoard_00002_00013, solutionBoard_00003_00013, solutionBoard_00004_00013, solutionBoard_00005_00013], aux150, 1)
+watchelement_undefzero([solutionBoard_00002_00000, solutionBoard_00002_00001, solutionBoard_00002_00002, solutionBoard_00002_00003, solutionBoard_00002_00004, solutionBoard_00002_00005, 1, solutionBoard_00002_00007, solutionBoard_00002_00008, solutionBoard_00002_00009, solutionBoard_00002_00010, solutionBoard_00002_00011, 1, solutionBoard_00002_00013, 1, 1, 1], leftIndexMatrix_00002_00006, 1)
+watchelement_undefzero([solutionBoard_00003_00002, solutionBoard_00003_00003, solutionBoard_00003_00004, solutionBoard_00003_00005, solutionBoard_00003_00006, solutionBoard_00003_00007, solutionBoard_00003_00008, solutionBoard_00003_00009, solutionBoard_00003_00010, solutionBoard_00003_00011], aux154, 1)
+watchelement_undefzero([solutionBoard_00000_00001, solutionBoard_00001_00001, solutionBoard_00002_00001, solutionBoard_00003_00001], aux156, 1)
+watchelement_undefzero([solutionBoard_00003_00000, solutionBoard_00003_00001, solutionBoard_00003_00002, solutionBoard_00003_00003, solutionBoard_00003_00004, solutionBoard_00003_00005, solutionBoard_00003_00006, solutionBoard_00003_00007, solutionBoard_00003_00008, solutionBoard_00003_00009], aux160, 1)
+watchelement_undefzero([solutionBoard_00000_00006, 1], aux163, 1)
+watchelement_undefzero([solutionBoard_00000_00000, solutionBoard_00000_00001, solutionBoard_00000_00002, solutionBoard_00000_00003, solutionBoard_00000_00004], leftIndexMatrix_00000_00000, 1)
+watchelement_undefzero([solutionBoard_00004_00000, solutionBoard_00004_00001, solutionBoard_00004_00002, solutionBoard_00004_00003, solutionBoard_00004_00004, solutionBoard_00004_00005, solutionBoard_00004_00006, solutionBoard_00004_00007, solutionBoard_00004_00008], aux167, 1)
+watchelement_undefzero([solutionBoard_00001_00000, solutionBoard_00001_00001, solutionBoard_00001_00002, solutionBoard_00001_00003], aux169, 1)
+watchelement_undefzero([solutionBoard_00000_00011, solutionBoard_00001_00011, solutionBoard_00002_00011, solutionBoard_00003_00011, solutionBoard_00004_00011], topIndexMatrix_00000_00011, 1)
+watchelement_undefzero([solutionBoard_00000_00005, solutionBoard_00001_00005, solutionBoard_00002_00005], aux172, 1)
+watchelement_undefzero([1, 1, solutionBoard_00003_00006], topIndexMatrix_00000_00006, 1)
+watchelement_undefzero([solutionBoard_00004_00010, solutionBoard_00004_00011, solutionBoard_00004_00012, solutionBoard_00004_00013, 1, 0, 1], aux175, 1)
+watchelement_undefzero([solutionBoard_00000_00010, solutionBoard_00001_00010, solutionBoard_00002_00010, solutionBoard_00003_00010], aux179, 1)
+watchelement_undefzero([solutionBoard_00000_00007, solutionBoard_00001_00007, solutionBoard_00002_00007, solutionBoard_00003_00007], topIndexMatrix_00000_00007, 1)
+watchelement_undefzero([solutionBoard_00001_00000, solutionBoard_00001_00001, solutionBoard_00001_00002, solutionBoard_00001_00003, solutionBoard_00001_00004, solutionBoard_00001_00005, 1, solutionBoard_00001_00007, solutionBoard_00001_00008, solutionBoard_00001_00009, solutionBoard_00001_00010, solutionBoard_00001_00011, 1], leftIndexMatrix_00001_00002, 1)
+watchelement_undefzero([solutionBoard_00000_00003, solutionBoard_00000_00004, solutionBoard_00000_00005, solutionBoard_00000_00006, solutionBoard_00000_00007, 1, 1, solutionBoard_00000_00010, solutionBoard_00000_00011, solutionBoard_00000_00012], leftIndexMatrix_00000_00002, 1)
+watchelement_undefzero([solutionBoard_00003_00001, solutionBoard_00003_00002, solutionBoard_00003_00003, solutionBoard_00003_00004, solutionBoard_00003_00005, solutionBoard_00003_00006, solutionBoard_00003_00007, solutionBoard_00003_00008, solutionBoard_00003_00009, solutionBoard_00003_00010, solutionBoard_00003_00011, solutionBoard_00003_00012, solutionBoard_00003_00013, 1, 1, 1], leftIndexMatrix_00003_00002, 1)
+watchelement_undefzero([solutionBoard_00000_00003, solutionBoard_00001_00003, solutionBoard_00002_00003, solutionBoard_00003_00003, solutionBoard_00004_00003, solutionBoard_00005_00003], topIndexMatrix_00000_00003, 1)
+watchelement_undefzero([solutionBoard_00001_00001, solutionBoard_00001_00002, solutionBoard_00001_00003, solutionBoard_00001_00004, solutionBoard_00001_00005, 1, solutionBoard_00001_00007, solutionBoard_00001_00008, solutionBoard_00001_00009], leftIndexMatrix_00001_00001, 1)
+watchelement_undefzero([solutionBoard_00000_00012, solutionBoard_00000_00013, 1], aux190, 1)
+watchelement_undefzero([solutionBoard_00005_00000, solutionBoard_00005_00001, solutionBoard_00005_00002, solutionBoard_00005_00003, solutionBoard_00005_00004, solutionBoard_00005_00005, solutionBoard_00005_00006, solutionBoard_00005_00007, solutionBoard_00005_00008, solutionBoard_00005_00009, solutionBoard_00005_00010, solutionBoard_00005_00011, solutionBoard_00005_00012, solutionBoard_00005_00013], leftIndexMatrix_00005_00003, 1)
+watchelement_undefzero([solutionBoard_00003_00000, solutionBoard_00003_00001, solutionBoard_00003_00002, solutionBoard_00003_00003, solutionBoard_00003_00004, solutionBoard_00003_00005, solutionBoard_00003_00006, solutionBoard_00003_00007, solutionBoard_00003_00008, solutionBoard_00003_00009, solutionBoard_00003_00010, solutionBoard_00003_00011, solutionBoard_00003_00012, solutionBoard_00003_00013, 1, 1], leftIndexMatrix_00003_00002, 1)
+watchelement_undefzero([solutionBoard_00001_00011, solutionBoard_00002_00011, solutionBoard_00003_00011, solutionBoard_00004_00011, solutionBoard_00005_00011], topIndexMatrix_00000_00011, 1)
+watchelement_undefzero([solutionBoard_00000_00001, solutionBoard_00000_00002, solutionBoard_00000_00003, solutionBoard_00000_00004, solutionBoard_00000_00005, solutionBoard_00000_00006, solutionBoard_00000_00007, 1, 1, solutionBoard_00000_00010], leftIndexMatrix_00000_00002, 1)
+watchelement_undefzero([solutionBoard_00002_00000, solutionBoard_00002_00001], aux199, 1)
+watchelement_undefzero([solutionBoard_00000_00003, solutionBoard_00000_00004, solutionBoard_00000_00005, solutionBoard_00000_00006], aux201, 1)
+watchelement_undefzero([solutionBoard_00000_00012, 1, 1], topIndexMatrix_00000_00012, 1)
+watchelement_undefzero([solutionBoard_00005_00000, solutionBoard_00005_00001, solutionBoard_00005_00002, solutionBoard_00005_00003, solutionBoard_00005_00004, solutionBoard_00005_00005, solutionBoard_00005_00006], leftIndexMatrix_00005_00001, 1)
+watchelement_undefzero([solutionBoard_00004_00006, solutionBoard_00005_00006], aux208, 1)
+watchelement_undefzero([solutionBoard_00005_00006, solutionBoard_00005_00007, solutionBoard_00005_00008, solutionBoard_00005_00009], aux211, 1)
+watchelement_undefzero([solutionBoard_00000_00002, solutionBoard_00001_00002, solutionBoard_00002_00002], aux214, 1)
+watchelement_undefzero([solutionBoard_00002_00009, solutionBoard_00003_00009], aux216, 1)
+watchelement_undefzero([solutionBoard_00004_00007, solutionBoard_00004_00008, solutionBoard_00004_00009, solutionBoard_00004_00010, solutionBoard_00004_00011, solutionBoard_00004_00012, solutionBoard_00004_00013, 1], aux218, 1)
+watchelement_undefzero([solutionBoard_00003_00011, solutionBoard_00003_00012, solutionBoard_00003_00013, 1], aux220, 1)
+watchelement_undefzero([solutionBoard_00002_00005, solutionBoard_00003_00005, solutionBoard_00004_00005], aux225, 1)
+weightedsumgeq([-1,1],[topIndexMatrix_00000_00000,topIndexMatrix_00001_00000],2)
+ineq(leftIndexMatrix_00004_00000, leftIndexMatrix_00004_00001, -1)
+weightedsumgeq([-1,1],[topIndexMatrix_00000_00010,topIndexMatrix_00001_00010],2)
+ineq(leftIndexMatrix_00004_00001, leftIndexMatrix_00004_00002, -1)
+weightedsumgeq([-1,1],[topIndexMatrix_00000_00013,topIndexMatrix_00001_00013],2)
+weightedsumgeq([-1,1],[leftIndexMatrix_00004_00003,leftIndexMatrix_00004_00004],2)
+weightedsumgeq([-1,1],[leftIndexMatrix_00001_00001,leftIndexMatrix_00001_00002],4)
+weightedsumgeq([-1,1],[leftIndexMatrix_00001_00002,leftIndexMatrix_00001_00003],3)
+weightedsumgeq([-1,1],[topIndexMatrix_00000_00001,topIndexMatrix_00001_00001],2)
+weightedsumgeq([-1,1],[leftIndexMatrix_00000_00000,leftIndexMatrix_00000_00001],3)
+weightedsumgeq([-1,1],[leftIndexMatrix_00000_00001,leftIndexMatrix_00000_00002],2)
+weightedsumgeq([-1,1],[leftIndexMatrix_00002_00005,leftIndexMatrix_00002_00006],3)
+weightedsumgeq([-1,1],[topIndexMatrix_00001_00009,topIndexMatrix_00002_00009],2)
+weightedsumgeq([-1,1],[leftIndexMatrix_00001_00000,leftIndexMatrix_00001_00001],3)
+weightedsumgeq([-1,1],[topIndexMatrix_00001_00008,topIndexMatrix_00002_00008],2)
+weightedsumgeq([-1,1],[leftIndexMatrix_00003_00001,leftIndexMatrix_00003_00002],3)
+ineq(leftIndexMatrix_00000_00001, leftIndexMatrix_00000_00002, -1)
+weightedsumgeq([-1,1],[leftIndexMatrix_00000_00002,leftIndexMatrix_00000_00003],6)
+ineq(leftIndexMatrix_00004_00002, leftIndexMatrix_00004_00003, -1)
+weightedsumgeq([-1,1],[leftIndexMatrix_00005_00000,leftIndexMatrix_00005_00001],2)
+ineq(leftIndexMatrix_00002_00003, leftIndexMatrix_00002_00004, -1)
+weightedsumgeq([-1,1],[leftIndexMatrix_00003_00000,leftIndexMatrix_00003_00001],2)
+ineq(leftIndexMatrix_00000_00000, leftIndexMatrix_00000_00001, -1)
+ineq(leftIndexMatrix_00004_00003, leftIndexMatrix_00004_00004, -1)
+ineq(leftIndexMatrix_00002_00002, leftIndexMatrix_00002_00003, -1)
+weightedsumgeq([-1,1],[leftIndexMatrix_00002_00002,leftIndexMatrix_00002_00003],2)
+weightedsumgeq([-1,1],[topIndexMatrix_00000_00006,topIndexMatrix_00001_00006],4)
+weightedsumgeq([-1,1],[leftIndexMatrix_00002_00001,leftIndexMatrix_00002_00002],2)
+ineq(leftIndexMatrix_00003_00001, leftIndexMatrix_00003_00002, -1)
+weightedsumgeq([-1,1],[leftIndexMatrix_00005_00001,leftIndexMatrix_00005_00002],4)
+ineq(topIndexMatrix_00000_00013, topIndexMatrix_00001_00013, -1)
+weightedsumgeq([-1,1],[leftIndexMatrix_00005_00002,leftIndexMatrix_00005_00003],3)
+weightedsumgeq([-1,1],[leftIndexMatrix_00002_00004,leftIndexMatrix_00002_00005],2)
+ineq(leftIndexMatrix_00003_00000, leftIndexMatrix_00003_00001, -1)
+ineq(topIndexMatrix_00000_00005, topIndexMatrix_00001_00005, -1)
+weightedsumgeq([-1,1],[leftIndexMatrix_00002_00003,leftIndexMatrix_00002_00004],2)
+ineq(leftIndexMatrix_00005_00000, leftIndexMatrix_00005_00001, -1)
+ineq(topIndexMatrix_00000_00004, topIndexMatrix_00001_00004, -1)
+weightedsumgeq([-1,1],[topIndexMatrix_00000_00004,topIndexMatrix_00001_00004],2)
+weightedsumgeq([-1,1],[leftIndexMatrix_00004_00001,leftIndexMatrix_00004_00002],2)
+ineq(topIndexMatrix_00000_00010, topIndexMatrix_00001_00010, -1)
+weightedsumgeq([-1,1],[topIndexMatrix_00000_00012,topIndexMatrix_00001_00012],4)
+weightedsumgeq([-1,1],[topIndexMatrix_00000_00002,topIndexMatrix_00001_00002],3)
+ineq(leftIndexMatrix_00005_00002, leftIndexMatrix_00005_00003, -1)
+weightedsumgeq([-1,1],[leftIndexMatrix_00004_00002,leftIndexMatrix_00004_00003],2)
+weightedsumgeq([-1,1],[leftIndexMatrix_00002_00000,leftIndexMatrix_00002_00001],2)
+ineq(topIndexMatrix_00000_00001, topIndexMatrix_00001_00001, -1)
+weightedsumgeq([-1,1],[topIndexMatrix_00000_00005,topIndexMatrix_00001_00005],2)
+weightedsumgeq([-1,1],[leftIndexMatrix_00004_00000,leftIndexMatrix_00004_00001],2)
+ineq(topIndexMatrix_00000_00000, topIndexMatrix_00001_00000, -1)
+sumleq([topIndexMatrix_00000_00000,-1],aux34)
+sumgeq([topIndexMatrix_00000_00000,-1],aux34)
+sumleq([topIndexMatrix_00000_00002,1],aux36)
+sumgeq([topIndexMatrix_00000_00002,1],aux36)
+sumleq([leftIndexMatrix_00002_00001,-3],aux37)
+sumgeq([leftIndexMatrix_00002_00001,-3],aux37)
+sumleq([topIndexMatrix_00000_00011,-1],aux40)
+sumgeq([topIndexMatrix_00000_00011,-1],aux40)
+sumleq([solutionBoard_00005_00008,solutionBoard_00001_00008,solutionBoard_00002_00008,solutionBoard_00003_00008,solutionBoard_00004_00008],2)
+sumgeq([solutionBoard_00005_00008,solutionBoard_00001_00008,solutionBoard_00002_00008,solutionBoard_00003_00008,solutionBoard_00004_00008],2)
+sumleq([-5,topIndexMatrix_00002_00009],aux43)
+sumgeq([-5,topIndexMatrix_00002_00009],aux43)
+sumleq([solutionBoard_00002_00000,solutionBoard_00002_00001,solutionBoard_00002_00002,solutionBoard_00002_00003,solutionBoard_00002_00004,solutionBoard_00002_00005,solutionBoard_00002_00007,solutionBoard_00002_00008,solutionBoard_00002_00009,solutionBoard_00002_00010,solutionBoard_00002_00011,solutionBoard_00002_00013,solutionBoard_00002_00017],5)
+sumgeq([solutionBoard_00002_00000,solutionBoard_00002_00001,solutionBoard_00002_00002,solutionBoard_00002_00003,solutionBoard_00002_00004,solutionBoard_00002_00005,solutionBoard_00002_00007,solutionBoard_00002_00008,solutionBoard_00002_00009,solutionBoard_00002_00010,solutionBoard_00002_00011,solutionBoard_00002_00013,solutionBoard_00002_00017],5)
+sumleq([-5,topIndexMatrix_00001_00012],aux46)
+sumgeq([-5,topIndexMatrix_00001_00012],aux46)
+sumleq([leftIndexMatrix_00002_00005,-12],aux48)
+sumgeq([leftIndexMatrix_00002_00005,-12],aux48)
+sumleq([-3,leftIndexMatrix_00005_00001],aux50)
+sumgeq([-3,leftIndexMatrix_00005_00001],aux50)
+sumleq([3,leftIndexMatrix_00000_00002],aux52)
+sumgeq([3,leftIndexMatrix_00000_00002],aux52)
+sumleq([-5,leftIndexMatrix_00001_00001],aux53)
+sumgeq([-5,leftIndexMatrix_00001_00001],aux53)
+sumleq([-3,topIndexMatrix_00001_00004],aux56)
+sumgeq([-3,topIndexMatrix_00001_00004],aux56)
+sumleq([solutionBoard_00000_00013,solutionBoard_00005_00013,solutionBoard_00001_00013,solutionBoard_00002_00013,solutionBoard_00003_00013,solutionBoard_00004_00013],2)
+sumgeq([solutionBoard_00000_00013,solutionBoard_00005_00013,solutionBoard_00001_00013,solutionBoard_00002_00013,solutionBoard_00003_00013,solutionBoard_00004_00013],2)
+sumleq([topIndexMatrix_00000_00003,1],aux60)
+sumgeq([topIndexMatrix_00000_00003,1],aux60)
+sumleq([-9,leftIndexMatrix_00001_00002],aux62)
+sumgeq([-9,leftIndexMatrix_00001_00002],aux62)
+sumleq([solutionBoard_00000_00005,solutionBoard_00005_00005,solutionBoard_00001_00005,solutionBoard_00002_00005,solutionBoard_00003_00005,solutionBoard_00004_00005],3)
+sumgeq([solutionBoard_00000_00005,solutionBoard_00005_00005,solutionBoard_00001_00005,solutionBoard_00002_00005,solutionBoard_00003_00005,solutionBoard_00004_00005],3)
+sumleq([leftIndexMatrix_00002_00002,-5],aux70)
+sumgeq([leftIndexMatrix_00002_00002,-5],aux70)
+sumleq([-3,leftIndexMatrix_00004_00001],aux72)
+sumgeq([-3,leftIndexMatrix_00004_00001],aux72)
+sumleq([-6,leftIndexMatrix_00000_00002],aux74)
+sumgeq([-6,leftIndexMatrix_00000_00002],aux74)
+sumleq([4,leftIndexMatrix_00000_00002],aux76)
+sumgeq([4,leftIndexMatrix_00000_00002],aux76)
+sumleq([-1,leftIndexMatrix_00005_00000],aux78)
+sumgeq([-1,leftIndexMatrix_00005_00000],aux78)
+sumleq([topIndexMatrix_00000_00003,-1],aux80)
+sumgeq([topIndexMatrix_00000_00003,-1],aux80)
+sumleq([1,leftIndexMatrix_00001_00001],aux82)
+sumgeq([1,leftIndexMatrix_00001_00001],aux82)
+sumleq([solutionBoard_00003_00000,solutionBoard_00003_00001,solutionBoard_00003_00002,solutionBoard_00003_00003,solutionBoard_00003_00004,solutionBoard_00003_00005,solutionBoard_00003_00006,solutionBoard_00003_00007,solutionBoard_00003_00008,solutionBoard_00003_00009,solutionBoard_00003_00010,solutionBoard_00003_00011,solutionBoard_00003_00012,solutionBoard_00003_00013,solutionBoard_00003_00017],4)
+sumgeq([solutionBoard_00003_00000,solutionBoard_00003_00001,solutionBoard_00003_00002,solutionBoard_00003_00003,solutionBoard_00003_00004,solutionBoard_00003_00005,solutionBoard_00003_00006,solutionBoard_00003_00007,solutionBoard_00003_00008,solutionBoard_00003_00009,solutionBoard_00003_00010,solutionBoard_00003_00011,solutionBoard_00003_00012,solutionBoard_00003_00013,solutionBoard_00003_00017],4)
+sumleq([solutionBoard_00005_00000,solutionBoard_00005_00001,solutionBoard_00005_00002,solutionBoard_00005_00003,solutionBoard_00005_00004,solutionBoard_00005_00005,solutionBoard_00005_00006,solutionBoard_00005_00007,solutionBoard_00005_00008,solutionBoard_00005_00009,solutionBoard_00005_00010,solutionBoard_00005_00011,solutionBoard_00005_00012,solutionBoard_00005_00013],8)
+sumgeq([solutionBoard_00005_00000,solutionBoard_00005_00001,solutionBoard_00005_00002,solutionBoard_00005_00003,solutionBoard_00005_00004,solutionBoard_00005_00005,solutionBoard_00005_00006,solutionBoard_00005_00007,solutionBoard_00005_00008,solutionBoard_00005_00009,solutionBoard_00005_00010,solutionBoard_00005_00011,solutionBoard_00005_00012,solutionBoard_00005_00013],8)
+sumleq([solutionBoard_00000_00004,solutionBoard_00005_00004,solutionBoard_00001_00004,solutionBoard_00002_00004,solutionBoard_00003_00004,solutionBoard_00004_00004],2)
+sumgeq([solutionBoard_00000_00004,solutionBoard_00005_00004,solutionBoard_00001_00004,solutionBoard_00002_00004,solutionBoard_00003_00004,solutionBoard_00004_00004],2)
+sumleq([solutionBoard_00000_00011,solutionBoard_00005_00011,solutionBoard_00001_00011,solutionBoard_00002_00011,solutionBoard_00003_00011,solutionBoard_00004_00011],3)
+sumgeq([solutionBoard_00000_00011,solutionBoard_00005_00011,solutionBoard_00001_00011,solutionBoard_00002_00011,solutionBoard_00003_00011,solutionBoard_00004_00011],3)
+sumleq([leftIndexMatrix_00002_00006,-15],aux87)
+sumgeq([leftIndexMatrix_00002_00006,-15],aux87)
+sumleq([solutionBoard_00000_00001,solutionBoard_00005_00001,solutionBoard_00001_00001,solutionBoard_00002_00001,solutionBoard_00003_00001,solutionBoard_00004_00001],2)
+sumgeq([solutionBoard_00000_00001,solutionBoard_00005_00001,solutionBoard_00001_00001,solutionBoard_00002_00001,solutionBoard_00003_00001,solutionBoard_00004_00001],2)
+sumleq([1,leftIndexMatrix_00001_00000],aux91)
+sumgeq([1,leftIndexMatrix_00001_00000],aux91)
+sumleq([topIndexMatrix_00000_00007,-1],aux92)
+sumgeq([topIndexMatrix_00000_00007,-1],aux92)
+sumleq([-6,leftIndexMatrix_00004_00002],aux94)
+sumgeq([-6,leftIndexMatrix_00004_00002],aux94)
+sumleq([solutionBoard_00000_00003,solutionBoard_00005_00003,solutionBoard_00001_00003,solutionBoard_00002_00003,solutionBoard_00003_00003,solutionBoard_00004_00003],2)
+sumgeq([solutionBoard_00000_00003,solutionBoard_00005_00003,solutionBoard_00001_00003,solutionBoard_00002_00003,solutionBoard_00003_00003,solutionBoard_00004_00003],2)
+sumleq([1,leftIndexMatrix_00001_00003],aux98)
+sumgeq([1,leftIndexMatrix_00001_00003],aux98)
+sumleq([-3,topIndexMatrix_00001_00000],aux99)
+sumgeq([-3,topIndexMatrix_00001_00000],aux99)
+sumleq([-3,topIndexMatrix_00001_00010],aux101)
+sumgeq([-3,topIndexMatrix_00001_00010],aux101)
+sumleq([leftIndexMatrix_00002_00003,-7],aux103)
+sumgeq([leftIndexMatrix_00002_00003,-7],aux103)
+sumleq([-4,topIndexMatrix_00001_00002],aux106)
+sumgeq([-4,topIndexMatrix_00001_00002],aux106)
+sumleq([solutionBoard_00004_00000,solutionBoard_00004_00001,solutionBoard_00004_00002,solutionBoard_00004_00003,solutionBoard_00004_00004,solutionBoard_00004_00005,solutionBoard_00004_00006,solutionBoard_00004_00007,solutionBoard_00004_00008,solutionBoard_00004_00009,solutionBoard_00004_00010,solutionBoard_00004_00011,solutionBoard_00004_00012,solutionBoard_00004_00013],3)
+sumgeq([solutionBoard_00004_00000,solutionBoard_00004_00001,solutionBoard_00004_00002,solutionBoard_00004_00003,solutionBoard_00004_00004,solutionBoard_00004_00005,solutionBoard_00004_00006,solutionBoard_00004_00007,solutionBoard_00004_00008,solutionBoard_00004_00009,solutionBoard_00004_00010,solutionBoard_00004_00011,solutionBoard_00004_00012,solutionBoard_00004_00013],3)
+sumleq([solutionBoard_00000_00010,solutionBoard_00005_00010,solutionBoard_00001_00010,solutionBoard_00002_00010,solutionBoard_00003_00010,solutionBoard_00004_00010],2)
+sumgeq([solutionBoard_00000_00010,solutionBoard_00005_00010,solutionBoard_00001_00010,solutionBoard_00002_00010,solutionBoard_00003_00010,solutionBoard_00004_00010],2)
+sumleq([solutionBoard_00000_00002,solutionBoard_00005_00002,solutionBoard_00001_00002,solutionBoard_00002_00002,solutionBoard_00003_00002,solutionBoard_00004_00002],3)
+sumgeq([solutionBoard_00000_00002,solutionBoard_00005_00002,solutionBoard_00001_00002,solutionBoard_00002_00002,solutionBoard_00003_00002,solutionBoard_00004_00002],3)
+sumleq([leftIndexMatrix_00002_00004,-9],aux111)
+sumgeq([leftIndexMatrix_00002_00004,-9],aux111)
+sumleq([topIndexMatrix_00000_00013,-1],aux113)
+sumgeq([topIndexMatrix_00000_00013,-1],aux113)
+sumleq([solutionBoard_00000_00000,solutionBoard_00000_00001,solutionBoard_00000_00002,solutionBoard_00000_00003,solutionBoard_00000_00004,solutionBoard_00000_00005,solutionBoard_00000_00006,solutionBoard_00000_00007,solutionBoard_00000_00010,solutionBoard_00000_00011,solutionBoard_00000_00012,solutionBoard_00000_00013,solutionBoard_00000_00017],7)
+sumgeq([solutionBoard_00000_00000,solutionBoard_00000_00001,solutionBoard_00000_00002,solutionBoard_00000_00003,solutionBoard_00000_00004,solutionBoard_00000_00005,solutionBoard_00000_00006,solutionBoard_00000_00007,solutionBoard_00000_00010,solutionBoard_00000_00011,solutionBoard_00000_00012,solutionBoard_00000_00013,solutionBoard_00000_00017],7)
+sumleq([1,leftIndexMatrix_00001_00002],aux116)
+sumgeq([1,leftIndexMatrix_00001_00002],aux116)
+sumleq([-10,leftIndexMatrix_00005_00003],aux117)
+sumgeq([-10,leftIndexMatrix_00005_00003],aux117)
+sumleq([-1,leftIndexMatrix_00000_00000],aux120)
+sumgeq([-1,leftIndexMatrix_00000_00000],aux120)
+sumleq([topIndexMatrix_00000_00006,1],aux122)
+sumgeq([topIndexMatrix_00000_00006,1],aux122)
+sumleq([solutionBoard_00000_00000,solutionBoard_00005_00000,solutionBoard_00001_00000,solutionBoard_00002_00000,solutionBoard_00003_00000,solutionBoard_00004_00000],2)
+sumgeq([solutionBoard_00000_00000,solutionBoard_00005_00000,solutionBoard_00001_00000,solutionBoard_00002_00000,solutionBoard_00003_00000,solutionBoard_00004_00000],2)
+sumleq([leftIndexMatrix_00003_00002,2],aux125)
+sumgeq([leftIndexMatrix_00003_00002,2],aux125)
+sumleq([solutionBoard_00000_00006,solutionBoard_00005_00006,solutionBoard_00003_00006,solutionBoard_00004_00006],2)
+sumgeq([solutionBoard_00000_00006,solutionBoard_00005_00006,solutionBoard_00003_00006,solutionBoard_00004_00006],2)
+sumleq([leftIndexMatrix_00002_00006,1],aux129)
+sumgeq([leftIndexMatrix_00002_00006,1],aux129)
+sumleq([-13,leftIndexMatrix_00001_00003],aux130)
+sumgeq([-13,leftIndexMatrix_00001_00003],aux130)
+sumleq([-5,topIndexMatrix_00002_00008],aux133)
+sumgeq([-5,topIndexMatrix_00002_00008],aux133)
+sumleq([topIndexMatrix_00000_00017,-1],aux135)
+sumgeq([topIndexMatrix_00000_00017,-1],aux135)
+sumleq([-3,topIndexMatrix_00001_00008],aux137)
+sumgeq([-3,topIndexMatrix_00001_00008],aux137)
+sumleq([topIndexMatrix_00000_00006,2],aux139)
+sumgeq([topIndexMatrix_00000_00006,2],aux139)
+sumleq([leftIndexMatrix_00003_00002,3],aux140)
+sumgeq([leftIndexMatrix_00003_00002,3],aux140)
+sumleq([leftIndexMatrix_00003_00001,1],aux141)
+sumgeq([leftIndexMatrix_00003_00001,1],aux141)
+sumleq([solutionBoard_00000_00007,solutionBoard_00005_00007,solutionBoard_00001_00007,solutionBoard_00002_00007,solutionBoard_00003_00007,solutionBoard_00004_00007],2)
+sumgeq([solutionBoard_00000_00007,solutionBoard_00005_00007,solutionBoard_00001_00007,solutionBoard_00002_00007,solutionBoard_00003_00007,solutionBoard_00004_00007],2)
+sumleq([topIndexMatrix_00000_00004,-1],aux143)
+sumgeq([topIndexMatrix_00000_00004,-1],aux143)
+sumleq([topIndexMatrix_00000_00011,2],aux145)
+sumgeq([topIndexMatrix_00000_00011,2],aux145)
+sumleq([topIndexMatrix_00000_00012,-1],aux146)
+sumgeq([topIndexMatrix_00000_00012,-1],aux146)
+sumleq([-3,topIndexMatrix_00001_00001],aux148)
+sumgeq([-3,topIndexMatrix_00001_00001],aux148)
+sumleq([-3,topIndexMatrix_00001_00013],aux150)
+sumgeq([-3,topIndexMatrix_00001_00013],aux150)
+sumleq([topIndexMatrix_00000_00007,1],aux152)
+sumgeq([topIndexMatrix_00000_00007,1],aux152)
+sumleq([leftIndexMatrix_00003_00001,-3],aux154)
+sumgeq([leftIndexMatrix_00003_00001,-3],aux154)
+sumleq([topIndexMatrix_00000_00001,-1],aux156)
+sumgeq([topIndexMatrix_00000_00001,-1],aux156)
+sumleq([1,leftIndexMatrix_00000_00003],aux158)
+sumgeq([1,leftIndexMatrix_00000_00003],aux158)
+sumleq([2,leftIndexMatrix_00001_00001],aux159)
+sumgeq([2,leftIndexMatrix_00001_00001],aux159)
+sumleq([leftIndexMatrix_00003_00000,-1],aux160)
+sumgeq([leftIndexMatrix_00003_00000,-1],aux160)
+sumleq([2,leftIndexMatrix_00005_00001],aux162)
+sumgeq([2,leftIndexMatrix_00005_00001],aux162)
+sumleq([topIndexMatrix_00000_00006,-1],aux163)
+sumgeq([topIndexMatrix_00000_00006,-1],aux163)
+sumleq([solutionBoard_00000_00012,solutionBoard_00005_00012,solutionBoard_00003_00012,solutionBoard_00004_00012],2)
+sumgeq([solutionBoard_00000_00012,solutionBoard_00005_00012,solutionBoard_00003_00012,solutionBoard_00004_00012],2)
+sumleq([-1,leftIndexMatrix_00004_00000],aux167)
+sumgeq([-1,leftIndexMatrix_00004_00000],aux167)
+sumleq([-1,leftIndexMatrix_00001_00000],aux169)
+sumgeq([-1,leftIndexMatrix_00001_00000],aux169)
+sumleq([topIndexMatrix_00000_00005,-1],aux172)
+sumgeq([topIndexMatrix_00000_00005,-1],aux172)
+sumleq([-11,leftIndexMatrix_00004_00004],aux175)
+sumgeq([-11,leftIndexMatrix_00004_00004],aux175)
+sumleq([topIndexMatrix_00000_00012,2],aux177)
+sumgeq([topIndexMatrix_00000_00012,2],aux177)
+sumleq([solutionBoard_00001_00000,solutionBoard_00001_00001,solutionBoard_00001_00002,solutionBoard_00001_00003,solutionBoard_00001_00004,solutionBoard_00001_00005,solutionBoard_00001_00007,solutionBoard_00001_00008,solutionBoard_00001_00009,solutionBoard_00001_00010,solutionBoard_00001_00011,solutionBoard_00001_00013,solutionBoard_00001_00017],5)
+sumgeq([solutionBoard_00001_00000,solutionBoard_00001_00001,solutionBoard_00001_00002,solutionBoard_00001_00003,solutionBoard_00001_00004,solutionBoard_00001_00005,solutionBoard_00001_00007,solutionBoard_00001_00008,solutionBoard_00001_00009,solutionBoard_00001_00010,solutionBoard_00001_00011,solutionBoard_00001_00013,solutionBoard_00001_00017],5)
+sumleq([topIndexMatrix_00000_00010,-1],aux179)
+sumgeq([topIndexMatrix_00000_00010,-1],aux179)
+sumleq([2,leftIndexMatrix_00000_00003],aux181)
+sumgeq([2,leftIndexMatrix_00000_00003],aux181)
+sumleq([1,leftIndexMatrix_00005_00001],aux182)
+sumgeq([1,leftIndexMatrix_00005_00001],aux182)
+sumleq([topIndexMatrix_00000_00011,1],aux187)
+sumgeq([topIndexMatrix_00000_00011,1],aux187)
+sumleq([-13,leftIndexMatrix_00000_00003],aux190)
+sumgeq([-13,leftIndexMatrix_00000_00003],aux190)
+sumleq([1,leftIndexMatrix_00000_00002],aux193)
+sumgeq([1,leftIndexMatrix_00000_00002],aux193)
+sumleq([1,topIndexMatrix_00001_00005],aux196)
+sumgeq([1,topIndexMatrix_00001_00005],aux196)
+sumleq([leftIndexMatrix_00002_00006,2],aux197)
+sumgeq([leftIndexMatrix_00002_00006,2],aux197)
+sumleq([leftIndexMatrix_00002_00000,-1],aux199)
+sumgeq([leftIndexMatrix_00002_00000,-1],aux199)
+sumleq([-4,leftIndexMatrix_00000_00001],aux201)
+sumgeq([-4,leftIndexMatrix_00000_00001],aux201)
+sumleq([solutionBoard_00000_00017,solutionBoard_00001_00017,solutionBoard_00002_00017,solutionBoard_00003_00017],1)
+sumgeq([solutionBoard_00000_00017,solutionBoard_00001_00017,solutionBoard_00002_00017,solutionBoard_00003_00017],1)
+sumleq([3,leftIndexMatrix_00000_00003],aux206)
+sumgeq([3,leftIndexMatrix_00000_00003],aux206)
+sumleq([1,leftIndexMatrix_00005_00003],aux207)
+sumgeq([1,leftIndexMatrix_00005_00003],aux207)
+sumleq([-5,topIndexMatrix_00001_00006],aux208)
+sumgeq([-5,topIndexMatrix_00001_00006],aux208)
+sumleq([leftIndexMatrix_00002_00005,1],aux210)
+sumgeq([leftIndexMatrix_00002_00005,1],aux210)
+sumleq([-7,leftIndexMatrix_00005_00002],aux211)
+sumgeq([-7,leftIndexMatrix_00005_00002],aux211)
+sumleq([topIndexMatrix_00000_00012,1],aux213)
+sumgeq([topIndexMatrix_00000_00012,1],aux213)
+sumleq([topIndexMatrix_00000_00002,-1],aux214)
+sumgeq([topIndexMatrix_00000_00002,-1],aux214)
+sumleq([-3,topIndexMatrix_00001_00009],aux216)
+sumgeq([-3,topIndexMatrix_00001_00009],aux216)
+sumleq([-8,leftIndexMatrix_00004_00003],aux218)
+sumgeq([-8,leftIndexMatrix_00004_00003],aux218)
+sumleq([leftIndexMatrix_00003_00002,-12],aux220)
+sumgeq([leftIndexMatrix_00003_00002,-12],aux220)
+sumleq([solutionBoard_00005_00009,solutionBoard_00001_00009,solutionBoard_00002_00009,solutionBoard_00003_00009,solutionBoard_00004_00009],2)
+sumgeq([solutionBoard_00005_00009,solutionBoard_00001_00009,solutionBoard_00002_00009,solutionBoard_00003_00009,solutionBoard_00004_00009],2)
+sumleq([1,leftIndexMatrix_00000_00000],aux223)
+sumgeq([1,leftIndexMatrix_00000_00000],aux223)
+sumleq([2,leftIndexMatrix_00000_00002],aux224)
+sumgeq([2,leftIndexMatrix_00000_00002],aux224)
+sumleq([-3,topIndexMatrix_00001_00005],aux225)
+sumgeq([-3,topIndexMatrix_00001_00005],aux225)
+sumleq([1,leftIndexMatrix_00005_00002],aux227)
+sumgeq([1,leftIndexMatrix_00005_00002],aux227)
+sumleq([leftIndexMatrix_00003_00002,1],aux228)
+sumgeq([leftIndexMatrix_00003_00002,1],aux228)
+**EOF**

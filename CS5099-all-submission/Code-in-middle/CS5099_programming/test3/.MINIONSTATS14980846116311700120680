@@ -1,0 +1,2 @@
+#"CommandLineArguments" "Filename" "FirstNodeTime" "InitialPropagate" "MinionVersion" "Nodes" "ParsingTime" "Preprocess" "RandomSeed" "Satisfiable" "SetupTime" "SolutionsFound" "SolveTime" "TimeOut" "TotalTime" 
+human_dog.param.minion,-printsolsonly,-preprocess,SACBounds,-tableout,.MINIONSTATS14980846116311700120680,-solsout,.MINIONSOLS14980846116321914439748,-noprintsols,-sollimit,5 human_dog.param.minion 0.046152 0.005341 0 9160323 0.024746 SACBounds 1498082177 0 0.00685 0 70.9233 0 71.0064 

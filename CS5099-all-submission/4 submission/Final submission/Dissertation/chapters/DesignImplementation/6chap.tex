@@ -1,0 +1,460 @@
+% \externaldocument {1chap}
+\let\textcircled=\pgftextcircled
+\chapter{Design \& Implementation}
+\label{chap:6}
+
+
+%----------------------------------------------------------------------------------------
+%   INTRO
+%----------------------------------------------------------------------------------------
+\initial{T}his chapter will consider the Design and Implementation of the project in details. The entire project could be split to the several stages: (1) modelling of the constraint satisfaction problem for Nonogram; (2) implementation of the system which can produce instances for the model; (3) enhancement of the system to produce solvable instances; (4) development of algorithms that generate different levels of difficulty of the puzzle; (5) implementation of the visualization form of the puzzle to be printed on paper; (6) assessment of levels of difficulty by comparison of computer and human rates.
+
+The system has been written mostly in Python language with the usage of the constraint model for Nonogram that was implemented in Essence'. As well as the analysis part was implemented in R (statistical programming language).
+
+\section{Design of Nonogram}
+\label{sec:designNono}
+The general description of the game was given in the introduction chapter. This part will talk in details about the black and white type Nonogram's properties and needed definitions for the puzzle, which will be used further in this chapter.
+
+% 	\item Block is the some of cells in one consecutive order, which are black coloured on the solution board.
+% Nonogram has three main matrices (one main board, which need to be filled, and two given matrices):
+\begin{itemize}
+
+	\item Clues: the numbers which are provided in this board.
+
+	\item Blocks: some amount of consequently coloured cells in any row or column.
+
+	\item Solution Board: it is an essential gridded area, which need to be filled by the player when the puzzle is solved. Initially this grid is empty (i.e. all cells are white). The grid has $m$ rows and $n$ columns (i.e. $m\times n$ size). The values of $m$ and $n$ could be equal or not, as well as they could be even or odd.
+
+	\item Top Matrix: is the one of the given matrices, which is located at the top or at the bottom of the solution board. This matrix normally has clues, which restricts the number and length of the coloured blocks per column. The size of this matrix has the same number of columns as the solution board (i.e. $n$ columns). 
+	For the number of rows it should not be the same as for the solution board. Since in the worst cast, when all clues on that columns are ones, the number of rows should be approximately twice less than $m$. As the number of rows of the solution board is $m$, then the number of rows for the top matrix should be $\dfrac {m} {2}$. However, if $m$ is odd value then it should be $\dfrac {m} {2}+1$. Thus the size is $(\dfrac {m} {2}+1)\times n$ or $(\dfrac {m} {2})\times n$ when it $m$ is odd or even respectively. Example \ref{example:nanogram1} demonstrates this case.\\
+
+	\begin{table}[h]
+	\centering
+	\begin{tabu}{cc|[2pt]c|c|c|c|}
+	\cline{3-6}
+	 &  &  & 1 &  &   \\ \cline{3-6} 
+	 &  &  & 1 &  &   \\ \cline{3-6} 
+	 &  &  & 1 &  & 1 \\ \tabucline[2pt]{-}
+	\multicolumn{1}{|l|}{1} & 1 &  &  &  &  \\ \hline
+	\multicolumn{1}{|l|}{} 	&   &  &  &  &  \\ \hline
+	\multicolumn{1}{|l|}{} 	& 1 &  &  &  &  \\ \hline
+	\multicolumn{1}{|l|}{} 	&   &  &  &  &  \\ \hline
+	\multicolumn{1}{|l|}{} 	& 1 &  &  &  &  \\ \hline
+	\end{tabu}
+	~
+	\begin{tabu}{cc|[2pt]c|c|c|c|}
+	\cline{3-6}
+	 &  &  & 1 &  &   \\ \cline{3-6} 
+	 &  &  & 1 &  &   \\ \cline{3-6} 
+	 &  &  & 1 &  & 1 \\ \tabucline[2pt]{-}
+	\multicolumn{1}{|l|}{1} & 1 & \diag{.1em}{.1cm}{}{} &  
+								& \diag{.1em}{.1cm}{}{}	& \\ \hline
+	\multicolumn{1}{|l|}{} 	&   & \diag{.1em}{.1cm}{}{} & \diag{.1em}{.1cm}{}{}
+								& \diag{.1em}{.1cm}{}{} & \diag{.1em}{.1cm}{}{}	\\ \hline
+	\multicolumn{1}{|l|}{} 	& 1 & \diag{.1em}{.1cm}{}{} &  
+								& \diag{.1em}{.1cm}{}{} & \\ \hline
+	\multicolumn{1}{|l|}{} 	&   & \diag{.1em}{.1cm}{}{} & \diag{.1em}{.1cm}{}{} 
+								& \diag{.1em}{.1cm}{}{} & \diag{.1em}{.1cm}{}{} \\ \hline
+	\multicolumn{1}{|l|}{} 	& 1 & \diag{.1em}{.1cm}{}{} & 
+								& \diag{.1em}{.1cm}{}{} & \\ \hline
+	\end{tabu}
+	~
+	\begin{tabu}{cc|[2pt]c|c|c|c|}
+	\cline{3-6} 
+	 &  &  & 1 &  &   \\ \cline{3-6} 
+	 &  &  & 1 &  &   \\ \cline{3-6} 
+	 &  &  & 1 &  & 1 \\ \tabucline[2pt]{-}
+	\multicolumn{1}{|l|}{1} & 1 & \diag{.1em}{.1cm}{}{} & \cellcolor{black} 
+								& \diag{.1em}{.1cm}{}{}	& \cellcolor{black}		\\ \hline
+	\multicolumn{1}{|l|}{} 	&   & \diag{.1em}{.1cm}{}{} & \diag{.1em}{.1cm}{}{}
+								& \diag{.1em}{.1cm}{}{} & \diag{.1em}{.1cm}{}{}	\\ \hline
+	\multicolumn{1}{|l|}{} 	& 1 & \diag{.1em}{.1cm}{}{} & \cellcolor{black} 
+								& \diag{.1em}{.1cm}{}{} & \diag{.1em}{.1cm}{}{} \\ \hline
+	\multicolumn{1}{|l|}{} 	&   & \diag{.1em}{.1cm}{}{} & \diag{.1em}{.1cm}{}{} 
+								& \diag{.1em}{.1cm}{}{} & \diag{.1em}{.1cm}{}{} \\ \hline
+	\multicolumn{1}{|l|}{} 	& 1 & \diag{.1em}{.1cm}{}{} & \cellcolor{black} 
+								& \diag{.1em}{.1cm}{}{} & \diag{.1em}{.1cm}{}{} \\ \hline
+	\end{tabu}
+	\caption{Example of the Nonogram}
+	\label{example:nanogram1}
+	\end{table}
+
+	In this example the size of solution board is $5\times 4$ (rows = 5; columns = 4). Where the top matrix has the worst case when all the clues are ones. In 5 allowed cells we can place maximum only 3 blocks in one cell. This proves that the formula for the odd value is correct (i.e. $\dfrac {m} {2}+1 = \dfrac {5} {2}+1 = 3$).
+
+		
+	\item Left Matrix: is the second given matrix that is very similar to the top matrix. But it is normally located on the left or on the right side of the solution board and provides the restrictions to the rows of the solution board. The size of it has the same logic as top matrix but reverse (the number of rows equal to the number of solution board's rows and the number of columns of left matrix is almost twice less amount of columns): $size = m\times(\dfrac {n} {2}+1)$ for odd $n$ and $size = m\times(\dfrac {n} {2})$ for even $n$.
+
+
+\end{itemize}
+
+This design was used for the definition of the CSP. In the next section it will be considered in more details.
+
+\section{Logic of solving Nonograms}
+\label{sec:logic}
+
+Nonogram is the logic puzzle game. In order to complete the Nonogram it is required to have some logical strategy to solve it faster:
+\begin{itemize}
+	\item It is easier to start with any row or column, which either do not have any clues and allows to cross out all cells on that row or column; or to start with the biggest clues that are equal to the number of cells on that row or column, which allows to colour all of them.
+
+	\item If the first case does not exist, then it is probably better to start with biggest provided clues first. The biggest clues are the most convenient in terms of finding out which cells need to be coloured for certain. If the value of the clues is bigger than 50\% of the number of cell on the row or column, then it is possible to colour the intersection of possible blocks, the part of the row or column that will be coloured for certain. 
+	For instance (see Tables \ref{ex1:intersec} - \ref{ex3:intersec} below), we are given with one clue of value 7 on the 10 cells row/column. The seven size block can be located in four possible ways. Therefore, we can count 7 cells from the beginning and mark where it finishes and count 7 cells from the end and make a second mark, which will be a different cell. The cells between these two marks can be coloured to the black for sure. In this case it will be 4 cells in between (indexes 4-7).
+
+	\item After finishing with the biggest clues it is better to move to the rows and columns, which already has some coloured cells. By counting the cells it becomes easier to solve even hard cases as well.
+	
+\end{itemize}
+
+
+% \begin{table}[h]
+% 	\centering
+% 	\begin{tabu}{|c|[2pt]c|c|c|c|c|c|c|c|c|c|}
+% 	  & 1 &  &  &  &  &  &  &  &  &  \\
+% 	\cline{1-11}
+% 	7 &  &  &  &  &  &  &  &  &  &  \\\hline
+% 	\end{tabu}
+% 	\caption{Example of the Nonogram}
+% 	\label{example:nanogram1}
+% \end{table}
+
+% \begin{table}[h]
+% 	\centering
+% 	\begin{tabu}{|c|[2pt]c|c|c|c|c|c|c|c|c|c|}
+% 	\cline{1-11}
+% 	7 & \tikzbullet{orange}{green} & \tikzbullet{orange}{green} & \tikzbullet{orange}{green}  & \tikzbullet{orange}{green} \tikzbullet{red}{red}\cellcolor{yellow} & \tikzbullet{orange}{green} \tikzbullet{red}{red}\cellcolor{yellow} & \tikzbullet{orange}{green}\tikzbullet{red}{red}\cellcolor{yellow} & \tikzbullet{orange}{green} \tikzbullet{red}{red}\cellcolor{yellow}& \tikzbullet{red}{red} & \tikzbullet{red}{red} & \tikzbullet{red}{red} \\\hline
+% 	\end{tabu}
+% 	\caption{Example of the Nonogram}
+% 	\label{example:nanogram1}
+% \end{table}
+
+% \begin{table}[h]
+% 	\centering
+% 	\begin{tabu}{|c|[2pt]c|c|c|c|c|c|c|c|c|c|}
+% 	\cline{1-11}
+% 	7 &  &  &  & \cellcolor{black} & \cellcolor{black} & \cellcolor{black} & \cellcolor{black} &  &  &  \\\hline
+% 	\end{tabu}
+% 	\caption{Example of the Nonogram}
+% 	\label{example:nanogram1}
+% \end{table}
+
+%CLEAN:
+\begin{table}[h]
+\centering
+\begin{tabu}{ccccccccccc}
+    & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\ \hline
+\multicolumn{1}{|l||}{7} 		& \multicolumn{1}{l|}{} &
+\multicolumn{1}{l|}{} 			& \multicolumn{1}{l|}{} &
+\multicolumn{1}{l|}{} 			& \multicolumn{1}{l|}{} &
+\multicolumn{1}{l|}{} 			& \multicolumn{1}{l|}{} & 
+\multicolumn{1}{l|}{} 			& \multicolumn{1}{l|}{} & 
+\multicolumn{1}{l|}{} \\ \hline
+\end{tabu}
+\caption{Example 1: demonstration of "intersection"}
+\label{ex1:intersec}
+\end{table}
+%COLOURFUL POINTS:
+\begin{table}[h]
+\centering
+\begin{tabu}{ccccccccccc}
+    & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\ \hline
+\multicolumn{1}{|l||}{7}& 
+\multicolumn{1}{l|}{\tikzbullet{orange}{green}} &
+\multicolumn{1}{l|}{\tikzbullet{orange}{green}} & 
+\multicolumn{1}{l|}{\tikzbullet{orange}{green}} &
+\multicolumn{1}{l|}{\tikzbullet{orange}{green}\tikzbullet{red}{red}\cellcolor{yellow}} & 
+\multicolumn{1}{l|}{\tikzbullet{orange}{green}\tikzbullet{red}{red}\cellcolor{yellow}} &
+\multicolumn{1}{l|}{\tikzbullet{orange}{green}\tikzbullet{red}{red}\cellcolor{yellow}} & 
+\multicolumn{1}{l|}{\tikzbullet{orange}{green}\tikzbullet{red}{red}\cellcolor{yellow}} & 
+\multicolumn{1}{l|}{\tikzbullet{red}{red}} & 
+\multicolumn{1}{l|}{\tikzbullet{red}{red}} & 
+\multicolumn{1}{l|}{\tikzbullet{red}{red}} \\ \hline
+\end{tabu}
+\caption{Example 2: demonstration of "intersection"}
+\label{ex2:intersec}
+\end{table}
+%COLOURED:
+\begin{table}[h]
+\centering
+\begin{tabu}{ccccccccccc}
+    & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\ \hline
+\multicolumn{1}{|l||}{7}& 
+\multicolumn{1}{l|}{\tikzbullet{orange}{green}} &
+\multicolumn{1}{l|}{\tikzbullet{orange}{green}} & 
+\multicolumn{1}{l|}{\tikzbullet{orange}{green}} &
+\multicolumn{1}{l|}{\cellcolor{black}} & 
+\multicolumn{1}{l|}{\cellcolor{black}} &
+\multicolumn{1}{l|}{\cellcolor{black}} & 
+\multicolumn{1}{l|}{\cellcolor{black}} & 
+\multicolumn{1}{l|}{\tikzbullet{red}{red}} & 
+\multicolumn{1}{l|}{\tikzbullet{red}{red}} & 
+\multicolumn{1}{l|}{\tikzbullet{red}{red}} \\ \hline
+\end{tabu}
+\caption{Example 3: demonstration of "intersection"}
+\label{ex3:intersec}
+\end{table}
+
+%----------------------------------------------------------------------------------------
+%  SECTION : CONSTRAINT MODELLING
+%----------------------------------------------------------------------------------------
+\section{Constraint Modelling}
+\label{sec:cming}
+Constraint modelling is the process of converting the properties of the existing problem to the Constraint Satisfaction Problem(CSP)\cite{nonogram_good,hanbook_cp}. This used as an input to the constraint solver to search for solutions \cite{minion}.\\~\\
+
+% \textbf{Constraint Satisfaction Problem of Nonogram:}\\
+\subsection{Constraint Satisfaction Problem}
+\label{subsec:CSP}
+
+To implement a solver of the problem with Constraint Programming it is not needed to write the program in traditional way, which executes everything in the normal sequential order. In fact it is necessary to define and write the rules of the Nonogram \cite{nonogram_good} (i.e. CSP of Nonogram). Accordingly the definition of the CSP that was described in the introduction chapter, the CSP is formally defined as triple (variables, domains and constraints $\left\langle X, D, C\right\rangle$)\cite{all_diff_st-andr,nonogram_good}. 
+
+
+\begin{itemize}
+	\item Variables: $X=\{X_{1}, X_{2}, ..., X_{n}\}$ in this case each variable of the Nonogram is the single cell on the solution board. 
+	\item Domains: $D=\{D_{1}, D_{2}, ..., D_{n}\}$ every variable $X$ has a finite set of values to which it could be assigned. This set is called domain. Each variable has its own domain. Variables may have the same domain or different. The values from the domain can be eliminated after applying constraint between the variables. When domain is left with one value it must be assigned to the variable.
+	\item Constraints: $C=\{C_{1}, C_{2}, ..., C_{m}\}$. One constraint is the relation between variables. It allows to eliminate some values from the domains of those variables that were involved in this constraint.   
+\end{itemize}
+
+The CSP is considered to be solved when all the constraints are satisfied and every variables assigned to one value. 
+
+Constraint Satisfaction Problem can be solved in the following way:
+\begin{itemize}
+	\item \textbf{Given:}
+	\begin{enumerate}
+		\item A finite set of \textcolor{red}{decision variables}.
+		\item For each decision variable, a finite \textcolor{red}{domain} of potential values.
+		\item A finite set of \textcolor{red}{constraints} on the decision variables.
+	\end{enumerate}
+
+
+	\item \textbf{Find:}
+	\begin{itemize}
+		\item An assignment of values to variables such that all constraints are satisfied.
+	\end{itemize}
+\end{itemize}
+
+
+
+
+\subsection{Constraint Satisfaction Problem of Nonogram }
+\label{subsec:CSP_nonogram}
+
+After getting the definition of the Constraint Satisfaction Problem, it is possible to define the CSP of Nonogram in detail.
+
+Due to the fact that the goal of the game is the determination of which cells of the solution board can be coloured to the black and which need to be left white, the solution board will be considered as a set of variables that need to be assigned at the end of CSP. The total amount of the variables in the solution board is $m\times n$ (amount of rows and columns). The domain of each variable has maximum 2 values: white or black, in the modelling of the problem it could be replaced by binary values 0s and 1s (0 - white, 1 - black). 
+Two matrices that provide the conditions of the game (i.e. top and left matrices) should be given to the solver as a set of parameters. Thus every single cell/clue of these matrices is a given variable. The maximum value of the clue in these matrices should not exceed the number of cells on any row or column. For instance if the solution board has size  $m\times n$ then the domain of each cell of the top matrix varies between 0 and $m$, since the maximum number of rows is $m$. The same for the left matrix's cells that varies between 0 and $n$
+\begin{center}
+$cell_{top(i, j)}\in \left\{ \begin{matrix} 0,\ldots m\end{matrix} \right\}$, where $i$,$j$ - are indices of the top matrix.
+
+$cell_{left(i, j)}\in \left\{ \begin{matrix} 0,\ldots n\end{matrix} \right\}$, where $i$,$j$ - are indices of the left matrix.
+\end{center}
+
+
+% \colorbox{red}{During the implementation of the problem in Essence' it is hard to declare the variable which will be changing but remembering the current value of the assigned value.}
+
+% But it is very convenient language in terms of solving the problem just by specifying the properties of the problem.
+
+As the Essence' prime is not a procedural languages and cannot remember the last updates to the 'object'.  For instance it cannot save the current updates to the solution board and read them in the next iteration. For instance, is the clue is equal to 4 and the number of cells on that row or column is 5, then the block can start with index 1 or 2 (if the indexing starts with 1). In order to keep the index where the solver should start colouring cells in continuous form it was decided to use additional two matrices for top and left matrices' indices. These two matrices should have the same sizes as the top and left matrices. If the cell in the top and left matrices are empty then they should be empty on the additional matrices. Otherwise, it should have index where it starts on the solution board. 
+
+The general design discussion above will help to define the CSP using mathematical notations. 
+
+
+% \begin{table}[!htbp]
+% 	\begin{tabularx}{\textwidth}{ l X }
+% 	\textbf{Given:}		&\\
+% 						&\\
+% 	\texttt{mainRow}:	& the number of rows of the solution board and left matrices\\
+% 	\texttt{mainCol}:	& the number of columns of the solution board and top matrices\\
+% 	\texttt{topRows}:	& the number of row of the top matrix which is almost twice less than the number of rows of the solution board\\
+% 	\texttt{leftCols}:	& the number of columns of the left matrix\\
+% 	\end{tabularx}
+% ~
+% 	\begin{tabularx}{\textwidth}{ l X }
+% 	\texttt{topMatrix[topRows][mainCol]}: & each cell of the matrix has domain = $\left\{ \begin{matrix} 0,\ldots m\end{matrix} \right\}$
+% 	\end{tabularx}
+% \end{table}
+
+\begin{itemize}
+	\item \textbf{Given:}\\
+	\textit{\$parameter declaration:}\\
+	\begin{tabular}{l p{12cm}}
+	\texttt{mainRow}: & the number of rows of the solution board and left matrices\\
+	\texttt{mainCol}:	& the number of columns of the solution board and top matrices\\
+	\texttt{topRows}:	& the number of rows of the top matrix.This number is almost twice less than \texttt{mainRow}\\
+	\texttt{leftCols}:	& the number of columns of the left matrix\\
+	\end{tabular}
+
+
+	\begin{tabular}{l p{12cm}}
+	\texttt{topMatrix[topRows][mainCol]}: & each cell of the matrix has domain: $\left\{ \begin{matrix} 0,\ldots mainRow\end{matrix} \right\}$\\
+
+	\texttt{leftMatrix[mainRow][leftCols]}: & each cell of the matrix has domain: $\left\{\begin{matrix} 0,\ldots mainCol\end{matrix} \right\}$\\
+
+	\texttt{topIndexMatrix[topRows][mainCol]}: & each cell of the matrix has domain: $\left\{ \begin{matrix} 0,\ldots mainRow\end{matrix} \right\}$\\
+
+	\texttt{leftIndexMatrix[mainRow][leftCols]}: & each cell of the matrix has domain: $\left\{\begin{matrix} 0,\ldots mainCol\end{matrix} \right\}$\\
+	\end{tabular}
+
+
+	\item \textbf{Find:}\\
+	\textit{\$variable declaration:}\\
+
+	\begin{tabular}{l p{8cm}}
+	\texttt{solutionBoard[mainRow][mainCol]}: & the board which need to be filled with only possible values 0s and 1s (domain = $\left\{ 0,1 \right\}$)\\
+	\end{tabular}
+
+	\item \textbf{such that:}\\
+	\textit{\$constraints:}\\
+	\begin{enumerate}
+		\item Since it was decided to define coloured cells as 1s and empty cells as 0s on the solution board. Consequently the sum of the clues in the column of the top matrix is equal to the sum of the sum of the ones in the same columns of the solution board.\\~\\ 
+		
+		$\forall col\in \left\{ 1,\ldots mainCol\right\} ,\\\sum _{j=1}^{topRow}topMatrix\left[ j\right]\left[ col\right] =\sum _{i=1}^{mainRow}solutionBoard\left[ i\right]\left[col\right] $\\~\\
+		
+		\item The next constraint will help to define the additional matrices for keepint the indices of the beginning of the blocks on the solution board. Since these matrices have absolutely the same size and domain as top and left matrices it will help to define the empty cells and non-empty cells:\\~\\
+
+		$\forall row\in \left\{ 1,\ldots topRows\right\}.\\\forall col\in \left\{ 1,\ldots mainCol\right\}, \\topMatrix\left[ row\right]\left[ col\right] = 0 \rightarrow topIndexMatrix\left[ row\right]\left[ col\right] = 0$\\~\\
+
+		\item Since the additional matrices stores the indices of the beginning of each block, they must be in the ascending order. As the blocks of cells need to be coloured in the same order as the clues in any row/column. \\
+
+		Each block should have at least one cell in between in any given row or column. The last two constraints were combined in one expression.
+		It happens quite often when the top matrix has needed number of clues and other cells are empty on this column. The possible mistake could be to compare next empty cell, which is zero with the previous non empty cell, which is greater than zero. So the constraint should specify first condition that both compared cells in the index matrix should not be zero elements, and only in this case it possible to make a proper comparison, which is constraint. \\
+
+		$\forall row\in \left\{ 1,\ldots topRows\right\}.\\
+		\forall col\in \left\{ 1,\ldots mainCol\right\},\\ 
+		\left(topIndexMatrix\left[ row\right]\left[ col\right]\neq 0.\\
+		topIndexMatrix\left[ row+1\right]\left[ col\right]\neq 0\right) \rightarrow\\ 
+		(\left(topIndexMatrix\left[ row\right]\left[ col\right] < topIndexMatrix\left[ row+1\right]\left[ col\right]\right). \\
+		\left(topIndexMatrix\left[ row+1\right]\left[ col\right] -  topIndexMatrix\left[ row\right]\left[ col\right]  -  topMatrix\left[ row\right]\left[ col\right]  \geq
+ 		1\right))$\\~\\
+
+ 		\item The last constraint allows to colour cells in continuous blocks and in the right indecies. For instance if the clue is 3 and it starts at position 2 then it should colour only cells on positions: 2, 3, 4. But just by adding 3+2 would give index 5, which should not be coloured, since it is more than needed and could overflow the matrix.\\
+ 		$\forall row\in \left\{ 1,\ldots topRows\right\}.\\
+		\forall col\in \left\{ 1,\ldots mainCol\right\},\\ 
+		(topMatrix\left[ row\right]\left[ col\right] > 0 )\rightarrow\\
+		\forall i\in \left\{ 1,\ldots topMatrix\left[ row\right]\left[ col\right]\right\},\\
+		(solutionBoard\left[ topIndexMatrix\left[ row\right]\left[ col\right]+i-1\right]\left[col \right]=1)$
+
+
+	\end{enumerate}
+\end{itemize}
+All these constraints need to be applied to the left matrix as well, but with symmetrical change of indecies and positions. These mathematical representation were translated to the Essence' constraint modelling language in the followig way:
+
+
+\begin{verbatim}
+	language ESSENCE' 1.0
+	given mainRow: int  $num of rows
+	given mainCol: int  $num of cols
+	given topRows: int  $topMatrix[b][mainCol]
+	given leftCols: int  $topMatrix[b][mainCol]
+
+
+	given topMatrix: matrix indexed by [int(1..topRows), int(1..mainCol)] 
+	of int(0..mainRow)
+	given leftMatrix: matrix indexed by [int(1..mainRow), int(1..leftCols)] 
+	of int(0..mainCol)
+
+	find topIndexMatrix: matrix indexed by [int(1..topRows), int(1..mainCol)] 
+	of int(0..mainRow)
+	find leftIndexMatrix: matrix indexed by [int(1..mainRow), int(1..leftCols)] 
+	of int(0..mainCol)
+
+	find solutionBoard: matrix indexed by [int(1..mainRow), int(1..mainCol)] 
+	of int(0..1)
+	such that
+\end{verbatim}
+
+\begin{enumerate}	
+	\item %1
+	\begin{verbatim}
+	forAll col:int(1..mainCol).
+		((sum j: int(1..topRows).topMatrix[j,col])
+		=(sum i: int(1..mainRow).solutionBoard[i,col])),
+	\end{verbatim}
+
+	\item %2
+	\begin{verbatim}
+	forAll row: int (1..topRows).
+			forAll col:int(1..mainCol).
+				topMatrix[row, col]=0 -> topIndexMatrix[row, col]=0,
+	\end{verbatim}
+
+	\item %3
+	\begin{verbatim}
+	forAll row: int (1..topRows).
+			forAll col:int(1..mainCol).
+				(topIndexMatrix[row, col]!=0 /\ topIndexMatrix[row+1,col]!=0) ->
+					((topIndexMatrix[row, col]<topIndexMatrix[row+1, col]) /\
+					((topIndexMatrix[row+1, col]-topIndexMatrix[row, col]-topMatrix[row, col])>=1)),
+	\end{verbatim}
+
+	\item %4
+	\begin{verbatim}
+	forAll row:int(1..topRows).
+		forAll col:int(1..mainCol).
+	    (topMatrix[row, col]>0) -> forAll run:int(0..topMatrix[row,col]).
+	      (run > 0 -> (solutionBoard[topIndexMatrix[row, col]+run-1,col]=1)),
+	\end{verbatim}
+\end{enumerate}
+
+The Essence' constraint model was tested by passing different instances, which were provided in the .param files and writing them by hand.
+The obtained results which were shown in the binary represntation was hard to determine whether the picture looks fine. For that it was decided to use Ruby to visualise the output of the Essence model. Also at this stage it was possible to test the instances that could have more than one solution. The instances which are not solvable were producing zero solutions. 
+
+Even in thi stage of the implementation of the solver there were some interesting instances like "human and dog", which was running forever to solve \(it was spent 2 hours to wait the solver to solve it\). Howerver with the usage of the "SACBound" it takes seconds to solve te same instance. 
+
+\section{Implementation of instances for the solver}
+\label{sec:imeplementationInstances}
+
+
+The imaplementation of instances in the format of .param files was implemented in Python programming language. There are several approaches were used to make the instances of the solver:
+
+\begin{enumerate}
+\item Reading the black and white images
+\item random generation of any size and different forms
+\item to allow user of the system to specify the size of the solution board and the amount of the percentage which need to be coloured by the players later
+\end{enumerate}
+
+\subsection{Reading image files}
+\label{subsec:read_images}
+The fact that Essence' was not allowing to see the images of the solved instance, it was decided to use the library of Python called "skimage.io" to read the image and assign the floating point value close to 1 of white colour and for the black it is close to 0. and for drawing the image it was decided to use the drawing application, in this case called "Paint2". Essentially drawing application would be suitable for this. At the beginning of creating the drawing space in the Paint it is needed to choose the size in pixels and start drawing on putting any squares. Once it was finished with drawing it is needed to save the image in the .jpg or .png format in the directory called "image\_instances". The Python code will read it and return matrix of floating point numbers either close to 0 or 1, nothing in between, which need to be converted to the binary matrix. This matrix is filled solution board, based on which the system will count coloured blocks of cells and generate clues to the top and left matrices. Then all this matrices are written to the .param format file for the Essence' constraint and pass it to the Savile Row to solve it. It is more likely that the instance will have at least one solution or even more. The reason of that is that the top and left matrices are valid and generated based on the actual image, but it might have more than one solution. This is a different problem which will be considered late. 
+
+\subsection{Random generation}
+\label{subsec:rand_generation}
+In the random generation approach it randomly generates the size of the solution board. The range of the size varies between 1 and 25. The maximum size could be $25\times25$ and number 25 was chosen since it was noticed in the modelling stage that the instances with the size greater than 20 rows and 20 columns get very slow in solving them. The values for the cells of the solution board are also spread randomly. Therefore some instances which have the same size still might be different in solving time due to their intensity of the black cells and the location of the cells. Then creation of the instances should be created in the same way as it was describe earlier. 
+
+
+\subsection{Generation of instance by prompting the user}
+\label{subsec:prompted_generation}
+This instances are generated by asking the user for the three parameters: number of rows of solution board, number of columns and the percentage of the coloured cells should be coloured out of the total amount of cells. The function for generation of the solution board counts the exact amount of the cells need to be assigned to ones. After that it randomly generates the coordinate of ones on the solution board and checked whether that cells is empty, if so it adds there one and increments the counter which counts how many ones were already placed. It iterates till every single one will be placed on the solution board. This function is needed in order to evaluate the level of difficulties of the Nonogram.
+
+
+\section{Types of Nonogram instances}
+\label{sec:types_isntances}
+There are several types of instances:
+\begin{itemize}
+	\item instances which was inserted by hands to the .pram file and has some error inside. So that this conflict will not allow to solve it. Normally these instances just don't have solutions.
+	\item instances which were generated by the system with respect to the solver of the Nonogram (Essence' model). All of these generated instances definitely has one or more solution for certain. However, among these valid instances it is still need to be mark to several categories:
+
+	\begin{enumerate}
+	\item instances with one solution. They are 'ideal' instances
+	\item instances which has more than one solution but less than 10 solutions. These instances can be enhanced iteratively by adding the pixel by pixel to the solution board. The algorithm which helps to determine the position of new cell should also be experimented and then if possible to evaluate it: (adding cells to the first solution after comparing this solution with another one and add the cells which are different from the first)
+	\item instances with extremely many solutions might take too much time to be enhanced. Therefore those, instance should be dropped and considered as unsolvable.
+	\item the same dropping approach should be applied to the instances which take too more than 20 seconds to be solved. Since if the computer takes more than 20 seconds to solve it, then it is more likely that the human player will not be able to solve it at all. 
+	\end{enumerate}
+
+\end{itemize}
+
+\subsection{ways of the enhancement of the instance}
+\label{subsec:enhancemenet_instance}
+All instances that has more than one solution but less than 10, can be tried to be improved. There are two approaches of improving it:
+\begin{enumerate}
+	\item Even if the instance has more than two solutions, the system will pick just first two solutions and compare them. All the cells which are different from each other will be saved in the special matrix which has the same size, but different locations of some cells will be added to the first solution one by one. If after iterating through all the cells which were different the instance will still have more than one solution it should be considered as not solvable as well. 
+	\item In this approach all possible solutions will be compared and the differences between all solutions should be also stored and be iterated by adding the new cells to the first solution.  In this it showed that this approaches iterates so many times so it is more likely that the instance will be improved and return one solution.  
+\end{enumerate}
+
+
+
+
+
+%----------------------------------------------------------------------------------------
+%   SUBSECTION: 
+%----------------------------------------------------------------------------------------
+% \subsection{Subsection}
+% \label{subsec:subsec01}
+
+% Begins a subsection.

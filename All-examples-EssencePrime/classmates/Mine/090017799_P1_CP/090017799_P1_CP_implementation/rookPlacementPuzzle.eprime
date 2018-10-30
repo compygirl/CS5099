@@ -1,0 +1,232 @@
+language ESSENCE' 1.0
+$----------------------------------------------------------------------------------
+$ PARAMETER DECLARATIONS:
+$----------------------------------------------------------------------------------
+$  1. 'n' - declaration of the square matrix size, val
+$  2. 'squareType' is the n*n integer matrix, which contains three types of squares (i.e.
+$ 		'0'-empty cell,
+$			'1' - blocking/black squares,
+$			'2' - clue squares - black square with the number.
+$
+$  3. 'clues' is also n*n integer matrix, which contains either zero or digit,
+$			which ranges between 1 and 4 for the number of adjacent rooks.
+$----------------------------------------------------------------------------------
+
+given n: int
+given squareType: matrix indexed by [int(1..n), int(1..n)] of int(0..2)
+given clues: matrix indexed by [int(1..n), int(1..n)] of int(0..4)
+
+
+$----------------------------------------------------------------------------------
+$ VARIABLE DECLARATIONS:
+$----------------------------------------------------------------------------------
+$	1. 'solutionBoard' - is also n*n integer matrix that should contain the solution.
+$		 for the rooks, which are denoted with '1' and all other types of the squres are denoted with '0'.
+$----------------------------------------------------------------------------------
+
+find solutionBoard: matrix indexed by [int(1..n), int(1..n)] of int(0..1)
+
+
+$----------------------------------------------------------------------------------
+$ PART 3: SYMMETRY BREAKING:
+$----------------------------------------------------------------------------------
+$	1. Accordingly the practical requirements there are two types of symmetry breaking should be modelled:
+$			a. Horizontal flip symmetry
+$			b. Veritcal flip symmetry
+$ For that it was needed to create two integer matrix variables of n*n size, where
+$ the possible values should be '1' for rooks and '0' for all other types of squares.
+$----------------------------------------------------------------------------------
+
+find vertSymmetryBoard: matrix indexed by [int(1..n), int(1..n)] of int(0..1)
+$find horSymmetryBoard: matrix indexed by [int(1..n), int(1..n)] of int(0..1)
+
+
+$branching on [[solutionBoard[i,i]|i:int(1..n)], solutionBoard]
+$heuristic static
+$heuristic sdf
+$heuristic conflict
+$heuristic srf
+
+such that
+
+$----------------------------------------------------------------------------------
+$ Constraint #1
+$
+$ If squareType is zero, then solutionBoard can have rook (i.e. 1)
+$ Put rook on white cells
+$----------------------------------------------------------------------------------
+
+	forAll row0:int(1..n).
+		forAll col0:int(1..n).
+			(solutionBoard[row0,col0]=1)->(squareType[row0,col0]=0),
+
+
+$----------------------------------------------------------------------------------
+$ Constraint #2
+$
+$ Every clue square constains the number 'i'(where 'i' is the number of adjacent rooks).
+$ Adjacent squares are those cells which directly above, below, left or right,
+$	(not diagonally) of the given square.
+$
+$ There are several constraints written separetely:
+$		1. 	cells with four adjacent squares (above, below, left, right),
+$			 	those ones that are in the range between 2 and n-1;
+$
+$		2. 	cells with maximum three adjacent squares, those ones
+$				that are close to the edges of the field;
+$
+$		3. 	cells with two adjacent squares, those that are located in the angles of the field
+$
+$		Therefore, the each square of the 'saureType' matrix is checked to be equal to '2',
+$		if it is equal to 2, then the 'clues' matrix should have a digit between 1 and 4.
+$ 	The sum of the adjence squares in the 'solutionBoard' should,
+$		should give exact value which is in the 'clues' matrix cell.
+$----------------------------------------------------------------------------------
+
+	$ Four sides:
+	forAll row1: int(2..n-1).
+		forAll col1: int(2..n-1).
+			(squareType[row1, col1]=2)->(solutionBoard[row1+1, col1]+solutionBoard[row1, col1+1]
+							+solutionBoard[row1-1, col1]+solutionBoard[row1, col1-1]=clues[row1, col1]),
+
+	$ Three sides:  on the edge Row 1:
+	forAll col1:int(2..n-1).
+		(squareType[1, col1]=2)->(solutionBoard[1, col1+1]+solutionBoard[2, col1]
+								+solutionBoard[1, col1-1]=clues[1, col1]),
+
+	$ Three sides:  on the edge Row n:
+	forAll col1:int(2..n-1).
+		(squareType[n, col1]=2)->(solutionBoard[n, col1+1]
+							+solutionBoard[n-1, col1]+solutionBoard[n, col1-1]=clues[n, col1]),
+
+	$ Three sides:  on the edge column 1:
+	forAll row1:int(2..n-1).
+		(squareType[row1, 1]=2)->(solutionBoard[row1+1, 1]
+							+solutionBoard[row1-1, 1]+solutionBoard[row1, 2] =clues[row1, 1]),
+
+	$ Three sides:  on the edge column n:
+	forAll row1:int(2..n-1).
+		(squareType[row1, n]=2)->(solutionBoard[row1+1, n]
+							+solutionBoard[row1-1, n]+solutionBoard[row1, n-1]=clues[row1, n]),
+
+	$Corners: Top-left:
+	(squareType[1, 1]=2)->(solutionBoard[2, 1]+solutionBoard[1, 2] = clues[1, 1]),
+
+	$Corners: Top-right:
+	(squareType[1, n]=2)->(solutionBoard[2, n]+solutionBoard[1, n-1] = clues[1, n]),
+
+	$Corners: Bottom-left:
+	(squareType[n, 1]=2)->(solutionBoard[n,2]+solutionBoard[n-1, 1] = clues[n, 1]),
+
+	$Corners: Bottom-right:
+	(squareType[n, n]=2)->(solutionBoard[n-1, n]+solutionBoard[n, n-1] = clues[n, n]),
+
+
+$----------------------------------------------------------------------------------
+$ Constraint #3
+$
+$	No pair of rooks attack each other
+$
+$ If the square of the 'solutionBoard' is equal to 1, then it means there should be a rook,
+$ and all adjacent cells should not contain any other rooks,
+$ thus the sum of the adjacent cells should be equal to '0'.
+$
+$ Since the square may have different number of adjancent cells,
+$ then it is needed to check in  all possible ways.
+$-----------------------------------------------------------------------------------
+
+	$ Four sides:
+	forAll row1: int(2..n-1).
+		forAll col1: int(2..n-1).
+			(solutionBoard[row1, col1]=1)->(solutionBoard[row1+1, col1]+solutionBoard[row1, col1+1]
+							+solutionBoard[row1-1, col1]+solutionBoard[row1, col1-1]=0),
+
+	$ Three sides:  on the edge Row 1:
+	forAll col1: int(2..n-1).
+		(solutionBoard[1, col1]=1) -> (solutionBoard[1, col1+1]+solutionBoard[2, col1]
+								+solutionBoard[1, col1-1]=0),
+
+	$ Three sides:  on the edge Row n:
+	forAll col1: int(2..n-1).
+		(solutionBoard[n, col1]=1)-> (solutionBoard[n, col1+1]
+							+solutionBoard[n-1, col1]+solutionBoard[n, col1-1]=0),
+
+	$ Three sides:  on the edge Column 1:
+	forAll row1:int(2..n-1).
+		(solutionBoard[row1, 1]=1)->(solutionBoard[row1+1, 1]
+							+solutionBoard[row1-1, 1]+solutionBoard[row1, 2] =0),
+
+	$ Three sides:  on the edge Column n:
+	forAll row1:int(2..n-1).
+		(solutionBoard[row1, n]=1)->(solutionBoard[row1+1, n]
+							+solutionBoard[row1-1, n]+solutionBoard[row1, n-1]=0),
+
+	$Corners: Top-left:
+	(solutionBoard[1, 1] =1)->(solutionBoard[2, 1]+solutionBoard[1, 2]=0),
+
+	$Corners: Top-right:
+	(solutionBoard[1, n]=1)->(solutionBoard[2, n]+solutionBoard[1, n-1] = 0),
+
+	$Corners: Bottom-left:
+	(solutionBoard[n, 1]=1)->(solutionBoard[n,2]+solutionBoard[n-1, 1] = 0),
+
+	$Corners: Bottom-right:
+	(solutionBoard[n, n]=1)->(solutionBoard[n-1, n]+solutionBoard[n, n-1] = 0),
+
+$----------------------------------------------------------------------------------
+$ Constraint #4
+$
+$	This constraint goea through each square in the 'squareType',
+$ if the square is empty then, it need to be considered as an intercection of row and column
+$ on this row we need to determin the begining and end points where the rook could be placed
+$ without being attacked by any other on this row,
+$ the same check it is need to be done for the column.
+$----------------------------------------------------------------------------------
+
+	forAll row: int (1..n).
+		forAll col: int(1..n).
+			forAll col1: int (1..col).
+				forAll col2: int (col..n).
+					forAll row1: int (1..row).
+						forAll row2: int (row..n).
+							(((squareType[row, col]=0) /\ ((squareType[row, col1-1]!=0) \/ (col1=1)) /\ ((squareType[row, col2+1]	!=0) \/ (col2=n)) /\ ((sum i: int (col1..col2).squareType[row, i])=0))->
+							((sum i: int (col1..col2).solutionBoard[row, i])=1))
+							\/
+							(((squareType[row, col]=0) /\ ((squareType[row1-1, col]!=0) \/ (row1=1)) /\ ((squareType[row2+1, col]	!=0) \/ (row2=n)) /\ ((sum i: int (row1..row2).squareType[i, col])=0))->
+							((sum i: int (row1..row2).solutionBoard[i, col])=1)),
+
+$----------------------------------------------------------------------------------
+$ Constraint #5
+$
+$ At empty row we can have at most one rook AND the same constraint is applied to the empty column
+$----------------------------------------------------------------------------------
+
+	$ Empty row
+	forAll row: int (1..n).
+		((sum i:int(1..n).squareType[row, i])=0)->((sum i:int(1..n).solutionBoard[row, i])<=1),
+
+	$ Empty column
+	forAll col: int (1..n).
+		((sum i:int(1..n).squareType[i, col])=0)->((sum i:int(1..n).solutionBoard[i, col])<=1),
+
+
+
+$----------------------------------------------------------------------------------
+$ Vertical symmetry
+$----------------------------------------------------------------------------------
+
+	forAll row: int(1..n).
+		forAll col: int(1..n).
+			solutionBoard[row,col]=vertSymmetryBoard[row, ((n+1)-col)],
+
+	flatten(solutionBoard)<=lexflatten(vertSymmetryBoard)
+
+$$----------------------------------------------------------------------------------
+$$ Horizontal symmetry
+$$----------------------------------------------------------------------------------
+$
+$	forAll row: int(1..n).
+$		forAll col: int(1..n).
+$			solutionBoard[row,col]=horSymmetryBoard[((n+1)-row), col ],
+$
+$	flatten(solutionBoard) <=lex flatten(horSymmetryBoard)

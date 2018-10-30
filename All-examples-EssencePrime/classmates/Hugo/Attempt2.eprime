@@ -1,0 +1,378 @@
+language ESSENCE' 1.0
+given n: int
+
+
+
+given clues: matrix indexed by [int(1..n), int(1..n)] of
+int(0..5)
+
+given squareType: matrix indexed by [int(1..n), int(1..n)] of
+int(0..5)
+
+
+letting   Range1 be domain int(0..n-1)
+letting   RANGE be domain int(0..n)
+letting   RANGE2 be domain int(2)
+letting   RANGE3 be domain int(0..1)
+letting ANYVALUE be domain int (0..50)
+
+
+$find RookPositions : matrix indexed by [int (1..2n), int (0..n*n-1)] of RANGE3
+
+$sfind RookPositions: matrix indexed by [int(1..2*n),int(0..n*n-1)] of RANGE3
+
+
+find RookAttackMatrix: matrix indexed by [int(1..2*n),int(0..n*n-1)] of RANGE3
+find RookPositions: matrix indexed by [int(1..n), int(1..n)] of RANGE
+find Positions1D: matrix indexed by [int(0..n*n-1)] of ANYVALUE
+
+$find Positions2D: matrix indexed by [int(0..n-1),int(1..n)] of ANYVALUE
+$$
+$find Positions2: matrix indexed by [int(0..n*n-1)] of ANYVALUE
+$$
+$$The number of times a square can be in a rooks matrix
+$$find PositionScores2D:  matrix indexed by [int(0..n*n-1)] of RANGE
+$$find MaxRooks1D:  matrix indexed by [int(0..n*n-1)] of RANGE
+$$find MaxRooks21D:  matrix indexed by [int(0..n*n-1)] of RANGE2
+$find solutionBoard: matrix indexed by [int(1..n), int(1..n)] of RANGE3
+
+$find solutionBoard2: iset of int(1..n*n)
+
+
+$find RookPositionRows:
+$find RookPositionsSet
+
+
+$$$ NOTE COULD HAVE 3d matrix
+$$the board (2d)
+$$then there is another dimension coming up from it
+$which stores the info on what rooks are attacking that square?
+$this can have a length of two and store the rook number?
+$THe rook number is it's location which is row*col+1
+$If a rook is attacking it then the rook number is stored in one of the two cells
+$GCC(rook number = 1)
+
+such that
+
+$forAll col: int(1..n).
+$sum(RookPositions[..,col])>0 <= 1+sum(squareType[..,col])>0,
+
+forAll x: int(0..n*n-1).
+Positions1D[x]=x,
+$
+
+$$A rook can never be attacking more than one of the same positinos as another rook
+forAll rook1, rook2: int(1..n).
+$forAll cellAttacked1,cellAttacked2: int (1..(n*n)+n).
+forAll x: int (1..(n*n)+n)
+. rook1!=rook2
+->  atmost( flatten([RookAttackMatrix[rook,..] | rook : int(rook1..rook2)]), [x], [2]),
+
+$$flatten([RookPositions[rook,..] | rook : int(rook1..rook2)])
+$
+$
+$$ note might need rookattackmatrix as a following format RookAttackMatrix[rook,[Attack vectors]]
+$$forAll ...at least in one rooks attack matrix
+$
+$forAll x, y: int(1..n).
+$forAll rook: int(1..(2*n)).
+$forAll z: int(1..n).
+$z%n=x%n /\ solutionBoard[x,y] = rook $( contains rook)
+$-> atmost(RookAttackMatrix[rook,..], [int(1..n*n)], [1]),
+
+$forAll x, y: int(1..n).
+$forAll rook: int(1..(2*n)).
+$solutionBoard[x,y] = rook \/ solutionBoard[x,y] = 0,
+
+forAll x, y: int (0..n).
+forAll rook: int(1..(2*n)).
+RookPositions[x,y] = 0->
+(atleast([RookPositions[x,a]| a: int(1..n)], [1], [1])
+\/
+atleast([RookPositions[a,y]| a: int(1..n)], [1], [1])
+
+$gcc(RookPositions[..,rook], [int(1..n*n)], [1])
+),
+
+forAll x,y: int(0..n).
+RookPositions[x,y]=1 -> gcc(flatten(1,RookAttackMatrix),[(x*n)+y], [1] ),
+
+
+
+
+
+$$NOW NEED IF A ROOK IS IN A POSITION. THE ROOK ATTACK MATRIX FOR THE ROOK NEEDS TO CONTAIN ALL IN ROW AND COL
+$forAll x,y: int(0..n).
+forAll z: int(0..25).
+forAll y: int(0..25).
+z%n=y%n /\
+$need convert from x,y being 2d to 1d
+RookPositions[z%n,z/n]=1 ->  gcc(RookAttackMatrix[z,..], [y], [1])
+
+
+
+
+
+ $forAll x,y: int(0..n).
+ $RookPositions[x,y]=1 -> gcc(flatten(1,RookAttackMatrix),[(x*n)+y], [1] ),
+
+$
+$
+$ forAll x,y: int(0..n).
+$ forAll z: int(0..24).
+$ RookPositions[x,y]=z ->
+$gcc(flatten(1,RookAttackMatrix),[z], [1] )
+$
+
+
+
+
+
+
+$gcc(RookAttackMatrix[x*y]
+$
+$forAll rook1, rook2: int(1..2n),
+$forAll cellAttacked1,cellAttacked2: int (1..(n*n)+n).
+$atmost([flatten([RookPositions[rook,..] | rook : int(1..2n)])],1DBoardCellMatrix[..],1DMaxRooks[..])
+
+$gcc([RookAttackMatrix[rook,..]],[Positions2D[x, b] | b: int(1..n)],[0]),
+
+$/\ gcc(RookPositions[rook,..],[Positions2D[b, y] | b: int(1..n)],[1]),
+
+$/\gcc(RookPositions[rook,..],[Positions2D[b, y] | b: int(1..n)],[1]),
+
+,
+
+
+$
+$forAll x, y: int(1..n).
+$forAll rook: int(1..(2*n)).
+$solutionBoard[x,..] != rook $( contains rook)
+$-> gcc([RookPositions[rook,..]],[Positions2D[x, b] | b: int(1..n)],[0]),
+$
+$
+$forAll x, y: int(1..n).
+$forAll rook: int(1..(2*n)).
+$solutionBoard[..,y] != rook $( contains rook)
+$-> gcc([RookPositions[rook,..]],[Positions2D[y, b] | b: int(1..n)],[0])
+$
+
+
+
+
+
+$
+$
+$
+$
+$$/\gcc[RookPositions[rook,..], Positions2D[[a..b, x]  | a<=y, b>=y],[1]]
+$
+$forall x from 1..n*n-1
+$rookAttackMatrix[..] contains x
+$and rookAttackMatrix[b,..] does not contain x if the rook b is not on the same row or col
+$etc.
+$
+$$Global
+$forAll rook1, rook2: int(1..2n),
+$forAll cellAttacked1,cellAttacked2: int (1..(n*n)+n).
+$atmost([flatten([RookPositions[rook,..] | rook : int(1..2n)])],1DBoardCellMatrix[..],1DMaxRooks[..])
+$
+$$$Now calculate MAX ROOKS - if it is 0 on the squareType board than max is 2
+$forAll cellAttacked: int (1..(n*n)+n).squareType[n*n,n]=0
+$-> 1DMaxRooks[cellAttacked]=2
+$
+$forAll cellAttacked: int (1..(n*n)+n).squareType[n*n,n]>0
+$-> 1DMaxRooks[cellAttacked]=4
+$
+$forAll cellAttacked: int (1..(n*n)+n)
+$->1DMinRooks[cellAttacked]=1
+$
+$
+$forAll rook: int(1..2n),
+$forAll cellAttacked: int (1..(n*n)+n).
+$$flatten([RookPositions[rook,..] | rook : int(1..2n)])
+$atleast([flatten([RookPositions[rook,..] | rook : int(1..2n)])],1DBoardCellMatrix[..],1DMinRooks[..])
+$
+$$$$A SINGLE ROOK CAN ONLY CONTAIN A SINGLE ROW AND SINGLE COLUMN NOT CONNECTED BY A blocking
+$$square
+$forAll rook: int(1..2n)
+$(
+$it can only contain values row*col+1 where all of them are in the same row (x)
+$or the same col y - check the modulus function?
+$((gcc([RookPositions[rook,..]],PositionBoard[x,a..b]| x and y values for same row or same col,[1])
+$/\
+$((gcc([RookPositions[square,..]],PositionBoard[a..b,y]| x and y values for same row or same col,[1])
+$/\ $((gcc([RookPositions[square,..]],PositionBoard[a..b,y]| x and y values different row or col,[0])
+$
+$
+$
+$SolutionBoard[x,y]=1
+$AND SOLUTIONBOARD[INTERSECTION] IS one
+$) OR else solutionBoard is zero
+$\/ SolutionBoard[x,y]=0
+$
+$
+$
+$$for any rook..
+$$if it isn't in the same column or row as a square and no clue is in between them
+$$-> -> the square is not in the rook's position matrix
+$$forAll rook: int(1..2n).
+$$forAll squares: int(1..n*n+1).
+$$rookPositions[square]=1 ->
+$$((gcc([RookPositions[square,..]],PositionBoard[x,a..b]| x and y values for same row or same col,[1])
+$$/\
+$$((gcc([RookPositions[square,..]],PositionBoard[a..b,y]| x and y values for same row or same col,[1])
+$$/\ ((gcc([RookPositions[square,..]],PositionBoard[a..b,y]| x and y values different row or col,[0])
+$
+$$
+$$$1drookpositions[squares] != 1 ->
+$$gcc([RookPositions[rook,..]],[square],[0])
+$$/\ it contains none of the row and none of them column
+$$gcc([RookPositions[rook,..]],PositionBoard[x,y]| get same row and same col,[0])
+$$ \/
+$$
+$$ ((gcc([RookPositions[rook,..]],PositionBoard[x,a..b]| x and y values for same row or same col,[1])
+$$/\
+$$((gcc([RookPositions[rook,..]],PositionBoard[a..b,y]| x and y values for same row or same col,[1])
+$$
+$$
+$$)
+$$
+$
+$$OR
+$$IT CONTAINS THE WHOLE ROW
+$$OR IT CONTAINS THE WHOLE COLUMN!!!
+$$It contains both same row and same column as square
+$
+$
+$RookPositions[rook,..],[square],[0] $or it contains squares in the same column or row
+$$a rook can only contain squares from one col and row?
+$
+$
+true
+$
+$ does not contain the square UNLESS it is in the same row or col and no clue seperating
+$
+$
+$for all solutionboardsquares
+$there is at least one rook in the same column as the square with no clue in between
+$OR at least one in the same row
+$
+$
+$
+$
+$
+$
+$
+$
+$
+$$Single Rook
+$$forAll rook1, rook2: int(1..2n),
+$$forAll cellAttacked1,cellAttacked2: int (1..(n*n)+n)
+$$flatten([RookPositions[rook,..] | rook : int(rook1..rook2)])
+$
+$
+$
+$
+$
+$
+$  H[(n*row)+col, (n*row)+col] = 1,
+$
+$forAll col: int(1..n).
+$sum(RookPositions[..,col])>0 >=1,
+$$atleast(RookPositions[..,col],[1],[1]),
+$
+$forAll col: int(1..n).
+$sum(RookPositions[col,..])>0 >=1,
+$
+$$For all col,x,y if there is a rook in any of the rows in that col (x is the position of the rook in terms of the row it is in) -> all the other columns do not have a rook in row x if the following holds true: all the squares in row x (the one with the rook) between the first rook (which is at position col) and between the second second column (position =y) are 0
+$
+$$forAll col, x, y: int(1..n).
+$$RookPositions[x,col]=1 /\ (y!=col) /\ (col < y) /\
+$$atleast(RookPositions[..,col],[1],[1])
+$$ ->
+$$ $gcc(RookPositions[x,..],[1],[1])
+$$ gcc([ RookPositions[x,j] | j : int(1..n)
+$$
+$$$(sum([squareType[x,b] | b : int(col+1..n)]) >0=0 )]
+$$
+$$ ],[1],[1])
+$$ $/\gcc([ squareType[x,j] | j : int(1..n), j>=col, j<=y ],[0],[y-col+1])
+$$ /\gcc([ squareType[x,j] | j : int(col..y)],[0],[1+y-col]),
+$$$THIS LINE ABOVE MEANS THE FOLLOWING: $/\gcc(squareType[x,col..y],[0],[3]
+$
+$
+$
+$$$BELOW
+$$ change col..y to a: int(col..y)
+$$The length of Xi is 1 given the following two assumptions:
+$$1. There is no clue in the column i and for the value of Xi (d - aka the position of the rook in the column), for all other columns there is no rook in the same position if there are no blocking squares between the two columns.
+$$aka xd!=Xi for values of d where all the squaretypes between squaretype[row,[i..d]] are 0
+$
+$$$need to add for all integers y, between 1 and n where RookPosition = y and unique..
+$
+$
+$$forAll col1, col2, y: int(1..n).
+$$(sum(RookPositions[..,col1])>0)=1 /\ (RookPositions[..,col1]=y)
+$$ <-> gcc(squareType[..,col1],[0],[n]) /\
+$$(gcc(RookPositions[..,col2],[y],[0]) /\ gcc(squareType[y,int(col1..col2)],[0],[col2-col1+1])),
+$
+$
+$$change a..b to col..y
+$$then can modify it so the length of Xi where i is the range of integers where there is no blocking square
+$$
+$$forAll col1, col2, a, b, rookRow: int(1..n)
+$$.(col1!=col2 /\ col2>col1 /\ b>a /\
+$$$forAll col1: int(1..n-1).
+$$$forAll col2: int(col1+1..n).
+$$$gcc(squareType[int(a..b),col1],[0],[b-a+1])
+$$gcc([ squareType[j,col1] | j : int(a..b)],[0],[b-a+1])
+$$ /\
+$$$sum([squareType[j,col1] | j : int(a..b)]) >0=1
+$$ $(sum(RookPositions[int(a..b),col1]) >0) =1
+$$$ /\
+$$$gcc(RookPositions[int(a..b),col1],[y],[1])
+$$gcc([ RookPositions[j,col1] | j : int(a..b)],[1],[1])
+$$/\
+$$RookPositions[rookRow,col1]=1
+$$/\
+$$$gcc(squareType[y,int(col1..col2)],[0],[col2-col1+1]))
+$$gcc([ squareType[rookRow,j] | j : int(a..b)],[0],[b-a+1])
+$$  ->
+$$$(gcc(RookPositions[int(a..b),col2],[y],[0])
+$$gcc([ RookPositions[j,col2] | j : int(a..b)],[1],[0]),
+$
+$
+$$$$$$$$$$$$$$$$$$$$$$$$
+$
+$
+$forAll col1, col2, a, b: int(1..n).col1!=col2 /\ b>a /\
+$$forAll col1: int(1..n-1).
+$$forAll col2: int(col1+1..n).
+$$gcc(squareType[int(a..b),col1],[0],[b-a+1])
+$atmost([ squareType[j,col1] | j : int(a..b)],[1],[0])
+$ /\
+$$sum([squareType[j,col1] | j : int(a..b)]) >0=1
+$ $(sum(RookPositions[int(a..b),col1]) >0) =1
+$$ /\
+$$gcc(RookPositions[int(a..b),col1],[y],[1])
+$gcc([ RookPositions[j,col1] | j : int(a..b)],[1],[0])
+$/\
+$
+$$Now horizontal, start with first row
+$gcc( flatten([
+$
+$squareType[k,j] | j : int(a..b),
+$$Now to define the rows
+$k: int(col1..n)]),[0],[b-a+1])
+$$(gcc(RookPositions[int(a..b),col2],[y],[0])
+$->
+$atleast([ RookPositions[j,col2] | j : int(a..b)],[1],[1])
+$
+$$gcc(squareType[y,int(col1..col2)],[0],[col2-col1+1]))
+$$
+$
+
+
+$/\gcc([ squareType[x,j] | j : int(1..n), j>=col, j<=y ],[0],[y-col+1])
+

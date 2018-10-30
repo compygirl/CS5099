@@ -1,0 +1,30 @@
+language ESSENCE' 1.0
+given n : int
+given squareType: matrix indexed by [int(1..n), int(1..n)] of int(0..2)
+given clues: matrix indexed by [int(1..n), int(1..n)] of int(0..4)
+find solution: matrix indexed by [int(1..n),int(1..n)] of int(-1..2)
+find neighbourVec: matrix indexed by [int(1..(n+1)*n+n*2)] of int(0..1)
+heuristic srf 
+letting RANGE be int(1..n)
+such that
+	forAll i,j : RANGE .(squareType[i,j] > 0) -> (solution[i,j] = squareType[i,j]),
+	forAll i,j : RANGE .(solution[i,j] > 0) -> (solution[i,j] = squareType[i,j]),
+$	forAll i : RANGE . (sum([(squareType[j,i] >= 1)*1|j : RANGE]) = 0) -> gcc(solution[..,i],[-1,0],[1,(n-1)]),
+$       forAll i : RANGE . (sum([(squareType[i,j] >= 1)*1|j : RANGE]) = 0) -> gcc(solution[i,..],[-1,0],[1,(n-1)]),
+	forAll i,j : RANGE .  (solution[i,j] = -1) <-> neighbourVec[(i) * n + j] = 1,
+	gcc(neighbourVec[..],[1],[sum([(solution[i,j] = -1) * 1| i,j:int(1..n)  ])]),
+	forAll i,j : RANGE . (squareType[i,j] = 2) ->  clues[i,j] = sum([neighbourVec[i*n+j + 1]
+			,neighbourVec[i*n +j - 1],neighbourVec[(i+1)*n+j],neighbourVec[(i-1)*n+j]]),
+$	forAll i : int(1..(n/2)) . (sum([(squareType[i,j] != squareType[n-(i-1),j]) * 1| j : RANGE]) = 0 /\
+$			(sum([clues[k,j]|j : RANGE, k : int(1..(n/2))]) <= sum([clues[k,j]| j : RANGE, k : int((n-(n/2))..n)])))	
+$				->solution[i,..] <=lex solution[n-(i-1),..],
+$	forAll i : int(1..(n/2)) . ((sum([(squareType[j,i] != squareType[j,n-(i-1)]) * 1| j : RANGE]) = 0) /\
+$			(sum([clues[j,k]|j : RANGE, k : int(1..(n/2))]) <= sum([clues[j,k]| j : RANGE, k : int((n-(n/2))..n)])))			
+$				->solution[..,i] <=lex solution[..,n-(i-1)],
+	forAll i,j : RANGE . (solution[i,j] = 0) ->
+			(exists k : RANGE . (sum([solution[i,h]|h : RANGE, h<=j, h>= k]) = -1) \/ (sum([solution[h,j]|h : RANGE, h<=k, h>= i]) = -1)
+			) \/ (exists p : RANGE . (sum([solution[i,h]|h : RANGE, h>=j, h<= p]) = -1) \/ (sum([solution[h,j]|h : RANGE, h>=p, h<= i]) = -1)),
+	forAll i,j : RANGE . (solution[i,j] = -1) ->
+			(forAll k : RANGE . (sum([solution[i,h]|h : RANGE, h<=j, h>= k]) >= -1) /\ (sum([solution[h,j]|h : RANGE, h<=k, h>= i]) >= -1))
+			/\ (forAll p : RANGE . 	(sum([solution[i,h]|h : RANGE, h>=j, h<= p]) >= -1) /\(sum([solution[h,j]|h : RANGE, h>=p, h<= i]) >= -1)),
+	true

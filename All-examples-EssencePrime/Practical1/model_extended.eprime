@@ -1,0 +1,75 @@
+language ESSENCE' 1.0
+
+given n: int
+
+letting RANGE be domain int(1..n)
+
+given squareType: matrix indexed by [RANGE, RANGE] of
+int(0..2)
+
+given clues: matrix indexed by [RANGE, RANGE] of
+int(0..4)
+
+find rooks: matrix indexed by [RANGE, RANGE] of int(0..1)
+find sym_x_axis, sym_y_axis, sym_row, sym_col : bool
+
+such that
+
+forAll col1,col2,row1,row2 : RANGE .
+  $---no rooks attack each other
+  $if they are in the same row or column (and not the same position) middle can't be empty (sum of squareType can't be 0).
+  ( (( col1 = col2) \/ (row1 = row2)) /\ ((col1 != col2) \/ (row1 != row2)) ) ->
+    (
+      ((rooks[row1,col1] = 1) /\ (rooks[row2,col2] = 1) ) ->
+        (((col1 = col2 /\ row2 > row1) ->
+          (max([ squareType[i, col1] | i : int(row1..row2)]) > 0))
+        /\
+        ((row1 = row2 /\ col2 > col1) ->
+          (max([ squareType[row1, j] | j : int(col1..col2)]) > 0)))
+    ),
+$---every empty square must be attacked
+$for every empty cell, go through left-right and up-down to find boundaries with edge or block and make sure at least one rook present either one of them
+$max of rooks in every subrow, subcolumn must be more than 0
+forAll col,row : RANGE .
+  squareType[row,col] = 0 ->
+  (
+    max([ rooks[i, col] | i: int(min([ i1 | i1: int(1..row), (i1 = 1 \/ squareType[i1-1,col] > 0), sum([squareType[ii,col] | ii: int(i1..row)]) = 0 ])..
+                                  max([ i2 | i2: int(row..n), (i2 = n \/ squareType[i2+1,col] > 0), sum([squareType[ii,col] | ii: int(row..i2)]) = 0 ]))]) > 0 \/
+    max([ rooks[row, j] | j: int(min([ j1 | j1: int(1..col), (j1 = 1 \/ squareType[row,j1-1] > 0), sum([squareType[row,jj] | jj: int(j1..col)]) = 0 ])..
+                                  max([ j2 | j2: int(col..n), (j2 = n \/ squareType[row,j2+1] > 0), sum([squareType[row,jj] | jj: int(col..j2)]) = 0 ]))]) > 0
+  ),
+
+$---no rooks on blocks or clues
+forAll row,col : RANGE .
+  (squareType[row,col] > 0 -> rooks[row,col] = 0),
+
+$---clue values must be satisfied
+$sum up all the adjacents and make it equal to clues value. If there isn't any rook it's undefined and bool comparison returns false
+forAll row,col : RANGE .
+  (squareType[row,col] = 2 ->
+   ((rooks[row-1,col] = 1) + (rooks[row+1,col] = 1) + (rooks[row,col-1] = 1) + (rooks[row,col+1] = 1) = clues[row,col])
+  ),
+
+$---axis symmetry detecting
+$x axis symmetry = vertical flip & y axis symmetry = horizontal flip
+$every row/column must be checked with its complementery (substraction must be 0 which also means max max must be less than 0
+sym_x_axis = (max([ |(squareType[i,j]-squareType[n-i+1,j])| + |clues[i,j]-clues[n-i+1,j]| | j: int(1..n), i: int(1..n/2)]) < 1),
+sym_y_axis = (max([ |(squareType[i,j]-squareType[i,n-j+1])| + |clues[i,j]-clues[i,n-j+1]| | j: int(1..n/2), i: int(1..n)]) < 1),
+
+
+$---axis ymmetry breaking
+$making upper/left submatrix more by >lex. we flatten becuase submatrix is 2d.
+sym_x_axis -> (flatten([ rooks[i,j] | j: int(1..n), i: int(1..n/2) ]) >=lex flatten([ rooks[n-i+1,j] | j: int(1..n), i: int(1..n/2) ]) ),
+sym_y_axis -> (flatten([ rooks[i,j] | j: int(1..n/2), i: int(1..n) ]) >=lex flatten([ rooks[i,n-j+1] | j: int(1..n/2), i: int(1..n) ]) ),
+
+
+$---row / column symmetry detecting
+$if all rows/columns are equal means maximum of not equality must be less than 1.
+sym_row = (max( [ (squareType[i,j] != squareType[i+1,j]) /\ ( clues[i,j]>0 -> (clues[i,j] != clues[i+1,j])) | j: int(1..n), i: int(1..n-1) ]) < 1),
+sym_col = (max( [ (squareType[i,j] != squareType[i,j+1]) /\ ( clues[i,j]>0 -> (clues[i,j] != clues[i,j+1])) | i: int(1..n), j: int(1..n-1) ]) < 1),
+
+$---row / column symmetry breaking
+$dont contradict with ax symmetry breaking and make up/left big
+$satisfying all >lex of every row/column means min of >lex must be bigger than 0
+sym_row -> (min( [ [rooks[i,j] | j: int(1..n) ] >=lex [rooks[i+1,j] | j: int(1..n)] | i: int(1..n-1) ] ) > 0 ),
+sym_col -> (min( [ [rooks[i,j] | i: int(1..n) ] >=lex [rooks[i,j+1] | i: int(1..n)] | j: int(1..n-1) ] ) > 0 )

@@ -1,0 +1,18 @@
+MINION 3
+# CSETopLevel_number = 0
+# CSETopLevel_eliminated_expressions = 0
+# CSETopLevel_total_size = 0
+# CSE_active_number = 0
+# CSE_active_eliminated_expressions = 0
+# CSE_active_total_size = 0
+**VARIABLES**
+DISCRETE x1 #
+{2..9}
+DISCRETE x2 #
+{1..8}
+**SEARCH**
+PRINT[[x1],[x2]]
+VARORDER STATIC [x1, x2]
+VARORDER AUX [x1,x2]
+**CONSTRAINTS**
+ineq(x2, x1, -1)**EOF**

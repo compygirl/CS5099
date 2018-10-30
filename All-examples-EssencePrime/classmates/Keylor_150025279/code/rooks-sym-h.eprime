@@ -1,0 +1,135 @@
+language ESSENCE' 1.0
+
+$ Size of the clue
+given n: int
+
+$ Type of squres: 
+$ - 0: empty square 
+$ - 1: blocking square
+$ - 2: clue square
+given squareType: matrix indexed by [int(1..n), int(1..n)] of int(0..2)
+
+$ Amount of rooks that need to be around a clue square
+given clues: matrix indexed by [int(1..n), int(1..n)] of int(0..4)
+
+$ Restrictions on the parameters. Each clue should have a number with it
+where forAll i,j: int(1..n) .
+        (squareType[i,j] <= 1 -> clues[i,j] = 0)
+
+$ Constants
+letting EMPTY_SQUARE = 0
+letting BLOCKING_SQUARE = 1
+letting CLUE_SQUARE = 2
+
+$ Find: A nxn matrix where 1 indicates that there is rook and 0 indicates that there isn't
+find rooks : matrix indexed by [int(1..n), int(1..n)] of int(0..1)
+
+$ Symmetry breaking variables
+find horizontalSym : bool
+find verticalSym : bool
+
+branching on [rooks]
+$ heuristic sdf
+heuristic static
+$ heuristic conflict
+$ heuristic srf
+
+$ Constraints
+such that
+
+    $ Constraint #1: No rooks are placed on blocking or cue squares
+    forAll i,j : int(1..n) .
+        squareType[i,j] != EMPTY_SQUARE -> rooks[i,j] = 0,
+    
+    $ Constraint #2: Clues have exactly i rooks around
+    forAll i,j : int(1..n) .
+        squareType[i, j] = CLUE_SQUARE -> (
+            (rooks[i, j + 1] = 1) + 
+            (rooks[i, j - 1] = 1) + 
+            (rooks[i - 1, j] = 1) + 
+            (rooks[i + 1, j] = 1) = clues[i,j]
+        ),
+    
+    $ Constraint #3: No rooks attack each other
+    forAll i,j : int(1..n) .
+       squareType[i, j] = EMPTY_SQUARE /\ rooks[i,j] = 1 -> (
+            (   $ No other attacks in the rows
+                (
+                    sum e : int(1..j) . 
+                        (sum([squareType[i, c] | c : int(e..j)]) = 0) * rooks[i, e]
+                ) = 1 
+                /\
+                (
+                    sum e : int(j..n) . 
+                        $ This part of the sum indicates if it         $ this if 
+                        $ matters or not for the range                $ ther is a rook
+                        $ i.e if all type 0
+                        (sum([squareType[i, c] | c : int(j..e)]) = 0) * rooks[i, e]
+                ) = 1
+            )
+            /\
+            (
+                $ No other attacks in the columns
+                 (
+                    sum e : int(1..i) . 
+                        (sum([squareType[c, j] | c : int(e..i)]) = 0) * rooks[e, j]
+                 ) = 1
+                 /\
+                 $ No other attacks in the columns
+                 (
+                    sum e : int(i..n) . 
+                        (sum([squareType[c, j] | c : int(i..e)]) = 0) * rooks[e, j]
+                 ) = 1
+            )
+        ),
+    
+    $ Constraint #4: Every empty space is attacked by at least one rook
+    forAll i,j : int(1..n) .
+        squareType[i, j] = EMPTY_SQUARE /\ rooks[i,j] = 0 -> (
+            (   $ At least one attack in the rows
+                ((
+                    sum e : int(1..j) . 
+                        (sum([squareType[i, c] | c : int(e..j)]) = 0) * rooks[i, e]
+                ) 
+                +
+                (
+                    sum e : int(j..n) . 
+                        $ This part of the sum indicates if it         $ this if 
+                        $ matters or not for the range                $ ther is a rook
+                        $ i.e if all type 0
+                        (sum([squareType[i, c] | c : int(j..e)]) = 0) * rooks[i, e]
+                )) > 0
+            )
+            \/
+            (
+                $At least one attacks in the columns
+                 ((
+                    sum e : int(1..i) . 
+                        (sum([squareType[c, j] | c : int(e..i)]) = 0) * rooks[e, j]
+                 ) 
+                 +
+                 (
+                    sum e : int(i..n) . 
+                        (sum([squareType[c, j] | c : int(i..e)]) = 0) * rooks[e, j]
+                 )) > 0
+            )
+        ),
+
+    $ Check Horizontal Symmetry
+    horizontalSym = (sum([|(squareType[i, j] + clues[i, j]) - (squareType[i, n - j + 1] + clues[i, n - j + 1])| | i: int(1..n), j: int(1..n/2)]) = 0),
+
+    $ Check Vertical Symmetry
+    verticalSym = (sum([|(squareType[i, j] + clues[i, j]) - (squareType[n - i + 1, j] + clues[n - i + 1, j])| | i: int(1..n/2), j: int(1..n)]) = 0),
+
+    $ Horizontal Symmetry breaking
+    horizontalSym -> (
+        $ Left half of the matrix                        $ Compared to the left half
+        [rooks[i, j]| i: int(1..n), j: int(1..n/2)] <=lex [rooks[i, n - j + 1]| i:int(1..n), j: int(1..n/2)]
+    ),
+
+    $ Vertical Symmetry breaking 
+    verticalSym -> (
+        $ Top half of the matrix                        $ Compared to the bottom half
+        [rooks[i, j]| i: int(1..n/2), j: int(1..n)] <=lex [rooks[n - i + 1, j] | i:int(1..n/2), j: int(1..n)]
+    )
+

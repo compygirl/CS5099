@@ -1,0 +1,10 @@
+language ESSENCE' 1.0
+letting n be 3
+letting squareType be [
+  [1,0,1],
+  [0,0,0],
+  [0,0,2]]
+letting clues be [
+  [0,0,0],
+  [0,0,0],
+  [0,0,1]]

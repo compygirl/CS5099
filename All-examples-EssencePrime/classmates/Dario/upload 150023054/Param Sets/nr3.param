@@ -1,0 +1,22 @@
+language ESSENCE' 1.0
+letting n be 5
+letting squareType be [
+[1,0,0,0,1],
+[0,1,0,1,0],
+[0,0,1,0,0],
+[0,1,0,1,0],
+[1,0,0,0,1]]
+
+letting clues be [
+[0,0,0,0,0],
+[0,0,0,0,0],
+[0,0,0,0,0],
+[0,0,0,0,0],
+[0,0,0,0,0]]
+
+letting auxVectorCols be [0, 2, 1, 2, 0]
+letting auxVectorRows be [0, 2, 1, 2, 0]
+letting blockCounterCol be [2, 2, 1, 2, 2]
+letting blockCounterRow be [2, 2, 1, 2, 2]
+
+

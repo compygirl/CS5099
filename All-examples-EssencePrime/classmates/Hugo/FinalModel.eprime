@@ -1,0 +1,266 @@
+language ESSENCE' 1.0
+given n: int
+
+given clues: matrix indexed by [int(0..n-1), int(0..n-1)] of
+int(0..4)
+
+given squareType: matrix indexed by [int(0..n-1), int(0..n-1)] of
+int(0..4)
+
+letting   RANGE1 be domain int(0..n-1)
+letting   RANGE be domain int(0..1)
+
+find BlockingSquares1D : matrix indexed by [int (0..n*n-1)] of RANGE
+
+find InSameColumnMatrix: matrix indexed by [int (0..n*n-1), int (0..n*n-1)] of RANGE
+
+find InSameRowMatrix: matrix indexed by [int (0..n*n-1), int (0..n*n-1)] of RANGE
+
+find HorizontalBlockedSquares : matrix indexed by [int (0..n*n-1), int (0..n*n-1)] of RANGE
+
+find VerticalBlockedSquares : matrix indexed by [int (0..n*n-1), int (0..n*n-1)] of RANGE
+
+find BlockedOffSquares : matrix indexed by [int (0..n*n-1), int (0..n*n-1)] of RANGE
+
+find ConnectionMatrix : matrix indexed by [int (0..n*n-1), int (0..n*n-1)] of RANGE
+
+find Rooks1D : matrix indexed by [int (0..n*n-1)] of RANGE
+
+find Rooks: matrix indexed by [int(0..n-1),int(0..n-1)] of RANGE
+
+find SolutionBoard: matrix indexed by [int(0..n-1),int(0..n-1)] of RANGE1
+
+$find SolutionBoardHorizontalFlipped: matrix indexed by [int(0..n-1),int(0..n-1)] of RANGE1
+$find SolutionBoardVerticalFlipped: matrix indexed by [int(0..n-1),int(0..n-1)] of RANGE1
+$find SolutionBoardDiagonalFlipped1: matrix indexed by [int(0..n-1),int(0..n-1)] of RANGE1
+$find SolutionBoardDiagonalFlipped2: matrix indexed by [int(0..n-1),int(0..n-1)] of RANGE1
+$
+$$
+$find SolutionBoardRotatedclockwise90: matrix indexed by [int(0..n-1),int(0..n-1)] of RANGE1
+$find SolutionBoardRotatedclockwise180: matrix indexed by [int(0..n-1),int(0..n-1)] of RANGE1
+$find SolutionBoardRotatedclockwise270: matrix indexed by [int(0..n-1),int(0..n-1)] of RANGE1
+$$
+
+branching on [Rooks1D]
+heuristic srf
+
+
+such that
+
+
+
+forAll row, col: int(0..n-1).(squareType[row, col]>0) ->
+  BlockingSquares1D[(n*row)+col] = 1,
+
+forAll row, col: int(0..n-1).(squareType[row, col]=0) ->
+ BlockingSquares1D[(n*row)+col] = 0,
+
+
+$$ Now need blocked squares only if in same column.
+$$Make a matrix of squares that are in the same column as ones
+forAll row, col: int(0..n*n-1).
+(row%n = col%n) -> InSameColumnMatrix[row, col] =1,
+
+forAll row, col: int(0..n*n-1).
+(row%n != col%n) -> InSameColumnMatrix[row, col] =0,
+
+
+$$ Now need blocked squares only if in same row.
+$$Make a matrix of squares that are in the same row as ones
+forAll row, col: int(0..n*n-1).
+(row/n = col/n) -> InSameRowMatrix[row, col] =1,
+
+$$ Now need blocked squares only if in same row.
+$$Make a matrix of squares that are in the same row as ones
+forAll row, col: int(0..n*n-1).
+(row/n != col/n) -> InSameRowMatrix[row, col] =0,
+
+
+
+$$Now model in the squares blocked off in same column
+forAll y: int(0..n*n-1).
+forAll x: int(0..y).
+forAll z: int(y..n*n-1).
+(BlockingSquares1D[y] =1 /\ InSameColumnMatrix[y, x] =1 /\ InSameColumnMatrix[y, z] = 1 /\ InSameColumnMatrix[x, z] = 1 ) ->
+(VerticalBlockedSquares[x,z] = 1) /\ (VerticalBlockedSquares[z,x] = 1),
+
+
+forAll square: int(0..n*n-1).
+forAll x: int(0..square).
+forAll z: int(square..n*n-1).
+((sum y : int(x..z) .(BlockingSquares1D[y] =1 /\ (InSameColumnMatrix[y, x] =1 /\ InSameColumnMatrix[y, z] = 1))) = 0) ->
+(VerticalBlockedSquares[x,z] = 0) /\ (VerticalBlockedSquares[z,x] = 0),
+
+
+
+$$Now model in the squares blocked off in same row
+
+forAll y: int(0..n*n-1).
+forAll x: int(0..y).
+forAll z: int(y..n*n-1).
+(BlockingSquares1D[y] =1 /\ InSameRowMatrix[y, x] =1 /\ InSameRowMatrix[y, z] = 1 /\ InSameRowMatrix[x, z] = 1 ) ->
+(HorizontalBlockedSquares[x,z] = 1) /\ (HorizontalBlockedSquares[z,x] = 1),
+
+
+forAll square: int(0..n*n-1).
+forAll x: int(0..square).
+forAll z: int(square..n*n-1).
+((sum k : int(x..z) .(BlockingSquares1D[k] =1 /\ (InSameRowMatrix[k, x] =1 /\ InSameRowMatrix[k, z] = 1))) = 0) ->
+(HorizontalBlockedSquares[x,z] = 0)/\ (HorizontalBlockedSquares[z,x] = 0),
+
+
+$$A catch-all constraint - if not in same row or column than they are zero for all these matrices.
+forAll row, col: int(0..n*n-1).(InSameRowMatrix[row, col] =0 /\ InSameColumnMatrix[row, col] = 0)
+-> (HorizontalBlockedSquares[row,col] = 0) /\ (VerticalBlockedSquares[row,col] = 0 /\ BlockedOffSquares[row,col] = 0 /\ ConnectionMatrix[row,col] =0),
+
+
+
+forAll row, col: int(0..n*n-1).
+(VerticalBlockedSquares[row,col]=1 \/ HorizontalBlockedSquares[row,col]=1) -> BlockedOffSquares[row,col] = 1,
+
+
+forAll row, col: int(0..n*n-1).
+(VerticalBlockedSquares[row,col]=0 /\ HorizontalBlockedSquares[row,col]=0) -> BlockedOffSquares[row,col] = 0,
+
+
+forAll row, col: int(0..n*n-1).((InSameColumnMatrix[row,col] = 1) \/ (InSameRowMatrix[row,col] = 1)) /\ (BlockedOffSquares[row,col] = 0) -> ConnectionMatrix[row,col] = 1,
+
+forAll row, col: int(0..n*n-1).((InSameColumnMatrix[row,col] = 0) /\ (InSameRowMatrix[row,col] = 0)) -> ConnectionMatrix[row,col] = 0,
+
+
+forAll row, col: int(0..n*n-1).(BlockedOffSquares[row,col] = 1) -> ConnectionMatrix[row,col] = 0,
+
+
+
+
+
+
+$$CENTER OF BOARD
+forAll row, col: int(1..n-2).
+(clues[row, col] > 0) ->
+( Rooks1D[(n*(row+1))+col]
++Rooks1D[(n*(row-1))+col]
++Rooks1D[(n*row)+(col+1)]
++Rooks1D[(n*row)+(col-1)] = clues[row, col]),
+
+
+
+$$TOP ROW OF BOARD
+
+forAll col: int(1..(n-2)) .
+((clues[0, col] > 0) ->
+((Rooks1D[(n*(0))+(col+1)]
+ +Rooks1D[(n*(0))+(col-1)]
+ + Rooks1D[(n*(1))+col]) = clues[0, col])),
+
+
+$$BOTTOM ROW OF BOARD
+
+forAll col: int(1..(n-2)) .
+((clues[n-1, col] > 0) ->
+((Rooks1D[(n*(n-1))+(col-1)]
+ +Rooks1D[(n*(n-1))+(col+1)]
+ + Rooks1D[(n*(n-2))+(col)]) = clues[4, col])) ,
+
+$$TOP COLUMN
+forAll row: int(1..(n-2)) .
+((clues[row, 0] > 0) ->
+((Rooks1D[(n*(row+1))+(0)]
+ +Rooks1D[(n*(row-1))+(0)]
+ + Rooks1D[(n*(row))+(1)]) = clues[row, 0])),
+
+
+$$BOTTOM COLUMN OF BOARD
+forAll row: int(1..(n-2)) .
+((clues[row, n-1] > 0) ->
+((Rooks1D[(n*(row+1))+(n-1)]
+ +Rooks1D[(n*(row-1))+(n-1)]
+ + Rooks1D[(n*(row))+(n-2)]) = clues[row, n])),
+
+$$BOTTOM-LEFT CORNER
+((clues[0, 0] > 0) ->
+((Rooks1D[(n*(1))+(0)]
+ +Rooks1D[(n*(0))+(1)]) = clues[0,0])),
+
+$$TOP-LEFT CORNER
+((clues[0, n-1] > 0) ->
+((Rooks1D[(n*(0))+(n-1)]
+ +Rooks1D[(n*(1))+(n-2)]) = clues[0, n-1])),
+
+$$Bottom-right CORNER
+((clues[n-1, 0] > 0) ->
+((Rooks1D[(n*(n-1))+(0)]
+ +Rooks1D[(n*(n-2))+(1)]) = clues[n-1, 0])),
+
+$$TOP-RIGHT CORNER
+((clues[n-1, n-1] > 0) ->
+((Rooks1D[(n*(n-1))+(n-2)]
+ +Rooks1D[(n*(n-2))+(n-1)]) = clues[n-1, n-1])),
+
+
+$$SOLVING THE PROBLEMs
+
+forAll x: int(0..n*n-1).(BlockingSquares1D[x] =0) ->
+((sum y : int(0..n*n-1) . (ConnectionMatrix[y,x] =1 /\ Rooks1D[y] =1) ) > 0 ),
+
+forAll x: int(0..n*n-1).(BlockingSquares1D[x] =0 /\ Rooks1D[x] =1) ->
+((sum y : int(0..n*n-1) . ((y!=x) /\ ConnectionMatrix[y,x] =1 /\ Rooks1D[y] =1) ) = 0 ),
+
+
+forAll row, col: int(0..n-1).
+squareType[row,col] >0 -> Rooks1D [(n*(row))+col]=0,
+
+forAll row, col: int(0..n-1).
+Rooks[row, col] = Rooks1D[(n*row)+col],
+
+$$SYMETRY BREAKING 1
+$
+$forAll x: int(0..n-1).
+$(sum k : int(0..((n-1)/2)).(Rooks1D[(n*x)+k] =1)*k) <= (sum k : int((((n-1)/2))..(n-1)) .(Rooks1D[(n*x)+k] =1)*(n-1-k)),
+$
+$
+
+
+
+$SYMETRY BREAKING 2
+forAll row, col: int(0..n-1).
+squareType[row,col]=1 \/ squareType[row,col]=2 -> SolutionBoard[row,col] = 2,
+forAll row, col: int(0..n-1).
+squareType[row,col]=0 ->  SolutionBoard[row,col] = Rooks[row, col],
+
+
+$
+$forAll row, col: int(0..n-1).
+$SolutionBoard[row,col] = SolutionBoardRotatedclockwise90[col,n-1-row],
+$
+$forAll row, col: int(0..n-1).
+$SolutionBoard[row,col] = SolutionBoardRotatedclockwise180[n-1-col,n-1-row],
+$
+$forAll row, col: int(0..n-1).
+$SolutionBoard[row,col] = SolutionBoardRotatedclockwise270[n-1-col,row],
+$
+$
+$
+$
+$
+$forAll row, col: int(0..n-1).
+$SolutionBoard[row,col] = SolutionBoardHorizontalFlipped[row,n-1-col],
+$$
+$forAll row, col: int(0..n-1).
+$SolutionBoard[row,col] = SolutionBoardVerticalFlipped[n-1-row,col],
+$
+$forAll row, col: int(0..n-1).
+$SolutionBoard[row,col] = SolutionBoardDiagonalFlipped1[col,row],
+$
+$forAll row, col: int(0..n-1).
+$SolutionBoard[row,col] = SolutionBoardDiagonalFlipped2[n-1-col,n-1-row],
+$$
+$flatten(SolutionBoard) >=lex flatten(SolutionBoardHorizontalFlipped),
+$flatten(SolutionBoard) >=lex flatten(SolutionBoardVerticalFlipped),
+$flatten(SolutionBoard) >=lex flatten(SolutionBoardDiagonalFlipped1),
+$flatten(SolutionBoard) >=lex flatten(SolutionBoardDiagonalFlipped2),
+$flatten(SolutionBoard) >=lex flatten(SolutionBoardRotatedclockwise90),
+$flatten(SolutionBoard) >=lex flatten(SolutionBoardRotatedclockwise180),
+$flatten(SolutionBoard) >=lex flatten(SolutionBoardRotatedclockwise270),
+
+true

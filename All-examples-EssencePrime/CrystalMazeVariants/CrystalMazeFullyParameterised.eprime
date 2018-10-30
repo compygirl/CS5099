@@ -1,0 +1,21 @@
+$ The Crystal Maze Puzzle
+
+language ESSENCE' 1.0
+
+$ We are fixing the nodes
+given noNodes: int
+
+$ But parameterising on the edges
+$ The edges are represented as pairs of integers [i,j]
+$  where are i and j are node indices. The edges matrix contains numEdges such pairs
+given edges: matrix indexed by[int(1..numEdges), int(1..2)] of int
+
+$ An easy way to get hold of the variables by their names is to put them into an array:
+find nodes: matrix indexed by[int(1..noNodes)] of int(1..noNodes)
+
+such that
+
+forAll edge : int(1..numEdges) .
+  |nodes[edges[edge,1]] - nodes[edges[edge,2]]| > 1,
+
+allDiff(nodes)

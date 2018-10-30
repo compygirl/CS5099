@@ -1,0 +1,73 @@
+language ESSENCE' 1.0
+given n : int
+given squareType: matrix indexed by [int(1..n), int(1..n)] of int(0..2)
+given clues: matrix indexed by [int(1..n), int(1..n)] of int(0..4)
+$find solution: matrix indexed by [int(1..n),int(1..n)] of int(-1..2)
+find auxMatrixRows: matrix indexed by [int(1..n),int(1..n)] of int(0..1)
+find auxMatrixCols: matrix indexed by [int(1..n),int(1..n)] of int(0..1)
+find auxVectorRows: matrix indexed by [int(1..n)] of int(0..n)
+find auxVectorCols: matrix indexed by [int(1..n)] of int(0..n)
+find blockCounterMat: matrix indexed by [int(1..n),int(1..n)] of int(0..1)
+find blockCounterRow: matrix indexed by [int(1..n)] of int(0..n)
+find blockCounterCol: matrix indexed by [int(1..n)] of int(0..n)
+letting RANGE be int(1..n)
+
+$ gcc(MATRIX, VALUE, NUMBER OF OCCS)
+
+such that
+
+	$$$$$$$$$$$$$$$$$$
+	$$Block Counting$$
+	$$$$$$$$$$$$$$$$$$
+	forAll i : RANGE . 
+		forAll j : RANGE . 
+			(squareType[i,j] = 0) -> blockCounterMat[i,j] = squareType[i,j],
+	forAll i : RANGE . 
+		forAll j : RANGE . 
+			((squareType[i,j] >= 1)) -> blockCounterMat[i,j] = 1,
+	forAll i : RANGE . 
+		blockCounterRow[i] = (sum(blockCounterMat[i,..])),
+	forAll i : RANGE . 
+		blockCounterCol[i] = (sum(blockCounterMat[..,i])),
+	$$$$$$$$$$$$$$$$$$
+	$$Auxiliary Rows$$
+	$$$$$$$$$$$$$$$$$$
+	forAll i : RANGE . 
+		forAll j : RANGE . 
+			(squareType[i,j] = 0) -> auxMatrixRows[i,j] = squareType[i,j],
+	forAll i : RANGE . 
+		forAll j : RANGE . 
+			((squareType[i,j] >= 1) /\ (j != 1) /\ (j != n)) -> auxMatrixRows[i,j] = 1,
+	forAll i : RANGE . 
+		forAll j : RANGE . 
+			((squareType[i,j] >= 1) /\ ((j = 1) \/ (j = n))) -> auxMatrixRows[i,j] = 0,
+	forAll i : RANGE . 
+		(sum(auxMatrixRows[i,..]) < (n-2) /\ (blockCounterRow[i]) < (n-2)) 
+				-> auxVectorRows[i] = (sum(auxMatrixRows[i,..])),
+	forAll i : RANGE . 
+		(sum(auxMatrixRows[i,..]) >= (n-2) \/ ((blockCounterRow[i]) >= (n-2))) 
+				-> auxVectorRows[i] = max([n-(blockCounterRow[i])-1,0]),
+	$$$$$$$$$$$$$$$$$$
+	$$Auxiliary Cols$$
+	$$$$$$$$$$$$$$$$$$
+	forAll i : RANGE . 
+		forAll j : RANGE . 
+			(squareType[i,j] = 0) -> auxMatrixCols[i,j] = squareType[i,j],
+	forAll i : RANGE . 
+		forAll j : RANGE . 
+			((squareType[i,j] >= 1) /\ (i != 1) /\ (i != n)) -> auxMatrixCols[i,j] = 1,
+	forAll i : RANGE . 
+		forAll j : RANGE . 
+			((squareType[i,j] >= 1) /\ ((i = 1) \/ (i = n))) -> auxMatrixCols[i,j] = 0,
+	forAll i : RANGE . 
+		(sum(auxMatrixCols[..,i]) < (n-2) /\ (blockCounterCol[i]) < (n-2) ) 
+			-> auxVectorCols[i] = (sum(auxMatrixCols[..,i])),
+	forAll i : RANGE . 
+		(sum(auxMatrixCols[..,i]) >=  (n-2) \/ ((blockCounterCol[i]) >= (n-2))) 
+				-> auxVectorCols[i]=max([n-(blockCounterCol[i])-1,0]), 
+
+	$$$ At least/most do not take decision variables, as such we need a second eprime file
+	$$$ for our actual non-counting constraints
+$		atleast(solution[i,..],[-1],[auxVectorRows[i]]), $$$ not possible $$$
+
+	true

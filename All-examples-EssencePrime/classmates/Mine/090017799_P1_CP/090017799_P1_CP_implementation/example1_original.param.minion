@@ -1,0 +1,107 @@
+MINION 3
+# CSETopLevel_number = 0
+# CSETopLevel_eliminated_expressions = 0
+# CSETopLevel_total_size = 0
+# CSE_active_number = 6
+# CSE_active_eliminated_expressions = 19
+# CSE_active_total_size = 19
+**VARIABLES**
+DISCRETE solutionBoard_00002_00000 #
+{0..1}
+DISCRETE solutionBoard_00002_00004 #
+{0..1}
+DISCRETE solutionBoard_00003_00001 #
+{0..1}
+DISCRETE solutionBoard_00003_00003 #
+{0..1}
+DISCRETE solutionBoard_00003_00004 #
+{0..1}
+DISCRETE solutionBoard_00004_00000 #
+{0..1}
+DISCRETE solutionBoard_00004_00001 #
+{0..1}
+DISCRETE solutionBoard_00004_00003 #
+{0..1}
+DISCRETE aux93 #Active-CSE: 5 occurrences of this expression or equivalent: (solutionBoard_00003_00001 + solutionBoard_00003_00003 + solutionBoard_00003_00004)
+{0..3}
+DISCRETE aux94 #Active-CSE: 2 occurrences of this expression or equivalent: (solutionBoard_00004_00000 + solutionBoard_00004_00001)
+{0..2}
+DISCRETE aux95 #Active-CSE: 4 occurrences of this expression or equivalent: (solutionBoard_00002_00000 + solutionBoard_00004_00000)
+{0..2}
+DISCRETE aux96 #Active-CSE: 2 occurrences of this expression or equivalent: (solutionBoard_00003_00003 + solutionBoard_00004_00003)
+{0..2}
+DISCRETE aux97 #Active-CSE: 2 occurrences of this expression or equivalent: (solutionBoard_00003_00001 + solutionBoard_00004_00001)
+{0..2}
+DISCRETE aux98 #Active-CSE: 4 occurrences of this expression or equivalent: (solutionBoard_00002_00004 + solutionBoard_00003_00004)
+{0..2}
+DISCRETE aux100 #(solutionBoard_00003_00004 + solutionBoard_00004_00003)
+{0..2}
+DISCRETE aux101 #(solutionBoard_00003_00001 + solutionBoard_00004_00000)
+{0..2}
+DISCRETE aux102 #(solutionBoard_00002_00004 + solutionBoard_00003_00003)
+{0..2}
+**TUPLELIST**
+squareType 5 5
+0 0 2 0 0 
+0 0 0 0 0 
+0 1 0 1 0 
+0 0 0 0 0 
+0 0 2 0 0 
+**VARIABLES**
+ALIAS squareType[5,5]=[[0, 0, 2, 0, 0], [0, 0, 0, 0, 0], [0, 1, 0, 1, 0], [0, 0, 0, 0, 0], [0, 0, 2, 0, 0]]
+**TUPLELIST**
+clues 5 5
+0 0 3 0 0 
+0 0 0 0 0 
+0 0 0 0 0 
+0 0 0 0 0 
+0 0 1 0 0 
+**VARIABLES**
+ALIAS clues[5,5]=[[0, 0, 3, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 1, 0, 0]]
+**SEARCH**
+PRINT[[solutionBoard_00002_00000],[solutionBoard_00002_00004],[solutionBoard_00003_00001],[solutionBoard_00003_00003],[solutionBoard_00003_00004],[solutionBoard_00004_00000],[solutionBoard_00004_00001],[solutionBoard_00004_00003]]
+VARORDER STATIC [0, 1, 0, 1, 0, 0, 0, 1, 0, 0, solutionBoard_00002_00000, 0, 0, 0, solutionBoard_00002_00004, 0, solutionBoard_00003_00001, 0, solutionBoard_00003_00003, solutionBoard_00003_00004, solutionBoard_00004_00000, solutionBoard_00004_00001, 0, solutionBoard_00004_00003, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, solutionBoard_00002_00004, 0, 0, 0, solutionBoard_00002_00000, solutionBoard_00003_00004, solutionBoard_00003_00003, 0, solutionBoard_00003_00001, 0, 0, solutionBoard_00004_00003, 0, solutionBoard_00004_00001, solutionBoard_00004_00000]
+VARORDER AUX [solutionBoard_00002_00000,solutionBoard_00002_00004,solutionBoard_00003_00001,solutionBoard_00003_00003,solutionBoard_00003_00004,solutionBoard_00004_00000,solutionBoard_00004_00001,solutionBoard_00004_00003,aux93,aux94,aux95,aux96,aux97,aux98,aux100,aux101,aux102]
+**CONSTRAINTS**
+watched-or({w-literal(solutionBoard_00004_00001,0),diseq(1,solutionBoard_00004_00000)})
+lexleq([solutionBoard_00002_00000, 0, solutionBoard_00003_00001, solutionBoard_00004_00000, solutionBoard_00004_00001],[solutionBoard_00002_00004, solutionBoard_00003_00004, solutionBoard_00003_00003, 0, solutionBoard_00004_00003])
+watched-or({w-literal(solutionBoard_00004_00001,0),diseq(1,solutionBoard_00003_00001)})
+watched-or({w-literal(aux100,0),diseq(1,solutionBoard_00003_00003)})
+watched-or({diseq(1,solutionBoard_00004_00001),w-literal(aux101,0)})
+watched-or({diseq(1,solutionBoard_00004_00003),w-literal(solutionBoard_00003_00003,0)})
+watched-or({diseq(1,solutionBoard_00002_00004),w-literal(solutionBoard_00003_00004,0)})
+watched-or({w-literal(aux102,0),diseq(1,solutionBoard_00003_00004)})
+watched-or({w-literal(solutionBoard_00002_00000,1),w-literal(aux95,1)})
+watched-or({w-literal(aux98,1),w-literal(solutionBoard_00002_00004,1)})
+watched-or({w-literal(aux93,1),w-literal(aux95,1)})
+watched-or({w-literal(aux93,1),w-literal(aux98,1)})
+watched-or({w-literal(aux93,1),w-literal(aux97,1)})
+watched-or({w-literal(aux93,1),w-literal(aux96,1)})
+watched-or({w-literal(aux94,1),w-literal(aux95,1)})
+watched-or({w-literal(solutionBoard_00004_00003,1),w-literal(aux98,1)})
+watched-or({w-literal(aux94,1),w-literal(aux97,1)})
+watched-or({w-literal(solutionBoard_00004_00003,1),w-literal(aux96,1)})
+ineq(aux93, 1, 0)
+ineq(aux95, 1, 0)
+ineq(aux98, 1, 0)
+sumleq([solutionBoard_00004_00001,solutionBoard_00004_00003],1)
+sumgeq([solutionBoard_00004_00001,solutionBoard_00004_00003],1)
+sumleq([solutionBoard_00003_00004,solutionBoard_00004_00003],aux100)
+sumgeq([solutionBoard_00003_00004,solutionBoard_00004_00003],aux100)
+sumleq([solutionBoard_00003_00001,solutionBoard_00004_00000],aux101)
+sumgeq([solutionBoard_00003_00001,solutionBoard_00004_00000],aux101)
+sumleq([solutionBoard_00002_00004,solutionBoard_00003_00003],aux102)
+sumgeq([solutionBoard_00002_00004,solutionBoard_00003_00003],aux102)
+sumleq([solutionBoard_00003_00001,solutionBoard_00003_00003,solutionBoard_00003_00004],aux93)
+sumgeq([solutionBoard_00003_00001,solutionBoard_00003_00003,solutionBoard_00003_00004],aux93)
+sumleq([solutionBoard_00004_00000,solutionBoard_00004_00001],aux94)
+sumgeq([solutionBoard_00004_00000,solutionBoard_00004_00001],aux94)
+sumleq([solutionBoard_00002_00000,solutionBoard_00004_00000],aux95)
+sumgeq([solutionBoard_00002_00000,solutionBoard_00004_00000],aux95)
+sumleq([solutionBoard_00003_00003,solutionBoard_00004_00003],aux96)
+sumgeq([solutionBoard_00003_00003,solutionBoard_00004_00003],aux96)
+sumleq([solutionBoard_00003_00001,solutionBoard_00004_00001],aux97)
+sumgeq([solutionBoard_00003_00001,solutionBoard_00004_00001],aux97)
+sumleq([solutionBoard_00002_00004,solutionBoard_00003_00004],aux98)
+sumgeq([solutionBoard_00002_00004,solutionBoard_00003_00004],aux98)
+**EOF**

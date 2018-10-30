@@ -1,0 +1,62 @@
+language ESSENCE' 1.0
+
+given n: int
+given squareType: matrix indexed by [int(1..n), int(1..n)] of int(0..2)
+given clues: matrix indexed by [int(1..n), int(1..n)] of int(0..4)
+
+letting range be domain int(1..n)
+
+find rooks: matrix indexed by [range, range] of int (0..1)
+find vm,hm: matrix indexed by [range, range] of int (0..1)
+$heuristic static
+such that
+
+$Populate the squares adjacent to clueSquares with the right number of rooks
+forAll row, col: range.
+clues[row, col]!=0 /\ (squareType[row, col]=2)
+    -> (sum([rooks[row+x, col+y] | x,y:int(-1..1), row+x>0, col+y>0, row+x<=n, col+y<=n, !(y=0 /\ x=0)/\(y=0 \/x=0)]) = clues[row, col]),
+
+$Make sure there's no adjacent rooks
+forAll row, col: range.
+rooks[row,col]=1 -> (sum([rooks[row+x, col+y] | x, y:int(-1..1), row+x>0, col+y>0, row+x<=n, col+y<=n, !(y=0 /\ x=0)/\(y=0 \/x=0)]) = 0),
+
+$Make sure that if an entire row or column sums up to 0 in the squareType matrix, we ad a rook on this row or column
+forAll row: range.
+(sum([squareType[row, col] | col:range])=0)-> ((sum([rooks[row, col] | col:range])=1)),
+forAll col: range.
+(sum([squareType[row, col] | row:range])=0)-> ((sum([rooks[row, col] | row:range])=1)),
+
+$Put zeros everywhere there's a block in squareType matrix
+forAll row,col:range.
+(squareType[row,col]!=0) -> (rooks[row,col]=0),
+
+$Check that there's at least a rook on the row or column of each empty cell.
+$Basically making sure that each empty cell is getting attacked as well as making sure the the sum between two blocks is 1.
+forAll row, col:range.
+forAll row1: int(1..row).
+forAll row2: int(row..n).
+forAll col1: int(1..col).
+forAll col2: int(col..n).
+
+((squareType[row, col]=0)/\((squareType[row1-1,col]!=0) \/ (row1=1)) /\ ((squareType[row2+1, col]!=0) \/ (row2=n))
+/\ ((sum i: int (row1..row2).squareType[i, col])=0)
+-> ((sum i: int (row1..row2).rooks[i, col])=1))
+\/
+((squareType[row, col]=0)/\((squareType[row,col1-1]!=0) \/ (col1=1)) /\ ((squareType[row, col2+1]!=0) \/ (col2=n))
+/\ ((sum i: int (col1..col2).squareType[row, i])=0)
+-> ((sum i: int (col1..col2).rooks[row, i])=1)),
+
+$Symetry breaking
+forAll row, col:range.
+rooks[row, col] = vm[row, (n+1)-col],
+
+forAll row,col:range.
+  (rooks[row, col] = vm[row, col])->
+flatten(rooks) <=lex flatten(vm),
+
+forAll row, col:range.
+rooks[row, col] = hm[n+1-row, col],
+
+forAll row,col:range.
+  (rooks[row, col] = hm[row, col])->
+flatten(rooks) <=lex flatten(hm)

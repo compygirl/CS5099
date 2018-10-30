@@ -1,0 +1,252 @@
+language ESSENCE' 1.0
+$------------------------------------------------------------------------------
+$ This n-rooks solution functions by filling in empty spaces attacked by a rook with 2s
+$ and than solving the chessboard so that no square is empty/zero. It is a constraint based solution using
+$ the occurance paradigm to find a solution.
+
+$ Explaining the above using an example:
+$ Imagine a 3x3 matrix without blocks. We would represent this as:
+$[0,0,0]
+$[0,0,0]
+$[0,0,0]
+$ adding a rook (represented as a one) into the center of the board would transform this matrix
+$ into the following:
+$[0,2,0]
+$[2,1,2]
+$[0,2,0]
+$ We add constraints to disallow placing n rooks in a row (no two rooks can atack each other)
+$ and hence the solver prunes off solutions with for instance a rook in position [1,2]
+
+$Adding another rook to a permitted sqaure [3,1], we get the following:
+$[2,2,0]
+$[2,1,2]
+$[1,2,2]
+$Notice the two in [3,2] did not change, but the zero in [3,3] became a two
+
+$The solver continues until all zeros dissappear.
+$------------------------------------------------------------------------------
+
+given n : int
+given nc : int
+
+letting   	Range be domain int(1..n)
+letting   	RangeCol be domain int(1..nc)
+letting		Pieces be domain int(-1..2)
+letting		Solver be domain int(0..3)
+
+given squareType : matrix indexed by [Range, RangeCol] of int(0..2)
+given clues : matrix indexed by [Range, RangeCol] of int(0..4)
+
+find    B : matrix indexed by [Range, RangeCol] of Solver	$Used for board rep in solver (solve so that no zero)
+find	M : matrix indexed by [Range, RangeCol] of Pieces	$Used for visulisation of B
+find	BL: matrix indexed by [Range, RangeCol] of int(0..1)	$Used for visulization of blocks
+find	R: matrix indexed by [Range, RangeCol] of int(0..1)	$Used for visulisation of rooks
+
+$----------------
+$USE TO SHOW WHICH CONSTARINTS ARE BEING USED IN EACH CHESSBOARD POSITION
+find	C: matrix indexed by[Range, RangeCol] of int(0.. 1) 	$Used to visulize which condition is being satisfied
+find	C1: matrix indexed by[Range, RangeCol] of int(0.. 1) 	$Used to visulize which condition is being satisfied
+find	C2: matrix indexed by[Range, RangeCol] of int(0.. 1) 	$Used to visulize which condition is being satisfied
+find	C3: matrix indexed by[Range, RangeCol] of int(0.. 1) 	$Used to visulize which condition is being satisfied
+find	C4: matrix indexed by[Range, RangeCol] of int(0.. 1) 	$Used to visulize which condition is being satisfied
+find	C5: matrix indexed by[Range, RangeCol] of int(0.. 1) 	$Used to visulize which condition is being satisfied
+find	C6: matrix indexed by[Range, RangeCol] of int(0.. 1) 	$Used to visulize which condition is being satisfied
+find	C7: matrix indexed by[Range, RangeCol] of int(0.. 1) 	$Used to visulize which condition is being satisfied
+find	C8: matrix indexed by[Range, RangeCol] of int(0.. 1) 	$Used to visulize which condition is being satisfied
+find	C9: matrix indexed by[Range, RangeCol] of int(0.. 1) 	$Used to visulize which condition is being satisfied
+find	C10: matrix indexed by[Range, RangeCol] of int(0.. 1) 	$Used to visulize which condition is being satisfied
+find	C11: matrix indexed by[Range, RangeCol] of int(0.. 1) 	$Used to visulize which condition is being satisfied
+find	C12: matrix indexed by[Range, RangeCol] of int(0.. 1) 	$Used to visulize which condition is being satisfied
+find	C13: matrix indexed by[Range, RangeCol] of int(0.. 1) 	$Used to visulize which condition is being satisfied
+find	C14: matrix indexed by[Range, RangeCol] of int(0.. 1) 	$Used to visulize which condition is being satisfied
+find	C15: matrix indexed by[Range, RangeCol] of int(0.. 1) 	$Used to visulize which condition is being satisfied
+
+find	CL: matrix indexed by[Range, RangeCol] of int(0,5)$Used to visulize which condition FROM CLUES
+
+$------------------------------------------------------------------------------
+such that
+
+$Convert SquareType into solver matrixes
+   	forAll row : Range .
+		forAll col : RangeCol .
+			(squareType[row, col] = 2 \/ squareType[row, col] = 1) ->
+          			(M[row, col] = (-1) /\ B[row, col] = 3 /\ BL[row, col] = 1 /\ R[row, col] = 0),
+
+    	forAll row : Range .
+		forAll col : RangeCol .
+			(squareType[row, col] = 0) ->
+          			((M[row, col]=1 \/ M[row, col]=0 \/ M[row, col]=2) /\ (B[row, col]=0 \/ B[row, col]=1 \/
+					B[row, col]=2) /\ (BL[row, col] = 0) /\ (R[row, col] = 1 \/ R[row, col] = 0)),
+
+$CONDITION TO PLACE TWOS BETWEEEN ROOK AND BLOCK IN B FROM TOP TO BOTTOM
+	forAll row, col: Range .
+		((B[row, col] = 1) ->
+			(forAll row1: Range .
+				(((B[row1, col] = 3) /\ ((row1 - row) > 2))->
+  					((forAll row2: int((row+1)..(row1-1)). B[row2, col] = 2) /\ (M[row, col] = 1) /\ (C[row, col] = 1))) )),
+
+$CONDITION TO PLACE TWOS BETWEEEN ROOK AND BLOCK IN B FROM LEFT TO RIGHT
+    forAll row: Range .
+	forAll col : RangeCol .
+      ((B[row, col] = 1) ->
+        (forAll col1: RangeCol .
+          (((B[row, col1] = 3) /\ ((col1 - col) > 2))->
+            ((forAll col2: int((col+1)..(col1-1)). B[row, col2] = 2) /\ (M[row, col] = 1) /\ (C1[row, col] = 1))) )),
+
+$CONDITION TO PLACE TWOS FROM ROOK TO CORNERS OF BOARD TOP AND BOTTOM
+    forAll row: Range .
+	forAll col : RangeCol .
+      ((B[row, col] = 1) ->
+        (forAll row1: Range .
+          ((((sum row3: Range. BL[row3, col]) = 0) /\ (row1 != row)) ->
+            (B[row1, col] = 2 /\ M[row, col] = 1 /\ (C2[row, col] = 1))) )),
+
+$CONDITION TO PLACE TWOS FROM ROOK TO CORNERS OF BOARD LEFT AND RIGHT
+    forAll row: Range .
+	forAll col : RangeCol .
+      ((B[row, col] = 1) ->
+        (forAll col1: RangeCol.
+          ((((sum col3: RangeCol. BL[row, col3]) = 0) /\ (col1 != col)) ->
+            (B[row, col1] = 2 /\ M[row, col] = 1 /\ (C3[row, col] = 1))) )),
+
+$CONDITION TO PLACE TWOS BETWEEEN ROOK AND BLOCK IN B FROM TOP TO BOTTOM IF 1 SPACE BETWEEN
+    forAll row: Range .
+	forAll col : RangeCol .
+      ((B[row, col] = 1) ->
+        (forAll row1: Range .
+          (((B[row1, col] = 3) /\ ((row1 - row) = 2))->
+            (B[row+1, col] = 2 /\ M[row, col] = 1 /\ (C4[row, col] = 1))) )),
+
+$CONDITION TO NOT PLACE TWOS BETWEEEN ROOK AND BLOCK IF NEXT TO EACH OTHER
+    forAll row: Range .
+	forAll col : RangeCol .
+      ((B[row, col] = 1) ->
+        (forAll row1: Range .
+          (((B[row1, col] = 3) /\ ((row1 - row) = 1))->
+            ((B[row1, col] = 3) /\ M[row, col] = 1 /\ (C5[row, col] = 1))) )),
+
+    forAll row: Range .
+	forAll col : RangeCol .
+      ((B[row, col] = 1) ->
+        (forAll row1: Range .
+          (((B[row1, col] = 3) /\ ((row - row1) = 1))->
+            ((B[row1, col] = 3) /\ M[row, col] = 1 /\ (C6[row, col] = 1))) )),
+
+$CONDITION TO PLACE TWOS BETWEEEN ROOK AND BLOCK IN B FROM LEFT TO RIGHT
+	forAll row: Range .
+		forAll col : RangeCol .
+      ((B[row, col] = 1) ->
+        (forAll col1: RangeCol .
+          (((B[row, col1] = 3) /\ ((col1 - col) = 2))->
+            (B[row, col+1] = 2 /\ M[row, col] = 1 /\ (C7[row, col] = 1))) )),
+
+
+$SAME CONDITIONS FOR ROWS AND COLUMNS AS ABOVE BUT FROM OTHER SIDE - SYMETRY FLIP
+    forAll row: Range .
+	forAll col : RangeCol .
+      ((B[row, col] = 1) ->
+        (forAll row1: Range .
+          (((B[row1, col] = 3 /\ ((row - row1) > 2))->
+            (forAll row2: int((row1+1)..(row-1)). B[row2, col] = 2) /\ M[row, col] = 1 /\ (C8[row, col] = 1))) )),
+
+    forAll row: Range .
+	forAll col : RangeCol .
+      ((B[row, col] = 1) ->
+        (forAll col1: RangeCol .
+          (((B[row, col1] = 3 /\ ((col - col1) > 2))->
+            (forAll col2: int((col1+1)..(col-1)). B[row, col2] = 2) /\ M[row, col] = 1 /\ (C9[row, col] = 1))) )),
+
+    forAll row: Range .
+	forAll col : RangeCol .
+      ((B[row, col] = 1) ->
+        (forAll row1: Range .
+          (((B[row1, col] = 3) /\ ((row - row1) = 2))->
+            (B[row1+1, col] = 2 /\ M[row, col] = 1 /\ (C10[row, col] = 1))) )),
+
+    forAll row: Range .
+	forAll col : RangeCol .
+      ((B[row, col] = 1) ->
+        (forAll col1: RangeCol .
+          (((B[row, col1] = 3) /\ ((col1 - col) = 1))->
+            ((B[row, col1] = 3) /\ M[row, col] = 1 /\ (C11[row, col] = 1))) )),
+
+    forAll row: Range .
+	forAll col : RangeCol .
+      ((B[row, col] = 1) ->
+        (forAll col1: RangeCol .
+          (((B[row, col1] = 3) /\ ((col - col1) = 1))->
+            ((B[row, col1] = 3) /\ M[row, col] = 1 /\ (C12[row, col] = 1))) )),
+
+    forAll row: Range .
+	forAll col : RangeCol .
+      ((B[row, col] = 1) ->
+        (forAll col1: RangeCol .
+          (((B[row, col1] = 3) /\ ((col - col1) = 2))->
+            (B[row, col1+1] = 2 /\ M[row, col] = 1 /\ (C13[row, col] = 1))) )),
+
+		forAll row, col: Range .
+			(B[row, col] = 1) <-> (R[row, col] = 1),
+
+$ROW OR COLUMN SUM GREATER THAN 0
+    forAll row: Range .
+	forAll col : RangeCol .
+	(((sum col1: RangeCol .
+		R[row, col1]) > 0  /\ (C14[row, col] = 1)) \/
+			((sum row1: Range .
+				R[row1, col]) > 0 /\ (C15[row, col] = 1))),
+
+$	(forAll row, col: Range.
+$		(sum C15[row, col] = 1)) \/
+$			(forAll row, col: Range.
+$				(C14[row, col] = 1)),
+
+$------------------------------------------------------------------------------
+$DEALING WITH CLUES: SUM OF ROOKS AROUND CLUE MUST EQUAL CLUE VALUE
+		$Top left corner
+		(squareType[1, 1] = 2) ->
+			((R[2, 1] + R[1, 2] = clues[1, 1]) /\
+      				CL[2, 1] = 5 /\ CL[1, 2] = 5 ),
+		$Bottom left corner
+		(squareType[n, 1] = 2) ->
+			((R[(n-1), 1] + R[n, 2] = clues[n, 1]) /\
+      				(CL[n-1, 1] = 5 /\ CL[n, 2] = 5 )),
+		$Bottom right corner
+		(squareType[n, nc] = 2) ->
+			((R[(n-1), nc] + R[n, (nc-1)] = clues[n, nc]) /\
+      				(CL[n-1, nc] = 5 /\ CL[n, nc-1] = 5 )),
+		$Top right corner
+		(squareType[1, nc] = 2) ->
+			((R[2, nc] + R[1, (nc-1)] = clues[1, nc]) /\
+      				(CL[2, n] = 5 /\ CL[1, n-1] = 5 )),
+		$When block in col = 1 or col = n
+		forAll row: int(2..(n-1)) .
+			(((squareType[row, 1] = 2) ->
+				(R[(row+1), 1] + R[(row-1), 1] + R[row, 2] = clues[row, 1])) /\
+			((squareType[row, nc] = 2) ->
+				(R[row+1, nc] + R[(row-1), nc] + R[row, (nc-1)] = clues[row, nc])) /\
+			((squareType[row, 1] = 2) ->
+				(CL[(row+1), 1] = 5 /\ CL[(row-1), 1] = 5 /\ CL[row, 2] = 5)) /\
+			((squareType[row, nc] = 2) ->
+				(CL[row+1, nc] = 5 /\ CL[(row-1), nc] = 5 /\ CL[row, (nc-1)] = 5))),
+		$When block in row = 1 or row =n
+		forAll col: int(2..(nc-1)) .
+			(((squareType[1, col] = 2) ->
+				(R[1, col+1] + R[1, (col-1)] + R[2, col] = clues[1, col])) /\
+			((squareType[n, col] = 2) ->
+				(R[n, col+1] + R[n, (col-1)] + R[(n-1), col] = clues[n, col])) /\
+			((squareType[1, col] = 2) ->
+				(CL[1, col+1] = 5 /\ CL[1, (col-1)] =5 /\ CL[2, col] = 5)) /\
+			((squareType[n, col] = 2) ->
+				(CL[n, col+1] = 5 /\ CL[n, (col-1)] =5 /\ CL[(n-1), col] = 5))),
+		$Any other instance
+		forAll row: int(2..(n-1)) .
+			forAll col: int(2..(nc-1)) .
+				(squareType[row, col] = 2) ->
+					((R[(row + 1), col] + R[(row -1), col] + R[row, (col + 1)] + R[row, (col - 1)] = clues[row, col]) /\
+            					(CL[row, col+1] = 5 /\ CL[row, (col-1)] =5 /\ CL[(row-1), col] = 5 /\ CL[(row+1), col] = 5)),
+
+$------------------------------------------------------------------------------
+$MAIN SOLVER CONDITION SO THAT ALL SQUARES ARE ATTACKED
+	forAll row: Range .
+	forAll col : RangeCol .
+		B[row, col] != 0

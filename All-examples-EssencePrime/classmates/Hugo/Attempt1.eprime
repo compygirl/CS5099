@@ -1,0 +1,177 @@
+language ESSENCE' 1.0
+given n: int
+
+given clues: matrix indexed by [int(1..n), int(1..n)] of
+int(0..n)
+
+letting   RANGE be domain int(0..1)
+
+letting   ROW_RANGE     be domain int(1..n)
+letting   COL_RANGE     be domain int(1..n)
+ 
+
+find numberOfBlockedSquaresInColumn: matrix indexed by [int(1..n)] of int (0..n) 
+find numberOfBlockedSquaresInRow: matrix indexed by [int(1..n)] of int (0..n)
+find numberOfCluesInRow: matrix indexed by [int(1..n)] of int (0..n)
+find numberOfCluesInCol: matrix indexed by [int(1..n)] of int (0..n)
+$find numberOfRooksSurroundingClue matrix indexed by [int(1..n), int(1..n)] of SURROUNDING_RANGE
+
+
+
+find M : matrix indexed by [int(1..n), int(1..n)] of RANGE
+
+
+such that 
+
+forAll row : ROW_RANGE .
+(numberOfBlockedSquaresInRow[row]=
+        (sum  col: COL_RANGE .
+            (clues[row,col]>0))),
+
+forAll col : COL_RANGE .
+(numberOfBlockedSquaresInColumn[col]=
+        (sum  row: ROW_RANGE .
+            (clues[row,col]>0))),
+
+forAll row,col : int(1..n) . 
+       (clues[row,col] > 0) ->
+               (M[row,col] = 0),
+	
+	
+	
+   $ amount of occupied sqares in each row lower limit
+forAll row : ROW_RANGE .
+        (sum  col: COL_RANGE .
+            M[row,col]) > 0,
+  
+ $ amount of occupied sqares in each column lower limit
+forAll col : COL_RANGE .
+       (sum row : ROW_RANGE .
+  M[row,col]) > 0,
+  
+   $ amount of occupied sqares in each column upper limit
+    forAll col : COL_RANGE .
+       (sum row : ROW_RANGE .
+  M[row,col]) < (numberOfBlockedSquaresInColumn[col]+2),
+  
+     $ amount of occupied sqares in each row upper limit
+  forAll row : ROW_RANGE .
+        (sum  col: COL_RANGE .
+            M[row,col]) < (numberOfBlockedSquaresInRow[row]+2),
+
+
+$$CLUES
+$$FIRST OF ALL DO IT FOR ROWS > 2 and less than n-1
+$$WITH ALL COLUMNS >2 and less than n-1
+
+forAll row : int(1..n-1).
+forAll col : int(1..n-1).
+forAll row1 : int(row+1..n) .
+forAll row2 : int(1..row-1) .
+forAll col1 : int(col+1..n) .
+forAll col2 : int(1..col-1) .
+(clues[row,col] != 0) -> (
+(M[ row-1, col] + M[ row+1, col] + M[ row, col+1] + M[ row, col-1]) = clues[row,col]
+),
+
+
+$$NOW FOR THE FIRST ROW
+forAll row : int(1).
+forAll col : int(2..n-1).
+forAll row1 : int(row+1) .
+forAll col1 : int(col+1..n-1) .
+forAll col2 : int(2..col-1) .
+(clues[row,col] != 0) -> (
+(M[ row+1, col] + M[ row, col+1] + M[ row, col-1]) = clues[row,col]
+),
+
+
+$$NOW FOR THE FIRST COL
+forAll col : int(1).
+forAll row : int(2..n-1).
+forAll col1 : int(col+1) .
+forAll row1 : int(row+1..n-1) .
+forAll row2 : int(2..row-1) .
+(clues[row,col] != 0) -> (
+(M[ row+1, col] + M[ row, col+1] + M[ row-1, col]) = clues[row,col]
+),
+
+
+
+$$NOW FOR THE LAST ROW
+forAll row : int(n).
+forAll col : int(1..n).
+forAll row1 : int(row-1) .
+forAll col1 : int(col+1..n-1) .
+forAll col2 : int(2..col-1) .
+(clues[row,col] != 0) -> (
+(M[ row-1, col] + M[ row, col+1] + M[ row, col-1]) = clues[row,col]
+),
+
+$$NOW FOR THE LAST COL
+forAll col : int(n).
+forAll row : int(1..n).
+forAll col1 : int(col-1) .
+forAll row1 : int(row+1..n-1) .
+forAll row2 : int(2..row-1) .
+(clues[row,col] != 0) -> (
+(M[ row-1, col] + M[ row+1, col] + M[ row, col-1]) = clues[row,col]
+),
+
+$$NOW FOR THE TOP RIGHT CORNER
+forAll col : int(n).
+forAll row : int(n).
+forAll col1 : int(col-1) .
+forAll row1 : int(row-1) .
+(clues[row,col] != 0) -> (
+(M[ row-1, col] + M[ row, col-1]) = clues[row,col]
+),
+
+$$NOW FOR THE TOP LEFT CORNER
+forAll col : int(1).
+forAll row : int(n).
+forAll col1 : int(col+1) .
+forAll row1 : int(row-1) .
+(clues[row,col] != 0) -> (
+(M[ row-1, col] + M[ row, col+1]) = clues[row,col]
+),
+
+$$NOW FOR THE BOTTOM LEFT CORNER
+forAll col : int(1).
+forAll row : int(1).
+forAll col1 : int(col+1) .
+forAll row1 : int(row+1) .
+(clues[row,col] != 0) -> (
+(M[ row+1, col] + M[ row, col+1]) = clues[row,col]
+),
+
+$$NOW FOR THE BOTTOM RIGHT CORNER
+forAll col : int(n).
+forAll row : int(1).
+forAll col1 : int(col-1) .
+forAll row1 : int(row+1) .
+(clues[row,col] != 0) -> (
+(M[ row+1, col] + M[ row, col-1]) = clues[row,col]
+),
+
+$minimizing (forAll row : ROW_RANGE .
+$forAll col: COL_RANGE .
+$        (sum M[row,col]) > 0)
+  
+
+  $ if a nurse works overnight, the next day she either gets the day off 
+$ or another night shift
+forAll col : int(1..n) .( 
+   forAll row : int(1..n) .
+   (M[row,col] = 1) -> 
+      (forAll row2:int(row+1..n).(M[row2,col]) = 0 \/ (exists i : int(1..n) . (clues[i,col]>0 /\ i<row2)
+	   ))),
+
+
+$$$WHERE ROW NUMBER IS 5 (n)
+$ if a nurse works overnight, the next day she either gets the day off 
+$ or another night shift
+forAll col : int(1..n) .( 
+   forAll row : int(n) .
+   (M[row,col] = 1) -> M[(n-1),col] = 0)
+

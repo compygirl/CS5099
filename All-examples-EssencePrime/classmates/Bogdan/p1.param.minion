@@ -1,0 +1,45 @@
+MINION 3
+# CSETopLevel_number = 1
+# CSETopLevel_eliminated_expressions = 4
+# CSETopLevel_total_size = 15
+# CSE_active_number = 2
+# CSE_active_eliminated_expressions = 6
+# CSE_active_total_size = 6
+**VARIABLES**
+DISCRETE rooks_00002_00004 #
+{0..1}
+DISCRETE rooks_00003_00001 #
+{0..1}
+DISCRETE rooks_00003_00004 #
+{0..1}
+**TUPLELIST**
+squareType 5 5
+0 0 2 0 0 
+0 0 0 0 0 
+0 1 0 1 0 
+0 0 0 0 0 
+0 0 2 0 0 
+**VARIABLES**
+ALIAS squareType[5,5]=[[0, 0, 2, 0, 0], [0, 0, 0, 0, 0], [0, 1, 0, 1, 0], [0, 0, 0, 0, 0], [0, 0, 2, 0, 0]]
+**TUPLELIST**
+clues 5 5
+0 0 3 0 0 
+0 0 0 0 0 
+0 0 0 0 0 
+0 0 0 0 0 
+0 0 1 0 0 
+**VARIABLES**
+ALIAS clues[5,5]=[[0, 0, 3, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 1, 0, 0]]
+**SEARCH**
+PRINT[[rooks_00002_00004],[rooks_00003_00001],[rooks_00003_00004]]
+VARORDER STATIC [0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, rooks_00002_00004, 0, rooks_00003_00001, 0, 0, rooks_00003_00004, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, rooks_00002_00004, 0, 0, 0, 0, rooks_00003_00004, 0, 0, rooks_00003_00001, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, rooks_00003_00001, 0, 0, rooks_00003_00004, 0, 0, 0, 0, rooks_00002_00004, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0]
+VARORDER AUX [rooks_00002_00004,rooks_00003_00001,rooks_00003_00004]
+**CONSTRAINTS**
+lexless([0, 0],[rooks_00002_00004, rooks_00003_00004])
+watched-or({diseq(1,rooks_00002_00004),w-literal(rooks_00003_00004,0)})
+watched-or({w-literal(rooks_00002_00004,0),diseq(1,rooks_00003_00004)})
+sumleq([rooks_00003_00001,rooks_00003_00004],1)
+sumgeq([rooks_00003_00001,rooks_00003_00004],1)
+sumleq([rooks_00002_00004,rooks_00003_00004],1)
+sumgeq([rooks_00002_00004,rooks_00003_00004],1)
+**EOF**

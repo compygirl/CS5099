@@ -1,0 +1,123 @@
+language ESSENCE' 1.0
+given n : int
+given squareType: matrix indexed by [int(1..n), int(1..n)] of int(0..2)
+given clues: matrix indexed by [int(1..n), int(1..n)] of int(0..4)
+find solution: matrix indexed by [int(1..n),int(1..n)] of int(-1..2)
+given auxVectorRows: matrix indexed by [int(1..n)] of int(0..n)
+given auxVectorCols: matrix indexed by [int(1..n)] of int(0..n)
+given blockCounterRow: matrix indexed by [int(1..n)] of int(0..n)
+given blockCounterCol: matrix indexed by [int(1..n)] of int(0..n)
+find neighbourVec: matrix indexed by [int(1..(n+1)*10+n*2)] of int(0..1)
+$find neighbourMat: matrix indexed by [int(1..n),int(1..n)] of int(0..4)
+letting RANGE be int(1..n)
+
+
+$ gcc(MATRIX, VALUE, NUMBER OF OCCS)
+
+
+such that
+	forAll i : RANGE .
+		forAll j : RANGE .
+			(squareType[i,j] > 0) -> (solution[i,j] = squareType[i,j]),
+
+	forAll i : RANGE . 
+		forAll j : RANGE .
+			(solution[i,j] > 0) -> (solution[i,j] = squareType[i,j]),
+	$$$$$$$$$$$$$$$$
+	$$$$$$GCC$$$$$$$
+	$$$$$$$$$$$$$$$
+	forAll i : RANGE .
+		(blockCounterCol[i] = 0) -> alldifferent_except(solution[..,i],0),
+	forAll i : RANGE . 
+		(blockCounterRow[i] = 0) -> alldifferent_except(solution[i,..],0),
+	forAll i : RANGE .
+		(blockCounterCol[i] = 0) -> gcc(solution[..,i],[-1],[1]),
+	forAll i : RANGE . 
+		(blockCounterRow[i] = 0) -> gcc(solution[i,..],[-1],[1]),
+	forAll i : RANGE . 
+		atleast(solution[i,..],[auxVectorRows[i]],[-1]),
+	forAll i : RANGE . 
+		atleast(solution[..,i],[auxVectorCols[i]],[-1]),
+	forAll i : RANGE . 
+		atmost(solution[i,..],[auxVectorRows[i] + 1],[-1]),
+	forAll i : RANGE .
+		atmost(solution[..,i],[auxVectorCols[i] + 1],[-1]),
+	$$$$$$$$$$$$$$$$$$$$$
+	$Adjacent Cell Check$
+	$$$$$$$$$$$$$$$$$$$$$
+	forAll i : RANGE .
+		forAll j : RANGE .
+			((i != n) /\ (solution[i,j] = -1)) -> solution[i + 1,j] != solution[i,j],
+	forAll i : RANGE .
+		forAll j : RANGE .
+			((i != 1) /\ (solution[i,j] = -1)) -> solution[i - 1,j] != solution[i,j],
+	forAll i : RANGE .
+		forAll j : RANGE .
+			((j != n) /\ (solution[i,j] = -1)) -> solution[i,j + 1] != solution[i,j],
+	forAll i : RANGE .
+		forAll j : RANGE .
+			((j != 1) /\ (solution[i,j] = -1)) -> solution[i,j - 1] != solution[i,j],
+	$$$$$$$$$$$$$$$$$
+	$$$Using Clues$$$
+	$$$$$$$$$$$$$$$$$
+	forAll i : RANGE . 
+		forAll j : RANGE .
+			 (solution[i,j] = -1) <-> neighbourVec[(i) * 10 + j] = 1,
+	$To ensure that the solver doesnt add 1's where there shouldn't be any 
+	$	in the neighbour vector a gcc is used
+	gcc(neighbourVec[..],[1],[sum([(solution[i,j] = -1) * 1| i,j:int(1..n)  ])]),
+
+	forAll i : RANGE . 
+		forAll j : RANGE .
+			(clues[i,j] > 0) ->  clues[i,j] = sum([neighbourVec[i*10+j + 1]
+			,neighbourVec[i*10 +j - 1],neighbourVec[(i+1)*10+j],
+				neighbourVec[(i-1)*10+j]]),
+	
+
+
+
+
+
+
+	$$$$$$$$$$$$$$$$$$$
+	$Symmetry Breaking$
+	$$$$$$$$$$$$$$$$$$$
+
+	forAll i : int(1..(n/2)) .
+		solution[i,..] <=lex solution[n-(i-1),..],
+$	forAll i : int(1..(n/2)) .
+$		solution[..,i] <=lex solution[..,n-(i-1)],
+
+
+
+
+
+$	forAll i : RANGE . 
+$		forAll j : RANGE .
+$			neighbourMat[i,j] = sum([neighbourVec[i*10+j + 1]
+$			,neighbourVec[i*10 +j - 1],neighbourVec[(i+1)*10+j],
+$				neighbourVec[(i-1)*10+j]]),
+$
+	true
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

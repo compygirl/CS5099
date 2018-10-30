@@ -1,0 +1,134 @@
+package savilerow.treetransformer;
+
+import savilerow.expression.*;
+import savilerow.model.*;
+
+import java.util.*;
+
+//   ac+bc  ->  (a+b)c
+// One of the 'branching' transformations.
+// Opposite of MultiplyOutSum
+
+import edu.jas.arith.*;
+import edu.jas.poly.*;
+import edu.jas.ufd.*;
+
+public class TransformFactorOutSum2 extends TreeTransformerBottomUpNoWrapper
+{
+    public TransformFactorOutSum2() {
+        super(null);
+        fac = new BigInteger();
+        var = new String[]{ "a", "b", "c", "d"};
+        ring = new GenPolynomialRing<BigInteger>(fac,var);
+        one = ring.getONE();
+        zero = ring.getZERO();
+        
+        vars = new ArrayList<GenPolynomial<BigInteger>>();
+        for(int i=0; i<var.length; i++) vars.add(ring.univariate(i));
+    }
+    
+    BigInteger fac;
+    String[] var;
+    GenPolynomialRing<BigInteger> ring;
+    ArrayList<GenPolynomial<BigInteger>> vars;
+    GenPolynomial<BigInteger> one;
+    GenPolynomial<BigInteger> zero;
+    
+	protected NodeReplacement processNode(ASTNode curnode)
+	{
+	    if(curnode instanceof WeightedSum) {
+	        System.out.println("Weighted sum: "+curnode);
+	        int varnum=0;  // go up the JAS variables. 
+	        
+	        HashMap<ASTNode, Integer> terms=new HashMap<ASTNode, Integer>();
+	        
+	        GenPolynomial<BigInteger> sum=zero;
+	        
+	        ASTNode numberterm=new NumberConstant(0);   // Leave the constant terms out. 
+	        
+	        // Populate terms
+	        for(int i=0; i<curnode.numChildren(); i++) {
+	            long weight=((WeightedSum)curnode).getWeight(i);
+	            
+	            GenPolynomial<BigInteger> casproductterm=one.multiply(new BigInteger(weight));
+	            
+	            ASTNode t=curnode.getChild(i);
+	            
+	            if(t instanceof Times) {
+	                for(int j=0; j<t.numChildren(); j++) {
+	                    ASTNode prodterm=t.getChild(j);
+	                    if(prodterm instanceof NumberConstant) {
+	                        casproductterm=casproductterm.multiply(new BigInteger(prodterm.getValue()));
+	                    }
+	                    else if(terms.containsKey(prodterm)) {
+	                        // prodterm already has a CAS variable, use it. 
+	                        casproductterm=casproductterm.multiply(vars.get(terms.get(prodterm)));
+	                    }
+	                    else {
+	                        // Prodterm does not have a CAS variable yet. 
+	                        terms.put(prodterm, varnum);
+	                        
+	                        casproductterm=casproductterm.multiply(vars.get(varnum));
+	                        
+	                        varnum++;
+	                    }
+	                }
+	            }
+	            else {
+	                // Might have 2z and xyz, and need to factor out z.
+	                // So need to include ones that are not in a Times. 
+	                if(t instanceof NumberConstant) {
+	                    // Don't add a numerical term, it will prevent variables being factorised out. 
+	                    numberterm=BinOp.makeBinOp("+", numberterm, new Times(new NumberConstant(weight), t));
+	                    continue;
+                        //casproductterm=casproductterm.multiply(new BigInteger(t.getValue()));
+                    }
+                    else if(terms.containsKey(t)) {
+                        casproductterm=casproductterm.multiply(vars.get(terms.get(t)));
+                    }
+                    else {
+                        // Prodterm does not have a CAS variable yet. 
+                        terms.put(t, varnum);
+                        
+                        casproductterm=casproductterm.multiply(vars.get(varnum));
+                        
+                        varnum++;
+                    }
+	            }
+	            
+	            sum=sum.sum(casproductterm);
+	        }
+	        
+	        System.out.println("Attempting to factorise: "+sum);
+	        
+	        Factorization<BigInteger> engine = FactorFactory.getImplementation(fac);
+	        SortedMap<GenPolynomial<BigInteger>,Long> factors = engine.factors(sum);
+	        
+	        System.out.println(factors);
+	        
+	        if(factors.size()>1) {
+	            // Turn it back into ASTNode
+	            ASTNode output_sum=numberterm;
+	            
+	            for(GenPolynomial<BigInteger> poly : factors.keySet()) {
+	                long power=factors.get(poly);
+	                
+	                Iterator<ExpVector> expvectors=poly.exponentIterator();
+	                Iterator<BigInteger> coeffs=poly.coefficientIterator();
+	                
+	                System.out.println("One poly:");
+	                
+	                while(expvectors.hasNext()) {
+	                    System.out.println(expvectors.next());   // use getVal to access it. 
+	                    System.out.println(coeffs.next());
+	                }
+	                
+	                
+	                
+	            }
+	            
+	        }
+	    }
+	    return null;
+	}
+}
